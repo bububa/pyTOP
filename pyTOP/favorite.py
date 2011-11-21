@@ -10,14 +10,14 @@ Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 from api import TOP, TOPRequest, TOPDate
 
 class CollectItem(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''商品或店铺的信息'''
         super(CollectItem, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['item_owner_nick','item_numid','title']
     
 
 class Favorite(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Favorite, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'search_list':CollectItem}
         self.fields = ['result','total_results', 'search_list']

@@ -10,14 +10,14 @@ Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 from api import TOP, TOPRequest, TOPDate
 
 class GroupDomain(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''分组简单定义'''
         super(GroupDomain, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['group_id','group_name']
     
 
 class BasicMember(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''表示会员关系的基本信息字段，用于会员列表的基本查询'''
         super(BasicMember, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'last_trade_time':TOPDate}
@@ -25,14 +25,14 @@ class BasicMember(TOP):
     
 
 class GradePromotion(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''卖家设置的等级优惠信息'''
         super(GradePromotion, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['cur_grade','cur_grade_name','discount','next_upgrade_amount','next_upgrade_count']
     
 
 class RuleData(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''规则相关信息'''
         super(RuleData, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'grouplist':GroupDomain,'start_trade_time':TOPDate,'end_trade_time':TOPDate}
@@ -40,14 +40,14 @@ class RuleData(TOP):
     
 
 class CrmMember(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''会员信息对象'''
         super(CrmMember, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['buyer_nick','status','grade','trade_count','trade_amount','close_trade_count','close_trade_amount','item_num','biz_order_id','group_ids','province','city','avg_price','relation_source','last_trade_time','item_close_count','buyer_id']
     
 
 class Group(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''描述分组的数据结构'''
         super(Group, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'group_create':TOPDate, 'group_modify':TOPDate}
@@ -105,7 +105,7 @@ class Group(TOP):
     
 
 class Groups(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Groups, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'groups':Group}
         self.fields = ['groups', 'total_result']
@@ -122,7 +122,7 @@ class Groups(TOP):
     
 
 class GroupTask(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(GroupTask, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['is_finished']
     
@@ -140,7 +140,7 @@ class GroupTask(TOP):
     
 
 class MemberInfo(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(MemberInfo, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['is_success']
     
@@ -162,7 +162,7 @@ class MemberInfo(TOP):
     
 
 class Members(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Members, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'members':BasicMember}
         self.fields = ['members', 'total_result']
@@ -225,7 +225,7 @@ class Members(TOP):
     
 
 class Grade(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Grade, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'grade_promotions':GradePromotion}
         self.fields = ['grade_promotions']
@@ -239,7 +239,7 @@ class Grade(TOP):
         return self.grade_promotions
 
 class Rule(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Rule, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['is_success', 'rule_id']
     
@@ -277,7 +277,7 @@ class Rule(TOP):
     
 
 class Rules(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Rules, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'rule_list':RuleData}
         self.fields = ['rule_list', 'total_result']
@@ -294,7 +294,7 @@ class Rules(TOP):
     
 
 class ShopVip(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ShopVip, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['is_success', ]
     

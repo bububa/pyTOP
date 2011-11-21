@@ -10,37 +10,37 @@ Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 from api import TOP, TOPRequest
 
 class PropValue(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(PropValue, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['cid','pid','prop_name','vid','name','name_alias','is_parent','status','sort_order']
     
 
 class SellerAuthorize(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(SellerAuthorize, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'item_cats':ItemCat, 'brands':Brand}
         self.fields = ['item_cats','brands']
     
 
 class ItemCat(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ItemCat, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['cid','parent_cid','name','is_parent','status','sort_order']
     
 class Brand(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Brand, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['vid','name','pid','prop_name']
    
 
 class ItemProp(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ItemProp, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'prop_values':PropValue}
         self.fields = ['is_input_prop','pid','parent_pid','parent_vid','name','is_key_prop','is_sale_prop','is_color_prop','is_enum_prop','is_item_prop','must','multi','prop_values','status','sort_order','child_template','is_allow_alias']
 
 class ItemCats(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ItemCats, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'item_cats':SellerAuthorize, 'item_cats':ItemCat}
         self.fields = ['last_modified','item_cats', 'seller_authorize']
@@ -71,7 +71,7 @@ class ItemCats(TOP):
 
 
 class ItemProps(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ItemProps, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'item_props':ItemProp}
         self.fields = ['last_modified','item_props']
@@ -99,7 +99,7 @@ class ItemProps(TOP):
     
 
 class ItemPropValues(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ItemPropValues, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'prop_values':PropValue}
         self.fields = ['last_modified','prop_values']

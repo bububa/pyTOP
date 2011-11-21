@@ -10,21 +10,21 @@ Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 from api import TOP, TOPRequest, TOPDate
 
 class PromotionDetail(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''交易的优惠信息详情'''
         super(PromotionDetail, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['id','promotion_name','discount_fee','gift_item_name']
     
 
 class OrderAmount(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''子订单的帐务数据结构'''
         super(OrderAmount, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['payment','oid','title','sku_properties_name','num','price','discount_fee','adjust_fee','promotion_name','num_iid','sku_id']
     
 
 class Order(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''订单结构'''
         super(Order, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'modified':TOPDate}
@@ -43,7 +43,7 @@ class Order(TOP):
     
 
 class TradeAmount(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''交易订单的帐务信息详情'''
         super(TradeAmount, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'created':TOPDate, 'pay_time':TOPDate, 'end_time':TOPDate, 'promotion_details':PromotionDetail, 'order_amounts':OrderAmount}
@@ -65,14 +65,14 @@ class TradeAmount(TOP):
     
 
 class TradeAccountDetail(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''淘宝卖家绑定的支付宝账户的财务明细'''
         super(TradeAccountDetail, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['type','memo','taobao_tid','alipay_tid','date','account_balance','income','expense','trade_partner','trade_locale','item_name']
     
 
 class Task(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''批量异步任务结果'''
         super(Task, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'subtasks':Subtask, 'created':TOPDate}
@@ -125,7 +125,7 @@ class Task(TOP):
     
 
 class Trade(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''交易结构'''
         super(Trade, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'pay_time':TOPDate, 'end_time':TOPDate, 'modified':TOPDate, 'created':TOPDate, 'consign_time':TOPDate, 'orders':Order, 'promotion_details':PromotionDetail}
@@ -233,7 +233,7 @@ class Trade(TOP):
     
 
 class Trades(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''批量异步任务的子任务结果'''
         super(Trades, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'trades':Trade}
@@ -289,14 +289,14 @@ class Trades(TOP):
     
 
 class Subtask(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''批量异步任务的子任务结果'''
         super(Subtask, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['sub_task_request','sub_task_result','is_success']
     
 
 class TradeConfirmFee(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''确认收货费用结构'''
         super(TradeConfirmFee, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['confirm_fee','confirm_post_fee','is_last_order']
@@ -313,7 +313,7 @@ class TradeConfirmFee(TOP):
     
 
 class TradeRate(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''评价列表'''
         super(TradeRate, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'created':TOPDate}
@@ -349,7 +349,7 @@ class TradeRate(TOP):
     
 
 class TradRates(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''确认收货费用结构'''
         super(TradRates, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'trade_rates':TradeRate}

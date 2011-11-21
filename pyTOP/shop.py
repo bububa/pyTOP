@@ -10,14 +10,14 @@ Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 from api import TOP, TOPRequest, TOPDate
 
 class ShopCat(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''店铺类目'''
         super(ShopCat, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['cid','parent_cid','name','is_parent']
     
 
 class ShopCats(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''店铺类目'''
         super(ShopCats, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'shop_cats':ShopCat}
@@ -37,14 +37,14 @@ class ShopCats(TOP):
     
 
 class ShopScore(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''店铺动态评分信息'''
         super(ShopScore, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['item_score','service_score','delivery_score']
     
 
 class SellerCat(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''店铺内卖家自定义类目'''
         super(SellerCat, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'created':TOPDate, 'modified':TOPDate}
@@ -76,7 +76,7 @@ class SellerCat(TOP):
     
 
 class SellerCats(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''店铺内卖家自定义类目'''
         super(SellerCats, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'seller_cats':SellerCat}
@@ -93,7 +93,7 @@ class SellerCats(TOP):
     
 
 class Shop(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''店铺信息'''
         super(Shop, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'created':TOPDate, 'modified':TOPDate,'shop_score':ShopScore}

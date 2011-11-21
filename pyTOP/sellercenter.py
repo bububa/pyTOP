@@ -10,14 +10,14 @@ Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 from api import TOP, TOPRequest, TOPDate
 
 class SubUserInfo(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''子账号基本信息'''
         super(SubUserInfo, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['nick','seller_id','seller_nick','status','is_online','full_name','sub_id']
     
 
 class SubUsers(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''子账号基本信息'''
         super(SubUsers, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'subusers':SubUserInfo}

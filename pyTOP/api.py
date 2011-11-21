@@ -38,24 +38,35 @@ class TOPRequest :
     def __setitem__(self, param_name, param_value) : self.api_params[param_name] = param_value
 
 class TOP(object):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
+        self.OS_ENV = 'TOP_ENV'
+        #淘宝正式环境
         self.PRODUCT_API_KEY = '12422885'
         self.PRODUCT_APP_SECRET = '9f127588ceb726905e078b64ab88a361'
+        self.PRODUCT_LOGIN_URL = 'http://container.api.taobao.com/container?appkey='
+        self.PRODUCT_API_URL = 'http://gw.api.taobao.com/router/rest'
+        #淘宝测试环境
         self.SANDBOX_API_KEY = '12422885'
         self.SANDBOX_APP_SECRET = 'sandbox8ceb726905e078b64ab88a361'
-        self.API_URL = 'http://gw.api.taobao.com/router/rest' #淘宝正式环境
-        self.SANDBOX_URL = 'http://gw.api.tbsandbox.com/router/rest' #淘宝测试环境
+        self.SANDBOX_LOGIN_URL = 'http://container.api.tbsandbox.com/container?appkey='
+        self.SANDBOX_API_URL = 'http://gw.api.tbsandbox.com/router/rest' 
+        self.SANDBOX_USER_REGISTER_WITHOUT_VALIDATE = 'http://mini.tbsandbox.com/minisandbox/user/register.htm'
+        
+        self.REFRESH_TOKEN_URL = 'http://container.open.taobao.com/container/refresh'
         self.ENVIRONMENT = ENVIRONMENT # or product
         self.FORMAT = 'json'  
         self.SIGN_METHOD = 'md5'  
         self.API_VERSION = '2.0'  
         self.SDK_VERSON = 'pyTOP_0.1.0'
+        if not self.ENVIRONMENT and os.getenv(self.OS_ENV):
+            self.ENVIRONMENT = self.OS_ENV
         if self.ENVIRONMENT == 'sandbox':
             if API_KEY:
                 self.SANDBOX_API_KEY = API_KEY
             if APP_SECRET:
                 self.SANDBOX_APP_SECRET = APP_SECRET
-            self.GATEWAY = self.SANDBOX_URL
+            self.GATEWAY = self.SANDBOX_API_URL
+            self.LOGIN_URL = self.SANDBOX_LOGIN_URL
             self.API_KEY = self.SANDBOX_API_KEY
             self.APP_SECRET = self.SANDBOX_APP_SECRET
         elif self.ENVIRONMENT == 'product':
@@ -63,7 +74,8 @@ class TOP(object):
                 self.PRODUCT_API_KEY = API_KEY
             if APP_SECRET:
                 self.PRODUCT_APP_SECRET = APP_SECRET
-            self.GATEWAY = self.API_URL
+            self.GATEWAY = self.PRODUCT_API_URL
+            self.LOGIN_URL = self.PRODUCT_LOGIN_URL
             self.API_KEY = self.PRODUCT_API_KEY
             self.APP_SECRET = self.PRODUCT_APP_SECRET
         else:
@@ -96,7 +108,18 @@ class TOP(object):
             params[key] = value  
         return params
     
-    def execute(self, request, session=None):
+    def _get_timestamp(self):
+        #gmtimefix = 28800
+        #stime = time.gmtime(time.time() - time.timezone + gmtimefix)
+        if(time.timezone == 0):
+            gmtimefix = 28800
+            stime = time.gmtime(gmtimefix + time.time())
+        else:
+            stime = time.localtime()
+        strtime = time.strftime('%Y-%m-%d %X', stime)
+        return strtime
+    
+    def execute(self, request, session=None, method='post'):
         '''
         request -- TOPRequest instance
         '''
@@ -108,15 +131,19 @@ class TOP(object):
             'partner_id'  : self.SDK_VERSON
         }
         api_params = request.get_api_params()
-        params['timestamp'] = datetime.datetime.utcnow().strftime("%Y-%m-%d %X")
+        params['timestamp'] = self._get_timestamp()
         params['method'] = request.get_method_name()
         if session is not None :
             params['session'] = session
         params.update(api_params)
         params['sign'] = self._sign(params)
         #print params
-        #form_data = urllib.urlencode(params)
-        rsp = requests.post(self.GATEWAY, data=params)
+        method = method.lower()
+        if method == 'get':
+            form_data = urllib.urlencode(params)
+            rsp = requests.get('%s?%s'%(self.GATEWAY, form_data))
+        elif method == 'post':
+            rsp = requests.post(self.GATEWAY, data=params)
         rsp = json.loads(rsp.content)
         if rsp.has_key('error_response'):
             error_code = rsp['error_response']['code']

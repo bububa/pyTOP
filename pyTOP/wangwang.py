@@ -10,7 +10,7 @@ Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 from api import TOP, TOPRequest, TOPDate
 
 class EService(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''wangwang.eservice'''
         super(EService, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'waiting_time_list_on_days':WaitingTimesOnDay, 'msgs':Msg, 'chatpeers':Chatpeer, 'staff_eval_details':EvalDetail, 'staff_eval_stat_on_days':StaffEvalStatOnDay, 'group_member_list':GroupMember, 'loginlogs':LoginLog, 'non_reply_stat_on_days':NonReplyStatOnDay,'online_times_list_on_days':OnlineTimesOnDay,'reply_stat_list_on_days':ReplyStatOnDay,'staff_stream_weights':StreamWeight}
@@ -145,14 +145,14 @@ class EService(TOP):
     
 
 class WaitingTimesOnDay(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''客户等待（客服）平均时长列表'''
         super(WaitingTimesOnDay, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'waiting_date':TOPDate, 'waiting_time_by_ids':WaitingTimeById}
         self.fields = ['waiting_date','waiting_time_by_ids']
 
 class NonReplyStatOnDay(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''未回复统计列表(按天)'''
         super(NonReplyStatOnDay, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'nonreply_date':TOPDate, 'nonreply_stat_by_ids':NonreplyStatById}
@@ -160,7 +160,7 @@ class NonReplyStatOnDay(TOP):
     
 
 class StaffEvalStatOnDay(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''客服评价统计列表(按天)'''
         super(StaffEvalStatOnDay, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'eval_date':TOPDate, 'staff_eval_stat_by_ids':StaffEvalStatById}
@@ -168,7 +168,7 @@ class StaffEvalStatOnDay(TOP):
     
 
 class OnlineTimesOnDay(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''某天的客服在线时长列表'''
         super(OnlineTimesOnDay, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'online_date':TOPDate, 'online_time_by_ids':OnlineTimeById}
@@ -176,21 +176,21 @@ class OnlineTimesOnDay(TOP):
     
 
 class Msg(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''聊天消息内容'''
         super(Msg, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['direction','time','content']
     
 
 class NonreplyStatById(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''客服未回复统计'''
         super(NonreplyStatById, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['service_staff_id','non_reply_num','non_reply_customId']
     
 
 class StaffEvalStatById(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''客服评价统计'''
         super(StaffEvalStatById, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'evaluations':Evaluation}
@@ -198,7 +198,7 @@ class StaffEvalStatById(TOP):
     
 
 class ReplyStatOnDay(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''(某天)回复统计列表'''
         super(ReplyStatOnDay, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'reply_date':TOPDate, 'reply_stat_by_ids':ReplyStatById}
@@ -206,42 +206,42 @@ class ReplyStatOnDay(TOP):
     
 
 class Evaluation(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''客服评价'''
         super(Evaluation, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['evaluation_name','evaluation_num']
     
 
 class OnlineTimeById(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''在线时长'''
         super(OnlineTimeById, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['service_staff_id','online_times']
     
 
 class WaitingTimeById(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''平均等待时长'''
         super(WaitingTimeById, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['service_staff_id','avg_waiting_times']
     
 
 class ReplyStatById(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''客服回复统计'''
         super(ReplyStatById, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['user_id','reply_num']
     
 
 class LoginLog(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''登录日志'''
         super(LoginLog, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['time','type']
     
 
 class EvalDetail(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''评价详细'''
         super(EvalDetail, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'send_time':TOPDate, 'eval_time':TOPDate}
@@ -249,21 +249,21 @@ class EvalDetail(TOP):
     
 
 class StreamWeight(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''分流权重'''
         super(StreamWeight, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['user','weight']
     
 
 class Chatpeer(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''聊天对象ID列表'''
         super(Chatpeer, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['uid','date']
     
 
 class GroupMember(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         '''组及其成员列表'''
         super(GroupMember, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['group_name','member_list','group_id']

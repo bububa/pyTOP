@@ -11,7 +11,7 @@ from api import TOP, TOPRequest, TOPDate
 from user import Location
 
 class Item(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Item, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'skus':Sku,'location':Location,'item_imgs':ItemImg,'prop_imgs':PropImg,'videos':Video}
         self.fields = ['detail_url','num_iid','title','nick','type','desc','skus','props_name','created','promoted_service','is_lightning_consignment','is_fenxiao','auction_point','property_alias','volume','template_id','after_sale_id','is_xinpin','sub_stock','cid','seller_cids','props','input_pids','input_str','pic_url','num','valid_thru','list_time','delist_time','stuff_status','location','price','post_fee','express_fee','ems_fee','has_discount','freight_payer','has_invoice','has_warranty','has_showcase','modified','increment','approve_status','postage_id','product_id','item_imgs','prop_imgs','outer_id','is_virtual','is_taobao','is_ex','is_timing','videos','is_3D','score','one_station','second_kill','auto_fill','violation','is_prepay','ww_status','wap_desc','wap_detail_url','cod_postage_id','sell_promise']
@@ -145,7 +145,7 @@ class Item(TOP):
     
 
 class Items(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Items, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'items':Item, 'item_search':ItemSearch}
         self.fields = ['items', 'total_results', 'item_search']
@@ -249,7 +249,7 @@ class Items(TOP):
     
 
 class Sku(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Sku, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'created':TOPDate, 'modified':TOPDate}
         self.fields = ['sku_id','num_iid','properties','quantity','price','outer_id','created','modified','status']
@@ -350,7 +350,7 @@ class Sku(TOP):
     
 
 class Skus(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Users, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'skus':Sku}
         self.fields = ['skus']
@@ -383,7 +383,7 @@ class Skus(TOP):
     
 
 class ItemImg(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ItemImg, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'created':TOPDate}
         self.fields = ['id','url','position','created']
@@ -436,7 +436,7 @@ class ItemImg(TOP):
     
 
 class PropImg(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ItemImg, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'created':TOPDate}
         self.fields = ['id','url','properties','position','created']
@@ -488,20 +488,20 @@ class PropImg(TOP):
     
 
 class Video(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Video, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'created':TOPDate, 'modified':TOPDate}
         self.fields = ['id','video_id','url','created','modified','iid','num_iid']
     
 
 class ItemCategory(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ItemCategory, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['category_id','count']
     
 
 class ProductPropImg(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ProductPropImg, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'created':TOPDate, 'modified':TOPDate}
         self.fields = ['id','product_id','props','url','position','created','modified']
@@ -531,7 +531,7 @@ class ProductPropImg(TOP):
     
 
 class ProductImg(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ProductPropImg, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'created':TOPDate, 'modified':TOPDate}
         self.fields = ['id','product_id','url','position','created','modified']
@@ -561,7 +561,7 @@ class ProductImg(TOP):
     
 
 class AfterSale(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(AfterSale, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'after_sales':AfterSale}
         self.fields = ['after_sales', 'after_sale_id','after_sale_name','after_sale_path']
@@ -576,13 +576,13 @@ class AfterSale(TOP):
     
 
 class ItemTemplate(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ItemTemplate, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['template_id','template_name','shop_type']
     
 
 class ItemTelplates(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ItemTemplate, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'item_template_list':ItemTemplate}
         self.fields = ['item_template_list']
@@ -597,14 +597,14 @@ class ItemTelplates(TOP):
     
 
 class ItemSearch(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ItemSearch, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'items':Item,'item_categories':ItemCategory}
         self.fields = ['items','item_categories']
     
 
 class Product(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Product, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'created':TOPDate, 'modified':TOPDate, 'product_imgs':ProductImg,'product_prop_imgs':ProductPropImg}
         self.fields = ['product_id','outer_id','created','tsc','cid','cat_name','props','props_str','binds_str','sale_props_str','collect_num','name','binds','sale_props','price','desc','pic_url','modified','product_imgs','product_prop_imgs','status','level','pic_path','vertical_market','customer_props','property_alias']
@@ -658,7 +658,7 @@ class Product(TOP):
     
 
 class Products(TOP):
-    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
+    def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Products, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'products':Product}
         self.fields = ['products', 'total_results']

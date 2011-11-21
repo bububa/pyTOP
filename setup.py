@@ -12,6 +12,9 @@ except ImportError:
 
 
 
+if sys.argv[-1] == "register":
+    os.system("python setup.py register")
+    sys.exit()
 if sys.argv[-1] == "publish":
     os.system("python setup.py sdist upload")
     sys.exit()

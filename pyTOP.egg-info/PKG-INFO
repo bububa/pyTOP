@@ -128,7 +128,7 @@ Description: Requests: HTTP for Humans
         
         
 Platform: UNKNOWN
-Classifier: Development Status :: 5 - Production/Stable
+Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Developers
 Classifier: Natural Language :: English
 Classifier: License :: OSI Approved :: ISC License (ISCL)
