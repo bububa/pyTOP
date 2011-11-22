@@ -144,7 +144,7 @@ class LogisticsCompanies(TOP):
         super(LogisticsCompanies, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'logistics_companies':LogisticsCompany}
         self.fields = ['logistics_companies',]
-
+    
     def get(self, session, is_recommended=None, order_mode=None, fields=[]):
         '''taobao.logistics.companies.get 查询物流公司信息
         ===================================

@@ -15,6 +15,7 @@ Features
 - 店铺会员管理 API
 - 子账号管理 API
 - 旺旺 API
+- 物流 API
 - 收藏夹 API
 - insight API
 - campagin API

@@ -34,6 +34,8 @@ from .crm import GroupDomain, BasicMember, GradePromotion, RuleData, CrmMember, 
 from .sellercenter import SubUserInfo, SubUsers
 # 旺旺 API
 from .wangwang import EService, WaitingTimesOnDay, NonReplyStatOnDay, StaffEvalStatOnDay, OnlineTimesOnDay, Msg, NonreplyStatById, StaffEvalStatById, ReplyStatOnDay, Evaluation, OnlineTimeById, WaitingTimeById, ReplyStatById, LoginLog, EvalDetail, StreamWeight, Chatpeer, GroupMember
+# 物流 API
+from .logistics import TransitStepInfo, Area, DeliveryTemplate, DeliveryTemplates, PartnerDetail, LogisticsCompany, LogisticsCompanies, PostageMode, Shipping, TopFee, Postage, Postages, AddressResult, LogisticsPartner, LogisticsPartners, LogisticsAddress, LogisticsDummy, LogisticsOffline, LogisticsOnline, Orders, LogisticsTrace, TopatsDelivery
 # 收藏夹 API
 from .favorite import CollectItem, Favorite
 # insight API
