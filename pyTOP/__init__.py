@@ -36,5 +36,9 @@ from .sellercenter import SubUserInfo, SubUsers
 from .wangwang import EService, WaitingTimesOnDay, NonReplyStatOnDay, StaffEvalStatOnDay, OnlineTimesOnDay, Msg, NonreplyStatById, StaffEvalStatById, ReplyStatOnDay, Evaluation, OnlineTimeById, WaitingTimeById, ReplyStatById, LoginLog, EvalDetail, StreamWeight, Chatpeer, GroupMember
 # 收藏夹 API
 from .favorite import CollectItem, Favorite
+# insight API
+from .insight import INWordBase, INCategoryBase, INWordAnalysis, INCategoryAnalysis, INCategoryProperties, INCategory, INWordCategory, INRecordBase, INCategoryAnalysisTop, INCategoryChildTop, INCategoryTop, INWordAnalysisTop, WordBase, CatsBase, WordAnalysis, CatsAnalysis, CatsForecast, CatsTopWord, CatsRelatedWord, WordsCats, Cats, TopLevelCats, CreativeIDs, AdGroupIDs, KeywordIDs, CatMatchedIDs
+# Campagin API
+from .campaign import AreaOption, ChannelOption, Campaign, Campaigns, CampaignArea, CampaignBudget, CampaignPlatform, CampaignSchedule, ADGroups, ADGroup, ADGroupCatmatch, Creative, Creatives, CreativeRecord, Keyword, Keywords, AccountRecord, RecommendWord, RankedItem, ADGroupPage, RecommendWordPage, Result, Customers, Account, Tools
 # Customize Exceptions
 from .errors import TOPException

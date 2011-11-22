@@ -367,7 +367,7 @@ class CatMatchedIDs(TOP):
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(CatMatchedIDs, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['success','result','result_code','result_message']
-
+    
     def changed_get(self, start_time, nick=None, page_size=200, page_no=1):
         '''taobao.simba.catmatchids.changed.get
         ===================================
@@ -379,7 +379,7 @@ class CatMatchedIDs(TOP):
         if nick!=None: request['nick'] = nick
         self.create(self.execute(request))
         return self.result
-
+    
     def deleted_get(self, start_time, nick=None, page_size=200, page_no=1):
         '''taobao.simba.catmatchids.deleted.get
         ===================================
@@ -391,3 +391,4 @@ class CatMatchedIDs(TOP):
         if nick!=None: request['nick'] = nick
         self.create(self.execute(request))
         return self.result
+    
