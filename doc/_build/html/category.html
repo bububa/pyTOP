@@ -1,0 +1,172 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>类目 API &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="商品 API" href="item.html" />
+    <link rel="prev" title="用户 API" href="user.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="item.html" title="商品 API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="user.html" title="用户 API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<span id="category"></span><h1>类目 API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<p>提供了标准类目，类目属性和类目属性值的查询功能</p>
+<span class="target" id="module-category"></span><dl class="class">
+<dt id="category.PropValue">
+<em class="property">class </em><tt class="descclassname">category.</tt><tt class="descname">PropValue</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/category.html#PropValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#category.PropValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>属性值</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="category.SellerAuthorize">
+<em class="property">class </em><tt class="descclassname">category.</tt><tt class="descname">SellerAuthorize</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/category.html#SellerAuthorize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#category.SellerAuthorize" title="Permalink to this definition">¶</a></dt>
+<dd><p>授权</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="category.ItemCat">
+<em class="property">class </em><tt class="descclassname">category.</tt><tt class="descname">ItemCat</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/category.html#ItemCat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#category.ItemCat" title="Permalink to this definition">¶</a></dt>
+<dd><p>商品类目结构</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="category.ItemProps">
+<em class="property">class </em><tt class="descclassname">category.</tt><tt class="descname">ItemProps</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/category.html#ItemProps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#category.ItemProps" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="category.ItemProps.get">
+<tt class="descname">get</tt><big>(</big><em>cid</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/category.html#ItemProps.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#category.ItemProps.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.itemprops.get 获取标准商品类目属性</p>
+<p>Q：能否通过图形化界面获取特定类目下面的属性及属性值? 
+A：请点击属性工具，通过图形化界面直接获取上述数据 
+Q：关键属性，非关键属性，销售属性有什么区别？ A：产品的关键属性是必填的，关键属性＋类目id确定一个产品，非关键属性，是分类上除了关键属性和销售属性以外的属性。销售属性是只有一件实物的商品才能确定的一个属性，如：N73　红色，黑色。没有实物不能确定。 
+Q：销售属性与SKU之间有何关联？ 
+A：销售属性是组成SKU的特殊属性，它会影响买家的购买和卖家的库存管理，如服装的&#8221;颜色&#8221;、&#8221;套餐&#8221;和&#8221;尺码&#8221;。 
+SKU 即我们常说的销售属性，最小购买单位或最小库存单位。它是销售属性的一个组合。比如&#8221;红色的诺基亚N95&#8221;就是一个SKU。</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="category.ItemPropValues">
+<em class="property">class </em><tt class="descclassname">category.</tt><tt class="descname">ItemPropValues</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/category.html#ItemPropValues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#category.ItemPropValues" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="category.ItemPropValues.get">
+<tt class="descname">get</tt><big>(</big><em>cid</em>, <em>pvs=None</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/category.html#ItemPropValues.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#category.ItemPropValues.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.itempropvalues.get 获取标准类目属性值</p>
+<p>传入类目ID,必需是叶子类目，通过taobao.itemcats.get获取类目ID 返回字段目前支持有：cid,pid,prop_name,vid,name,name_alias,status,sort_order 作用:获取标准类目属性值</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="user.html"
+                        title="previous chapter">用户 API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="item.html"
+                        title="next chapter">商品 API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/category.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="item.html" title="商品 API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="user.html" title="用户 API"
+             >previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

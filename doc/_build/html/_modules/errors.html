@@ -1,0 +1,234 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>errors &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for errors</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># encoding: utf-8</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">pyTOP.exceptions</span>
+<span class="sd">~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="sd">This module contains the set of pyTOP&#39;s exceptions.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">ERROR_MESSAGES</span> <span class="o">=</span> <span class="p">{</span>
+
+    <span class="c">#系统级错误</span>
+    <span class="mi">3</span><span class="p">:</span><span class="s">u&#39;图片上传失败&#39;</span><span class="p">,</span>
+    <span class="mi">4</span><span class="p">:</span><span class="s">u&#39;用户调用次数超限&#39;</span><span class="p">,</span>
+    <span class="mi">5</span><span class="p">:</span><span class="s">u&#39;会话调用次数超限&#39;</span><span class="p">,</span>
+    <span class="mi">6</span><span class="p">:</span><span class="s">u&#39;合作伙伴调用次数超限&#39;</span><span class="p">,</span>
+    <span class="mi">7</span><span class="p">:</span><span class="s">u&#39;应用调用次数超限&#39;</span><span class="p">,</span>
+    <span class="mi">8</span><span class="p">:</span><span class="s">u&#39;应用调用频率超限&#39;</span><span class="p">,</span>
+    <span class="mi">9</span><span class="p">:</span><span class="s">u&#39;HTTP方法被禁止（请用大写的POST或GET）&#39;</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">:</span><span class="s">u&#39;服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">11</span><span class="p">:</span><span class="s">u&#39;开发者权限不足&#39;</span><span class="p">,</span>
+    <span class="mi">12</span><span class="p">:</span><span class="s">u&#39;用户权限不足&#39;</span><span class="p">,</span>
+    <span class="mi">13</span><span class="p">:</span><span class="s">u&#39;合作伙伴权限不足&#39;</span><span class="p">,</span>
+    <span class="mi">15</span><span class="p">:</span><span class="s">u&#39;远程服务出错&#39;</span><span class="p">,</span>
+    <span class="mi">21</span><span class="p">:</span><span class="s">u&#39;缺少方法名参数&#39;</span><span class="p">,</span>
+    <span class="mi">22</span><span class="p">:</span><span class="s">u&#39;不存在的方法名&#39;</span><span class="p">,</span>
+    <span class="mi">23</span><span class="p">:</span><span class="s">u&#39;非法数据格式&#39;</span><span class="p">,</span>
+    <span class="mi">24</span><span class="p">:</span><span class="s">u&#39;缺少签名参数&#39;</span><span class="p">,</span>
+    <span class="mi">25</span><span class="p">:</span><span class="s">u&#39;非法签名&#39;</span><span class="p">,</span>
+    <span class="mi">26</span><span class="p">:</span><span class="s">u&#39;缺少SessionKey参数&#39;</span><span class="p">,</span>
+    <span class="mi">27</span><span class="p">:</span><span class="s">u&#39;无效的SessionKey参数&#39;</span><span class="p">,</span>
+    <span class="mi">28</span><span class="p">:</span><span class="s">u&#39;缺少AppKey参数&#39;</span><span class="p">,</span>
+    <span class="mi">29</span><span class="p">:</span><span class="s">u&#39;非法的AppKe参数&#39;</span><span class="p">,</span>
+    <span class="mi">30</span><span class="p">:</span><span class="s">u&#39;缺少时间戳参数&#39;</span><span class="p">,</span>
+    <span class="mi">31</span><span class="p">:</span><span class="s">u&#39;非法的时间戳参数&#39;</span><span class="p">,</span>
+    <span class="mi">32</span><span class="p">:</span><span class="s">u&#39;缺少版本参数&#39;</span><span class="p">,</span>
+    <span class="mi">33</span><span class="p">:</span><span class="s">u&#39;非法的版本参数&#39;</span><span class="p">,</span>
+    <span class="mi">34</span><span class="p">:</span><span class="s">u&#39;不支持的版本号&#39;</span><span class="p">,</span>
+    <span class="mi">40</span><span class="p">:</span><span class="s">u&#39;缺少必选参数&#39;</span><span class="p">,</span>
+    <span class="mi">41</span><span class="p">:</span><span class="s">u&#39;非法的参数&#39;</span><span class="p">,</span>
+    <span class="mi">42</span><span class="p">:</span><span class="s">u&#39;请求被禁止&#39;</span><span class="p">,</span>
+    <span class="mi">43</span><span class="p">:</span><span class="s">u&#39;参数错误&#39;</span><span class="p">,</span>
+
+    <span class="c">#容器类错误</span>
+    <span class="mi">100</span><span class="p">:</span><span class="s">u&#39;授权码已经过期&#39;</span><span class="p">,</span>
+    <span class="mi">101</span><span class="p">:</span><span class="s">u&#39;授权码在缓存里不存在，一般是用同样的authcode两次获取sessionkey&#39;</span><span class="p">,</span>
+    <span class="mi">103</span><span class="p">:</span><span class="s">u&#39;appkey或者tid（插件ID）参数必须至少传入一个&#39;</span><span class="p">,</span>
+    <span class="mi">104</span><span class="p">:</span><span class="s">u&#39;appkey或者tid对应的插件不存在&#39;</span><span class="p">,</span>
+    <span class="mi">105</span><span class="p">:</span><span class="s">u&#39;插件的状态不对，不是上线状态或者正式环境下测试状态&#39;</span><span class="p">,</span>
+    <span class="mi">106</span><span class="p">:</span><span class="s">u&#39;没权限调用此app，由于插件不是所有用户都默认安装，所以需要用户和插件进行一个订购关系。&#39;</span><span class="p">,</span>
+    <span class="mi">108</span><span class="p">:</span><span class="s">u&#39;由于app有绑定昵称，而登陆的昵称不是绑定昵称，所以没权限访问。&#39;</span><span class="p">,</span>
+    <span class="mi">109</span><span class="p">:</span><span class="s">u&#39;服务端在生成参数的时候出了问题（一般是tair有问题）&#39;</span><span class="p">,</span>
+    <span class="mi">110</span><span class="p">:</span><span class="s">u&#39;服务端在写出参数的时候出了问题&#39;</span><span class="p">,</span>
+    <span class="mi">111</span><span class="p">:</span><span class="s">u&#39;服务端在生成参数的时候出了问题（一般是tair有问题）&#39;</span><span class="p">,</span>
+
+    <span class="c">#业务级错误</span>
+    <span class="mi">501</span><span class="p">:</span><span class="s">u&#39;语句不可索引&#39;</span><span class="p">,</span>
+    <span class="mi">502</span><span class="p">:</span><span class="s">u&#39;数据服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">503</span><span class="p">:</span><span class="s">u&#39;无法解释TBQL语句&#39;</span><span class="p">,</span>
+    <span class="mi">504</span><span class="p">:</span><span class="s">u&#39;需要绑定用户昵称&#39;</span><span class="p">,</span>
+    <span class="mi">505</span><span class="p">:</span><span class="s">u&#39;缺少参数&#39;</span><span class="p">,</span>
+    <span class="mi">506</span><span class="p">:</span><span class="s">u&#39;参数错误&#39;</span><span class="p">,</span>
+    <span class="mi">507</span><span class="p">:</span><span class="s">u&#39;参数格式错误&#39;</span><span class="p">,</span>
+    <span class="mi">508</span><span class="p">:</span><span class="s">u&#39;获取信息权限不足&#39;</span><span class="p">,</span>
+    <span class="mi">540</span><span class="p">:</span><span class="s">u&#39;交易统计服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">541</span><span class="p">:</span><span class="s">u&#39;类目统计服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">542</span><span class="p">:</span><span class="s">u&#39;商品统计服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">550</span><span class="p">:</span><span class="s">u&#39;用户服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">551</span><span class="p">:</span><span class="s">u&#39;商品服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">552</span><span class="p">:</span><span class="s">u&#39;商品图片服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">553</span><span class="p">:</span><span class="s">u&#39;商品更新服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">554</span><span class="p">:</span><span class="s">u&#39;商品删除失败&#39;</span><span class="p">,</span>
+    <span class="mi">555</span><span class="p">:</span><span class="s">u&#39;用户没有订购图片服务&#39;</span><span class="p">,</span>
+    <span class="mi">556</span><span class="p">:</span><span class="s">u&#39;图片URL错误&#39;</span><span class="p">,</span>
+    <span class="mi">557</span><span class="p">:</span><span class="s">u&#39;商品视频服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">560</span><span class="p">:</span><span class="s">u&#39;交易服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">561</span><span class="p">:</span><span class="s">u&#39;交易服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">562</span><span class="p">:</span><span class="s">u&#39;交易不存在&#39;</span><span class="p">,</span>
+    <span class="mi">563</span><span class="p">:</span><span class="s">u&#39;非法交易&#39;</span><span class="p">,</span>
+    <span class="mi">564</span><span class="p">:</span><span class="s">u&#39;没有权限添加或更新交易备注&#39;</span><span class="p">,</span>
+    <span class="mi">565</span><span class="p">:</span><span class="s">u&#39;交易备注超出长度限制&#39;</span><span class="p">,</span>
+    <span class="mi">566</span><span class="p">:</span><span class="s">u&#39;交易备注已经存在&#39;</span><span class="p">,</span>
+    <span class="mi">567</span><span class="p">:</span><span class="s">u&#39;没有权限添加或更新交易信息&#39;</span><span class="p">,</span>
+    <span class="mi">568</span><span class="p">:</span><span class="s">u&#39;交易没有子订单&#39;</span><span class="p">,</span>
+    <span class="mi">569</span><span class="p">:</span><span class="s">u&#39;交易关闭错误&#39;</span><span class="p">,</span>
+    <span class="mi">570</span><span class="p">:</span><span class="s">u&#39;物流服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">571</span><span class="p">:</span><span class="s">u&#39;非法的邮费&#39;</span><span class="p">,</span>
+    <span class="mi">572</span><span class="p">:</span><span class="s">u&#39;非法的物流公司编号&#39;</span><span class="p">,</span>
+    <span class="mi">580</span><span class="p">:</span><span class="s">u&#39;评价服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">581</span><span class="p">:</span><span class="s">u&#39;添加评价服务错误&#39;</span><span class="p">,</span>
+    <span class="mi">582</span><span class="p">:</span><span class="s">u&#39;获取评价服务错误&#39;</span><span class="p">,</span>
+    <span class="mi">590</span><span class="p">:</span><span class="s">u&#39;店铺服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">591</span><span class="p">:</span><span class="s">u&#39;店铺剩余推荐数 服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">592</span><span class="p">:</span><span class="s">u&#39;卖家自定义类目服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">594</span><span class="p">:</span><span class="s">u&#39;卖家自定义类目添加错误&#39;</span><span class="p">,</span>
+    <span class="mi">595</span><span class="p">:</span><span class="s">u&#39;卖家自定义类目更新错误&#39;</span><span class="p">,</span>
+    <span class="mi">596</span><span class="p">:</span><span class="s">u&#39;用户没有店铺&#39;</span><span class="p">,</span>
+    <span class="mi">597</span><span class="p">:</span><span class="s">u&#39;卖家自定义父类目错误&#39;</span><span class="p">,</span>
+    <span class="mi">601</span><span class="p">:</span><span class="s">u&#39;用户不存在&#39;</span><span class="p">,</span>
+    <span class="mi">611</span><span class="p">:</span><span class="s">u&#39;产品数据格式错误&#39;</span><span class="p">,</span>
+    <span class="mi">612</span><span class="p">:</span><span class="s">u&#39;产品ID错误&#39;</span><span class="p">,</span>
+    <span class="mi">613</span><span class="p">:</span><span class="s">u&#39;删除产品图片错误&#39;</span><span class="p">,</span>
+    <span class="mi">614</span><span class="p">:</span><span class="s">u&#39;没有权限添加产品&#39;</span><span class="p">,</span>
+    <span class="mi">615</span><span class="p">:</span><span class="s">u&#39;收货地址服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">620</span><span class="p">:</span><span class="s">u&#39;邮费服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">621</span><span class="p">:</span><span class="s">u&#39;邮费模板类型错误&#39;</span><span class="p">,</span>
+    <span class="mi">622</span><span class="p">:</span><span class="s">u&#39;缺少参数：post, express或ems&#39;</span><span class="p">,</span>
+    <span class="mi">623</span><span class="p">:</span><span class="s">u&#39;邮费模板参数错误&#39;</span><span class="p">,</span>
+    <span class="mi">630</span><span class="p">:</span><span class="s">u&#39;收费服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">650</span><span class="p">:</span><span class="s">u&#39;退款服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">651</span><span class="p">:</span><span class="s">u&#39;非法的退款编号&#39;</span><span class="p">,</span>
+    <span class="mi">670</span><span class="p">:</span><span class="s">u&#39;佣金服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">671</span><span class="p">:</span><span class="s">u&#39;佣金交易不存在&#39;</span><span class="p">,</span>
+    <span class="mi">672</span><span class="p">:</span><span class="s">u&#39;淘宝客报表服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">673</span><span class="p">:</span><span class="s">u&#39;备案服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">674</span><span class="p">:</span><span class="s">u&#39;应用服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">710</span><span class="p">:</span><span class="s">u&#39;淘宝客服务不可用&#39;</span><span class="p">,</span>
+    <span class="mi">900</span><span class="p">:</span><span class="s">u&#39;远程连接错误&#39;</span><span class="p">,</span>
+    <span class="mi">901</span><span class="p">:</span><span class="s">u&#39;远程服务超时&#39;</span><span class="p">,</span>
+    <span class="mi">902</span><span class="p">:</span><span class="s">u&#39;远程服务错误&#39;</span><span class="p">,</span>
+    
+    <span class="c">#CUSTOM ERRORS</span>
+    <span class="mi">1000</span><span class="p">:</span><span class="s">u&#39;Bad Environment&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<div class="viewcode-block" id="TOPException"><a class="viewcode-back" href="../index.html#errors.TOPException">[docs]</a><span class="k">class</span> <span class="nc">TOPException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;There was an ambiguous exception that occurred while handling your</span>
+<span class="sd">    TOP request.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">msg</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">ERROR_MESSAGES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="s">u&#39;未知错误(</span><span class="si">%d</span><span class="s">)&#39;</span><span class="o">%</span><span class="n">code</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="o">==</span> <span class="nb">unicode</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TOPException</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="n">code</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> (code=</span><span class="si">%d</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">super</span><span class="p">(</span><span class="n">TOPException</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__str__</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="p">)</span>
+        <span class="n">__repr__</span> <span class="o">=</span> <span class="n">__str__</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

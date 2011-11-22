@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>wangwang &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for wangwang</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># encoding: utf-8</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">wangwang.py</span>
+
+<span class="sd">Created by 徐 光硕 on 2011-11-18.</span>
+<span class="sd">Copyright (c) 2011 __MyCompanyName__. All rights reserved.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">api</span> <span class="kn">import</span> <span class="n">TOP</span><span class="p">,</span> <span class="n">TOPRequest</span><span class="p">,</span> <span class="n">TOPDate</span>
+
+<div class="viewcode-block" id="EService"><a class="viewcode-back" href="../wangwang.html#wangwang.EService">[docs]</a><span class="k">class</span> <span class="nc">EService</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;wangwang.eservice&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">EService</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;waiting_time_list_on_days&#39;</span><span class="p">:</span><span class="n">WaitingTimesOnDay</span><span class="p">,</span> <span class="s">&#39;msgs&#39;</span><span class="p">:</span><span class="n">Msg</span><span class="p">,</span> <span class="s">&#39;chatpeers&#39;</span><span class="p">:</span><span class="n">Chatpeer</span><span class="p">,</span> <span class="s">&#39;staff_eval_details&#39;</span><span class="p">:</span><span class="n">EvalDetail</span><span class="p">,</span> <span class="s">&#39;staff_eval_stat_on_days&#39;</span><span class="p">:</span><span class="n">StaffEvalStatOnDay</span><span class="p">,</span> <span class="s">&#39;group_member_list&#39;</span><span class="p">:</span><span class="n">GroupMember</span><span class="p">,</span> <span class="s">&#39;loginlogs&#39;</span><span class="p">:</span><span class="n">LoginLog</span><span class="p">,</span> <span class="s">&#39;non_reply_stat_on_days&#39;</span><span class="p">:</span><span class="n">NonReplyStatOnDay</span><span class="p">,</span><span class="s">&#39;online_times_list_on_days&#39;</span><span class="p">:</span><span class="n">OnlineTimesOnDay</span><span class="p">,</span><span class="s">&#39;reply_stat_list_on_days&#39;</span><span class="p">:</span><span class="n">ReplyStatOnDay</span><span class="p">,</span><span class="s">&#39;staff_stream_weights&#39;</span><span class="p">:</span><span class="n">StreamWeight</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;waiting_time_list_on_days&#39;</span><span class="p">,</span><span class="s">&#39;msgs&#39;</span><span class="p">,</span><span class="s">&#39;ret&#39;</span><span class="p">,</span><span class="s">&#39;count&#39;</span><span class="p">,</span> <span class="s">&#39;chatpeers&#39;</span><span class="p">,</span> <span class="s">&#39;log_file_url&#39;</span><span class="p">,</span> <span class="s">&#39;staff_eval_details&#39;</span><span class="p">,</span> <span class="s">&#39;result_code&#39;</span><span class="p">,</span><span class="s">&#39;result_count&#39;</span><span class="p">,</span> <span class="s">&#39;staff_eval_stat_on_days&#39;</span><span class="p">,</span> <span class="s">&#39;group_member_list&#39;</span><span class="p">,</span> <span class="s">&#39;user_id&#39;</span><span class="p">,</span> <span class="s">&#39;loginlogs&#39;</span><span class="p">,</span><span class="s">&#39;non_reply_stat_on_days&#39;</span><span class="p">,</span><span class="s">&#39;online_times_list_on_days&#39;</span><span class="p">,</span><span class="s">&#39;reply_stat_list_on_days&#39;</span><span class="p">,</span> <span class="s">&#39;staff_stream_weights&#39;</span><span class="p">,</span><span class="s">&#39;result_code&#39;</span><span class="p">,</span><span class="s">&#39;result_count&#39;</span><span class="p">,</span><span class="s">&#39;total_weight&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="EService.avgwaittime_get"><a class="viewcode-back" href="../wangwang.html#wangwang.EService.avgwaittime_get">[docs]</a>    <span class="k">def</span> <span class="nf">avgwaittime_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_staff_id</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.wangwang.eservice.avgwaittime.get 平均等待时长</span>
+<span class="sd">        </span>
+<span class="sd">        根据客服ID和日期，获取该客服&quot;当日接待的所有客户的平均等待时长&quot;。 备注：</span>
+<span class="sd">        </span>
+<span class="sd">        - 1、如果是操作者ID=被查者ID，返回被查者ID的&quot;当日接待的所有客户的平均等待时长&quot;。 </span>
+<span class="sd">        - 2、如果操作者是组管理员，他可以查询他的组中的所有子帐号的&quot;当日接待的所有客户的平均等待时长&quot;。 </span>
+<span class="sd">        - 3、如果操作者是主账户，他可以查询所有子帐号的&quot;当日接待的所有客户的平均等待时长&quot;。 </span>
+<span class="sd">        - 4、被查者ID可以是多个，用 &quot;,&quot; 隔开，id数不能超过30。 </span>
+<span class="sd">        - 5、开始时间与结束时间之间的间隔不能超过7天 </span>
+<span class="sd">        - 6、不能查询90天以前的数据 7、不能查询当天的记录&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.wangwang.eservice.avgwaittime.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;service_staff_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">service_staff_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;start_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">start_date</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;end_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">waiting_time_list_on_days</span>
+    </div>
+<div class="viewcode-block" id="EService.chatlogs_get"><a class="viewcode-back" href="../wangwang.html#wangwang.EService.chatlogs_get">[docs]</a>    <span class="k">def</span> <span class="nf">chatlogs_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chat_id</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">charset</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.wangwang.eservice.chatpeers.get 获取聊天对象列表，查询时间段&lt;=7天,只支持xml返回</span>
+<span class="sd">        </span>
+<span class="sd">        获取聊天对象列表，查询时间段&lt;=7天,只支持xml返回&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.wangwang.eservice.chatlog.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;chat_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">chat_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;charset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">charset</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;start_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">start_date</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;end_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">chatpeers</span>
+    </div>
+<div class="viewcode-block" id="EService.chatpeers_get"><a class="viewcode-back" href="../wangwang.html#wangwang.EService.chatpeers_get">[docs]</a>    <span class="k">def</span> <span class="nf">chatpeers_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">from_id</span><span class="p">,</span> <span class="n">to_id</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.wangwang.eservice.chatpeers.get 获取聊天对象列表，查询时间段&lt;=7天,只支持xml返回&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.wangwang.eservice.chatpeers.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;from_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">from_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;to_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">to_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;start_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">start_date</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;end_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">msgs</span>
+    </div>
+<div class="viewcode-block" id="EService.chatrecord_get"><a class="viewcode-back" href="../wangwang.html#wangwang.EService.chatrecord_get">[docs]</a>    <span class="k">def</span> <span class="nf">chatrecord_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_staff_id</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.wangwang.eservice.chatrecord.get 聊天记录查询</span>
+<span class="sd">        </span>
+<span class="sd">        该接口会返回一个聊天记录的下载地址。 请于5分钟以后使用该链接下载(因为文件大小的不同，生成日志的时间会延长到50分钟),该链接有如下限制： </span>
+<span class="sd">        - 1.该链接的有效期为3个小时，逾期作废。 </span>
+<span class="sd">        - 2.同一链接只能使用一次。</span>
+<span class="sd">        </span>
+<span class="sd">         用户点击地址，下载聊天记录压缩包（压缩包中含有1个文件或多个文件，查询了几个用户的聊天记录，就含有几个文本文件）。 备注：</span>
+<span class="sd">         </span>
+<span class="sd">         - 1、如果是操作者ID=被查者ID，返回被查者ID的&quot;聊天记录&quot;。 </span>
+<span class="sd">         - 2、如果操作者是组管理员，他可以查询他的组中的所有子帐号的&quot;聊天记录&quot;。 </span>
+<span class="sd">         - 3、如果操作者是主账户，他可以查询所有子帐号的&quot;聊天记录&quot;。 </span>
+<span class="sd">         - 4、被查者ID可以是多个，用 &quot;,&quot; 隔开，id数不能超过30。 </span>
+<span class="sd">         - 5、开始时间与结束时间之间的间隔不能超过7天 </span>
+<span class="sd">         - 6、不能查询30天以前的记录 </span>
+<span class="sd">         - 7、不能查询当天的数据&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.wangwang.eservice.chatrecord.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;service_staff_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">service_staff_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;start_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">start_date</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;end_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_file_url</span>
+    </div>
+<div class="viewcode-block" id="EService.evals_get"><a class="viewcode-back" href="../wangwang.html#wangwang.EService.evals_get">[docs]</a>    <span class="k">def</span> <span class="nf">evals_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_staff_id</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.wangwang.eservice.evals.get 获取评价详细</span>
+<span class="sd">        </span>
+<span class="sd">        根据用户id查询用户对应的评价详细情况， 主账号id可以查询店铺内子账号的评价 组管理员可以查询组内账号的评价 非管理员的子账号可以查自己的评价&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.wangwang.eservice.evals.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;service_staff_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">service_staff_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;start_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">start_date</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;end_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">staff_eval_details</span>
+    </div>
+<div class="viewcode-block" id="EService.evaluation_get"><a class="viewcode-back" href="../wangwang.html#wangwang.EService.evaluation_get">[docs]</a>    <span class="k">def</span> <span class="nf">evaluation_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_staff_id</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.wangwang.eservice.evaluation.get 客服评价统计</span>
+<span class="sd">        </span>
+<span class="sd">        根据操作者ID，返回被查者ID指定日期内每个帐号每日的&quot;客服评价统计&quot; 备注：</span>
+<span class="sd">        </span>
+<span class="sd">        - 1、如果是操作者ID=被查者ID，返回被查者ID的&quot;客服评价统计&quot;。 </span>
+<span class="sd">        - 2、如果操作者是组管理员，他可以查询他的组中的所有子帐号的&quot;客服评价统计&quot;。 </span>
+<span class="sd">        - 3、如果操作者是主账户，他可以查询所有子帐号的&quot;客服评价统计&quot;。 </span>
+<span class="sd">        - 4、被查者ID可以是多个，用 &quot;,&quot; 隔开，id数不能超过30。 </span>
+<span class="sd">        - 5、开始时间与结束时间之间的间隔不能超过7天 </span>
+<span class="sd">        - 6、不能查询90天以前的数据 </span>
+<span class="sd">        - 7、不能查询当天的记录&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.wangwang.eservice.evaluation.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;service_staff_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">service_staff_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;start_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">start_date</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;end_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">staff_eval_stat_on_days</span>
+    </div>
+<div class="viewcode-block" id="EService.groupmember_get"><a class="viewcode-back" href="../wangwang.html#wangwang.EService.groupmember_get">[docs]</a>    <span class="k">def</span> <span class="nf">groupmember_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">manager_id</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.wangwang.eservice.groupmember.get 获取组成员列表</span>
+<span class="sd">        </span>
+<span class="sd">        用某个组管理员账号查询，返回该组组名、和该组所有组成员ID（E客服的分流设置）。 用旺旺主帐号查询，返回所有组的组名和该组所有组成员ID。 返回的组成员ID可以是多个，用 &quot;,&quot; 隔开。 被查者ID只能传入一个。 组成员中排名最靠前的ID是组管理员ID&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.wangwang.eservice.groupmember.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;manager_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">manager_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_member_list</span>
+    </div>
+<div class="viewcode-block" id="EService.loginlogs_get"><a class="viewcode-back" href="../wangwang.html#wangwang.EService.loginlogs_get">[docs]</a>    <span class="k">def</span> <span class="nf">loginlogs_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_staff_id</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.wangwang.eservice.loginlogs.get 获取登录日志</span>
+<span class="sd">        </span>
+<span class="sd">        通过用户id查询用户自己或者子账户的登录日志： 主账号可以查询自己和店铺子账户的登录日志 组管理员可以查询自己和组内子账号的登录日志 非组管理员的子账户只能查询自己的登录日志&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.wangwang.eservice.loginlogs.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;service_staff_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">service_staff_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;start_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">start_date</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;end_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">loginlogs</span>
+    </div>
+<div class="viewcode-block" id="EService.noreplynum_get"><a class="viewcode-back" href="../wangwang.html#wangwang.EService.noreplynum_get">[docs]</a>    <span class="k">def</span> <span class="nf">noreplynum_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_staff_id</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.wangwang.eservice.noreplynum.get 客服未回复人数</span>
+<span class="sd">        </span>
+<span class="sd">        根据操作者ID，返回被查者ID指定日期内每个帐号每日的&quot;未回复情况&quot; 备注：</span>
+<span class="sd">        </span>
+<span class="sd">        - 1、如果是操作者ID=被查者ID，返回被查者ID的&quot;未回复情况&quot;（未回复人数、未回复的ID）。 </span>
+<span class="sd">        - 2、如果操作者是组管理员，他可以查询他的组中的所有子帐号的&quot;未回复情况&quot;。 </span>
+<span class="sd">        - 3、如果操作者是主账户，他可以查询所有子帐号的&quot;未回复情况&quot;。 </span>
+<span class="sd">        - 4、被查者ID可以是多个，用 &quot;,&quot; 隔开，id数不能超过30。 </span>
+<span class="sd">        - 5、开始时间与结束时间之间的间隔不能超过7天 </span>
+<span class="sd">        - 6、不能查询90天以前的数据 </span>
+<span class="sd">        - 7、不能查询当天的记录&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.wangwang.eservice.noreplynum.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;service_staff_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">service_staff_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;start_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">start_date</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;end_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">non_reply_stat_on_days</span>
+    </div>
+<div class="viewcode-block" id="EService.onlinetime_get"><a class="viewcode-back" href="../wangwang.html#wangwang.EService.onlinetime_get">[docs]</a>    <span class="k">def</span> <span class="nf">onlinetime_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_staff_id</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.wangwang.eservice.onlinetime.get 日累计在线时长</span>
+<span class="sd">        </span>
+<span class="sd">        描述：根据客服ID和日期，获取该客服&quot;当日在线时长&quot;。 备注：</span>
+<span class="sd">        </span>
+<span class="sd">        - 1、如果是操作者ID=被查者ID，返回被查者ID的&quot;当日在线时长&quot;。 </span>
+<span class="sd">        - 2、如果操作者是组管理员，他可以查询他的组中的所有子帐号的&quot;当日在线时长&quot;。 </span>
+<span class="sd">        - 3、如果操作者是主账户，他可以查询所有子帐号的&quot;当日在线时长&quot;。 </span>
+<span class="sd">        - 4、被查者ID可以是多个，用 &quot;,&quot; 隔开，id数不能超过30。 </span>
+<span class="sd">        - 5、日累计在线时长定义：当日该用户累计的旺旺在线时长 </span>
+<span class="sd">        - 6、开始时间与结束时间之间的间隔不能超过7天 </span>
+<span class="sd">        - 7、不能查询90天以前的数据 </span>
+<span class="sd">        - 8、不能查询当天的记录&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.wangwang.eservice.onlinetime.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;service_staff_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">service_staff_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;start_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">start_date</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;end_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">online_times_list_on_days</span>
+    </div>
+<div class="viewcode-block" id="EService.receivenum_get"><a class="viewcode-back" href="../wangwang.html#wangwang.EService.receivenum_get">[docs]</a>    <span class="k">def</span> <span class="nf">receivenum_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_staff_id</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.wangwang.eservice.receivenum.get 客服接待数</span>
+<span class="sd">        </span>
+<span class="sd">        根据操作者ID，返回被查者ID指定时间段内每个帐号的&quot;已接待人数&quot; 备注：</span>
+<span class="sd">        </span>
+<span class="sd">        - 1、如果是操作者ID=被查者ID，返回被查者ID的&quot;已接待人数&quot;。 </span>
+<span class="sd">        - 2、如果操作者是组管理员，他可以查询他的组中的所有子帐号的&quot;已接待人数&quot;。 </span>
+<span class="sd">        - 3、如果操作者是主账户，他可以查询所有子帐号的&quot;已接待人数&quot;。 </span>
+<span class="sd">        - 4、被查者ID可以是多个，用 &quot;,&quot; 隔开，id数不能超过30。 </span>
+<span class="sd">        - 5、规则：某客服在1天内和同一个客户交流了多次，已回复人数算1。 </span>
+<span class="sd">        - 6、&quot;已接待人数&quot;定义：买家、卖家彼此发过至少1条消息 ，不论谁先发都可以。 4、被查者ID可以是多个，用 &quot;,&quot; 隔开，id数不能超过30。 </span>
+<span class="sd">        - 7、开始时间与结束时间之间的间隔不能超过7天 </span>
+<span class="sd">        - 8、不能查询90天以前的数据 </span>
+<span class="sd">        - 9、不能查询当天的记录&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.wangwang.eservice.receivenum.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;service_staff_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">service_staff_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;start_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">start_date</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;end_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reply_stat_list_on_days</span>
+    </div>
+<div class="viewcode-block" id="EService.streamweigths_get"><a class="viewcode-back" href="../wangwang.html#wangwang.EService.streamweigths_get">[docs]</a>    <span class="k">def</span> <span class="nf">streamweigths_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.wangwang.eservice.streamweigths.get 获取分流权重接口</span>
+<span class="sd">        </span>
+<span class="sd">        获取当前登录用户自己的店铺内的分流权重设置&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.wangwang.eservice.streamweigths.get&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">staff_stream_weights</span>
+    
+</div></div>
+<div class="viewcode-block" id="WaitingTimesOnDay"><a class="viewcode-back" href="../wangwang.html#wangwang.WaitingTimesOnDay">[docs]</a><span class="k">class</span> <span class="nc">WaitingTimesOnDay</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;客户等待（客服）平均时长列表&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">WaitingTimesOnDay</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;waiting_date&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span> <span class="s">&#39;waiting_time_by_ids&#39;</span><span class="p">:</span><span class="n">WaitingTimeById</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;waiting_date&#39;</span><span class="p">,</span><span class="s">&#39;waiting_time_by_ids&#39;</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="NonReplyStatOnDay"><a class="viewcode-back" href="../wangwang.html#wangwang.NonReplyStatOnDay">[docs]</a><span class="k">class</span> <span class="nc">NonReplyStatOnDay</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;未回复统计列表(按天)&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NonReplyStatOnDay</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;nonreply_date&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span> <span class="s">&#39;nonreply_stat_by_ids&#39;</span><span class="p">:</span><span class="n">NonreplyStatById</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;nonreply_date&#39;</span><span class="p">,</span><span class="s">&#39;nonreply_stat_by_ids&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="StaffEvalStatOnDay"><a class="viewcode-back" href="../wangwang.html#wangwang.StaffEvalStatOnDay">[docs]</a><span class="k">class</span> <span class="nc">StaffEvalStatOnDay</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;客服评价统计列表(按天)&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">StaffEvalStatOnDay</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;eval_date&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span> <span class="s">&#39;staff_eval_stat_by_ids&#39;</span><span class="p">:</span><span class="n">StaffEvalStatById</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;eval_date&#39;</span><span class="p">,</span><span class="s">&#39;staff_eval_stat_by_ids&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="OnlineTimesOnDay"><a class="viewcode-back" href="../wangwang.html#wangwang.OnlineTimesOnDay">[docs]</a><span class="k">class</span> <span class="nc">OnlineTimesOnDay</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;某天的客服在线时长列表&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">OnlineTimesOnDay</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;online_date&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span> <span class="s">&#39;online_time_by_ids&#39;</span><span class="p">:</span><span class="n">OnlineTimeById</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;online_date&#39;</span><span class="p">,</span><span class="s">&#39;online_time_by_ids&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="Msg"><a class="viewcode-back" href="../wangwang.html#wangwang.Msg">[docs]</a><span class="k">class</span> <span class="nc">Msg</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;聊天消息内容&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Msg</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;direction&#39;</span><span class="p">,</span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="s">&#39;content&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="NonreplyStatById"><a class="viewcode-back" href="../wangwang.html#wangwang.NonreplyStatById">[docs]</a><span class="k">class</span> <span class="nc">NonreplyStatById</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;客服未回复统计&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NonreplyStatById</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;service_staff_id&#39;</span><span class="p">,</span><span class="s">&#39;non_reply_num&#39;</span><span class="p">,</span><span class="s">&#39;non_reply_customId&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="StaffEvalStatById"><a class="viewcode-back" href="../wangwang.html#wangwang.StaffEvalStatById">[docs]</a><span class="k">class</span> <span class="nc">StaffEvalStatById</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;客服评价统计&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">StaffEvalStatById</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;evaluations&#39;</span><span class="p">:</span><span class="n">Evaluation</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;service_staff_id&#39;</span><span class="p">,</span><span class="s">&#39;evaluations&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="ReplyStatOnDay"><a class="viewcode-back" href="../wangwang.html#wangwang.ReplyStatOnDay">[docs]</a><span class="k">class</span> <span class="nc">ReplyStatOnDay</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;(某天)回复统计列表&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ReplyStatOnDay</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;reply_date&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span> <span class="s">&#39;reply_stat_by_ids&#39;</span><span class="p">:</span><span class="n">ReplyStatById</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;reply_date&#39;</span><span class="p">,</span><span class="s">&#39;reply_stat_by_ids&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="Evaluation"><a class="viewcode-back" href="../wangwang.html#wangwang.Evaluation">[docs]</a><span class="k">class</span> <span class="nc">Evaluation</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;客服评价&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Evaluation</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;evaluation_name&#39;</span><span class="p">,</span><span class="s">&#39;evaluation_num&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="OnlineTimeById"><a class="viewcode-back" href="../wangwang.html#wangwang.OnlineTimeById">[docs]</a><span class="k">class</span> <span class="nc">OnlineTimeById</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;在线时长&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">OnlineTimeById</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;service_staff_id&#39;</span><span class="p">,</span><span class="s">&#39;online_times&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="WaitingTimeById"><a class="viewcode-back" href="../wangwang.html#wangwang.WaitingTimeById">[docs]</a><span class="k">class</span> <span class="nc">WaitingTimeById</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;平均等待时长&#39;&#39;&#39;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">WaitingTimeById</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;service_staff_id&#39;</span><span class="p">,</span><span class="s">&#39;avg_waiting_times&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="ReplyStatById"><a class="viewcode-back" href="../wangwang.html#wangwang.ReplyStatById">[docs]</a><span class="k">class</span> <span class="nc">ReplyStatById</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;客服回复统计&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ReplyStatById</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;user_id&#39;</span><span class="p">,</span><span class="s">&#39;reply_num&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="LoginLog"><a class="viewcode-back" href="../wangwang.html#wangwang.LoginLog">[docs]</a><span class="k">class</span> <span class="nc">LoginLog</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;登录日志&#39;&#39;&#39;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LoginLog</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="EvalDetail"><a class="viewcode-back" href="../wangwang.html#wangwang.EvalDetail">[docs]</a><span class="k">class</span> <span class="nc">EvalDetail</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;评价详细&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">EvalDetail</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;send_time&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span> <span class="s">&#39;eval_time&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;eval_sender&#39;</span><span class="p">,</span><span class="s">&#39;eval_recer&#39;</span><span class="p">,</span><span class="s">&#39;send_time&#39;</span><span class="p">,</span><span class="s">&#39;eval_time&#39;</span><span class="p">,</span><span class="s">&#39;eval_code&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="StreamWeight"><a class="viewcode-back" href="../wangwang.html#wangwang.StreamWeight">[docs]</a><span class="k">class</span> <span class="nc">StreamWeight</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;分流权重&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">StreamWeight</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;user&#39;</span><span class="p">,</span><span class="s">&#39;weight&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="Chatpeer"><a class="viewcode-back" href="../wangwang.html#wangwang.Chatpeer">[docs]</a><span class="k">class</span> <span class="nc">Chatpeer</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;聊天对象ID列表&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Chatpeer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;uid&#39;</span><span class="p">,</span><span class="s">&#39;date&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="GroupMember"><a class="viewcode-back" href="../wangwang.html#wangwang.GroupMember">[docs]</a><span class="k">class</span> <span class="nc">GroupMember</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;组及其成员列表&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GroupMember</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;group_name&#39;</span><span class="p">,</span><span class="s">&#39;member_list&#39;</span><span class="p">,</span><span class="s">&#39;group_id&#39;</span><span class="p">]</span>
+    
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

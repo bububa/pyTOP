@@ -23,7 +23,13 @@ import requests
 from pprint import pprint
 
 class TOPDate:
+    '''
+    pyTOP Date Object
+    '''
     def create(self, date_str):
+        '''
+        Convert string to datetime.datetime
+        '''
         try:
             return parse(date_str)
         except:
@@ -31,7 +37,10 @@ class TOPDate:
     
 
 class TOPRequest :
-    def __init__(self, method_name) :  
+    '''
+    pyTOP Request Object
+    '''
+    def __init__(self, method_name) :
         self.method_name = method_name  
         self.api_params = {}  
     def get_api_params(self) : return self.api_params  
@@ -39,6 +48,9 @@ class TOPRequest :
     def __setitem__(self, param_name, param_value) : self.api_params[param_name] = param_value
 
 class TOP(object):
+    '''
+    Basic API class. All the API models are inherited from this class
+    '''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         self.OS_ENV = 'TOP_ENV'
         #淘宝正式环境
@@ -92,6 +104,9 @@ class TOP(object):
         if format in ('json','xml'): self.FORMAT = format
     
     def _sign(self,params):
+        '''
+        Generate API sign code
+        '''
         for k, v in params.iteritems():
             if type(v) == int: v = str(v)
             elif type(v) == float: v = '%.2f'%v
@@ -127,7 +142,7 @@ class TOP(object):
     
     def execute(self, request, session=None, method='post'):
         '''
-        request -- TOPRequest instance
+        pyTOP.API -- TOPRequest instance
         '''
         params = {
             'app_key' : self.API_KEY,  
@@ -165,6 +180,9 @@ class TOP(object):
             return rsp
     
     def create(self, data, fields=[], models={}):
+        '''
+        Create model attributes
+        '''
         if not fields: fields = self.fields
         if not models and hasattr(self, 'models'): models = self.models
         for field in fields:

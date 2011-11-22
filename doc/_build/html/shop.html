@@ -1,0 +1,200 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>店铺 API &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="index.html" />
+    <link rel="prev" title="商品 API" href="item.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="item.html" title="商品 API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<span id="shop"></span><h1>店铺 API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<p>提供了店铺查询，店铺自定义类目的查询和更新，图片空间图片的查询和删除等功能</p>
+<span class="target" id="module-shop"></span><dl class="class">
+<dt id="shop.ShopCat">
+<em class="property">class </em><tt class="descclassname">shop.</tt><tt class="descname">ShopCat</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/shop.html#ShopCat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#shop.ShopCat" title="Permalink to this definition">¶</a></dt>
+<dd><p>店铺类目</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="shop.ShopCats">
+<em class="property">class </em><tt class="descclassname">shop.</tt><tt class="descname">ShopCats</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/shop.html#ShopCats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#shop.ShopCats" title="Permalink to this definition">¶</a></dt>
+<dd><p>店铺类目</p>
+<dl class="method">
+<dt id="shop.ShopCats.get">
+<tt class="descname">get</tt><big>(</big><em>fields=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/shop.html#ShopCats.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#shop.ShopCats.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.shopcats.list.get 获取前台展示的店铺类目</p>
+<p>此API获取淘宝面向买家的浏览导航类目 跟后台卖家商品管理的类目有差异</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shop.ShopScore">
+<em class="property">class </em><tt class="descclassname">shop.</tt><tt class="descname">ShopScore</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/shop.html#ShopScore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#shop.ShopScore" title="Permalink to this definition">¶</a></dt>
+<dd><p>店铺动态评分信息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="shop.SellerCat">
+<em class="property">class </em><tt class="descclassname">shop.</tt><tt class="descname">SellerCat</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/shop.html#SellerCat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#shop.SellerCat" title="Permalink to this definition">¶</a></dt>
+<dd><p>店铺内卖家自定义类目</p>
+<dl class="method">
+<dt id="shop.SellerCat.add">
+<tt class="descname">add</tt><big>(</big><em>name</em>, <em>session</em>, <em>pict_url=None</em>, <em>parent_cid=None</em>, <em>sort_order=None</em><big>)</big><a class="reference internal" href="_modules/shop.html#SellerCat.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#shop.SellerCat.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.sellercats.list.add 添加卖家自定义类目</p>
+<p>此API添加卖家店铺内自定义类目 父类目parent_cid值等于0：表示此类目为店铺下的一级类目，值不等于0：表示此类目有父类目 注：因为缓存的关系,添加的新类目需8个小时后才可以在淘宝页面上正常显示，但是不影响在该类目下商品发布</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shop.SellerCat.update">
+<tt class="descname">update</tt><big>(</big><em>cid</em>, <em>session</em>, <em>name=None</em>, <em>pict_url=None</em>, <em>sort_order=None</em><big>)</big><a class="reference internal" href="_modules/shop.html#SellerCat.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#shop.SellerCat.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.sellercats.list.update 更新卖家自定义类目</p>
+<p>此API更新卖家店铺内自定义类目 注：因为缓存的关系，添加的新类目需8个小时后才可以在淘宝页面上正常显示，但是不影响在该类目下商品发布</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shop.SellerCats">
+<em class="property">class </em><tt class="descclassname">shop.</tt><tt class="descname">SellerCats</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/shop.html#SellerCats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#shop.SellerCats" title="Permalink to this definition">¶</a></dt>
+<dd><p>店铺内卖家自定义类目</p>
+<dl class="method">
+<dt id="shop.SellerCats.get">
+<tt class="descname">get</tt><big>(</big><em>nick</em><big>)</big><a class="reference internal" href="_modules/shop.html#SellerCats.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#shop.SellerCats.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.sellercats.list.get 获取前台展示的店铺内卖家自定义商品类目</p>
+<p>此API添加卖家店铺内自定义类目 父类目parent_cid值等于0：表示此类目为店铺下的一级类目，值不等于0：表示此类目有父类目 注：因为缓存的关系,添加的新类目需8个小时后才可以在淘宝页面上正常显示，但是不影响在该类目下商品发布</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shop.Shop">
+<em class="property">class </em><tt class="descclassname">shop.</tt><tt class="descname">Shop</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/shop.html#Shop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#shop.Shop" title="Permalink to this definition">¶</a></dt>
+<dd><p>店铺信息</p>
+<dl class="method">
+<dt id="shop.Shop.get">
+<tt class="descname">get</tt><big>(</big><em>nick</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/shop.html#Shop.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#shop.Shop.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.shop.get 获取卖家店铺的基本信息</p>
+<p>获取卖家店铺的基本信息</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shop.Shop.remainshowcase_get">
+<tt class="descname">remainshowcase_get</tt><big>(</big><em>session</em><big>)</big><a class="reference internal" href="_modules/shop.html#Shop.remainshowcase_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#shop.Shop.remainshowcase_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.shop.remainshowcase.get 获取卖家店铺剩余橱窗数量</p>
+<p>获取卖家店铺剩余橱窗数量，已用橱窗数量，总橱窗数量（对于B卖家，后两个参数返回-1）</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shop.Shop.update">
+<tt class="descname">update</tt><big>(</big><em>session</em>, <em>title=None</em>, <em>bulletin=None</em>, <em>desc=None</em><big>)</big><a class="reference internal" href="_modules/shop.html#Shop.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#shop.Shop.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.shop.remainshowcase.get 获取卖家店铺剩余橱窗数量</p>
+<p>目前只支持标题、公告和描述的更新</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="item.html"
+                        title="previous chapter">商品 API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/shop.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="item.html" title="商品 API"
+             >previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

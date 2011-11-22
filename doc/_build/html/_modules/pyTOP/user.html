@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyTOP.user &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="../../index.html" />
+    <link rel="up" title="pyTOP" href="../pyTOP.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../pyTOP.html" accesskey="U">pyTOP</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for pyTOP.user</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># encoding: utf-8</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">user.py</span>
+
+<span class="sd">Created by 徐 光硕 on 2011-11-14.</span>
+<span class="sd">Copyright (c) 2011 __MyCompanyName__. All rights reserved.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">try</span> <span class="p">:</span>  
+    <span class="kn">import</span> <span class="nn">json</span>  
+<span class="k">except</span> <span class="ne">ImportError</span> <span class="p">:</span>  
+    <span class="kn">import</span> <span class="nn">simplejson</span> <span class="kn">as</span> <span class="nn">json</span>  
+<span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">md5</span>
+<span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">from</span> <span class="nn">api</span> <span class="kn">import</span> <span class="n">TOP</span><span class="p">,</span> <span class="n">TOPRequest</span><span class="p">,</span> <span class="n">TOPDate</span>
+<span class="kn">from</span> <span class="nn">systime</span> <span class="kn">import</span> <span class="n">SysTime</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">BeautifulSoup</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<div class="viewcode-block" id="Location"><a class="viewcode-back" href="../../user.html#pyTOP.user.Location">[docs]</a><span class="k">class</span> <span class="nc">Location</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;用户地址&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Location</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;zip&#39;</span><span class="p">,</span><span class="s">&#39;address&#39;</span><span class="p">,</span><span class="s">&#39;city&#39;</span><span class="p">,</span><span class="s">&#39;state&#39;</span><span class="p">,</span><span class="s">&#39;country&#39;</span><span class="p">,</span><span class="s">&#39;district&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="UserCredit"><a class="viewcode-back" href="../../user.html#pyTOP.user.UserCredit">[docs]</a><span class="k">class</span> <span class="nc">UserCredit</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;用户信用&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UserCredit</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;level&#39;</span><span class="p">,</span><span class="s">&#39;score&#39;</span><span class="p">,</span><span class="s">&#39;total_num&#39;</span><span class="p">,</span><span class="s">&#39;good_num&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="User"><a class="viewcode-back" href="../../user.html#pyTOP.user.User">[docs]</a><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;用户&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;buyer_credit&#39;</span><span class="p">:</span><span class="n">UserCredit</span><span class="p">,</span> <span class="s">&#39;seller_credit&#39;</span><span class="p">:</span><span class="n">UserCredit</span><span class="p">,</span> <span class="s">&#39;location&#39;</span><span class="p">:</span><span class="n">Location</span><span class="p">,</span> <span class="s">&#39;created&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span> <span class="s">&#39;last_visit&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span> <span class="s">&#39;birthday&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;user_id&#39;</span><span class="p">,</span><span class="s">&#39;uid&#39;</span><span class="p">,</span><span class="s">&#39;nick&#39;</span><span class="p">,</span><span class="s">&#39;sex&#39;</span><span class="p">,</span><span class="s">&#39;buyer_credit&#39;</span><span class="p">,</span><span class="s">&#39;seller_credit&#39;</span><span class="p">,</span><span class="s">&#39;location&#39;</span><span class="p">,</span><span class="s">&#39;created&#39;</span><span class="p">,</span><span class="s">&#39;last_visit&#39;</span><span class="p">,</span><span class="s">&#39;birthday&#39;</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;has_more_pic&#39;</span><span class="p">,</span><span class="s">&#39;item_img_num&#39;</span><span class="p">,</span><span class="s">&#39;item_img_size&#39;</span><span class="p">,</span><span class="s">&#39;prop_img_num&#39;</span><span class="p">,</span><span class="s">&#39;prop_img_size&#39;</span><span class="p">,</span><span class="s">&#39;auto_repost&#39;</span><span class="p">,</span><span class="s">&#39;promoted_type&#39;</span><span class="p">,</span><span class="s">&#39;status&#39;</span><span class="p">,</span><span class="s">&#39;alipay_bind&#39;</span><span class="p">,</span><span class="s">&#39;consumer_protection&#39;</span><span class="p">,</span><span class="s">&#39;alipay_account&#39;</span><span class="p">,</span><span class="s">&#39;alipay_no&#39;</span><span class="p">,</span><span class="s">&#39;avatar&#39;</span><span class="p">,</span><span class="s">&#39;liangpin&#39;</span><span class="p">,</span><span class="s">&#39;sign_food_seller_promise&#39;</span><span class="p">,</span><span class="s">&#39;has_shop&#39;</span><span class="p">,</span><span class="s">&#39;is_lightning_consignment&#39;</span><span class="p">,</span><span class="s">&#39;has_sub_stock&#39;</span><span class="p">,</span><span class="s">&#39;vip_info&#39;</span><span class="p">,</span><span class="s">&#39;email&#39;</span><span class="p">,</span><span class="s">&#39;magazine_subscribe&#39;</span><span class="p">,</span><span class="s">&#39;vertical_market&#39;</span><span class="p">,</span><span class="s">&#39;online_gaming&#39;</span><span class="p">]</span>
+        
+<div class="viewcode-block" id="User.get"><a class="viewcode-back" href="../../user.html#pyTOP.user.User.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nick</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[],</span> <span class="n">session</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.user.get 获取单个用户信息;</span>
+<span class="sd">        </span>
+<span class="sd">        在传入session的情况下,可以不传nick，表示取当前用户信息；否则nick必须传.</span>
+<span class="sd">        自用型应用不需要传入nick&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.user.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;nick&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nick</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">)[</span><span class="s">&#39;user&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    </div>
+    <span class="k">def</span> <span class="nf">logout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">systime</span> <span class="o">=</span> <span class="n">SysTime</span><span class="p">()</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;app_key&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">API_KEY</span><span class="p">,</span>
+            <span class="s">&#39;timestamp&#39;</span>  <span class="p">:</span> <span class="n">systime</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="s">&#39;sign_method&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">SIGN_METHOD</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP_SECRET</span> <span class="o">+</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;</span><span class="si">%s%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">iteritems</span><span class="p">())])</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP_SECRET</span>
+        <span class="n">params</span><span class="p">[</span><span class="s">&#39;sign&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">md5</span><span class="p">(</span><span class="n">src</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="n">form_data</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">rsp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">?</span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">LOGOUT_URL</span><span class="p">,</span> <span class="n">form_data</span><span class="p">))</span>
+        <span class="k">if</span> <span class="s">&#39;login.taobao.com&#39;</span> <span class="ow">in</span> <span class="n">rsp</span><span class="o">.</span><span class="n">url</span><span class="p">:</span> <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+        
+    <span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">app_user_nick</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">use_taobaoid</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">use_taobaoid</span><span class="p">:</span>
+            <span class="n">systime</span> <span class="o">=</span> <span class="n">SysTime</span><span class="p">()</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s">&#39;app_key&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">API_KEY</span><span class="p">,</span>
+                <span class="s">&#39;timestamp&#39;</span>  <span class="p">:</span> <span class="n">systime</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                <span class="s">&#39;sign_method&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">SIGN_METHOD</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="n">app_user_nick</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;app_user_nick&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">app_user_nick</span>
+            <span class="k">if</span> <span class="n">target</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">target</span>
+            <span class="n">src</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP_SECRET</span> <span class="o">+</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;</span><span class="si">%s%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">iteritems</span><span class="p">())])</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP_SECRET</span>
+            <span class="n">params</span><span class="p">[</span><span class="s">&#39;sign&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">md5</span><span class="p">(</span><span class="n">src</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="n">form_data</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+            <span class="n">rsp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">?</span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">TaobaoID_URL</span><span class="p">,</span> <span class="n">form_data</span><span class="p">))</span>
+            <span class="k">print</span> <span class="n">rsp</span><span class="o">.</span><span class="n">content</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rsp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">LOGIN_URL</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">API_KEY</span><span class="p">))</span>
+            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">rsp</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+            <span class="n">iframe_src</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;iframe&#39;</span><span class="p">)[</span><span class="s">&#39;src&#39;</span><span class="p">]</span>
+            <span class="n">rsp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">iframe_src</span><span class="p">)</span>
+            <span class="k">print</span> <span class="n">rsp</span><span class="o">.</span><span class="n">url</span>
+            <span class="c">#s = requests.session()</span>
+            <span class="n">login_url</span> <span class="o">=</span> <span class="s">&#39;https://login.taobao.com/member/login.jhtml&#39;</span>
+            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">rsp</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+            <span class="n">login_url</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;form&#39;</span><span class="p">)[</span><span class="s">&#39;action&#39;</span><span class="p">]</span>
+            <span class="c">#inputs = soup.findAll(&#39;input&#39;)</span>
+            <span class="n">forms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_form_fields</span><span class="p">(</span><span class="n">soup</span><span class="p">)</span>
+            <span class="n">forms</span><span class="p">[</span><span class="s">&#39;TPL_username&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">username</span>
+            <span class="n">forms</span><span class="p">[</span><span class="s">&#39;TPL_password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">passwd</span>
+            <span class="n">rsp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">login_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">forms</span><span class="p">)</span>
+            <span class="k">print</span> <span class="n">rsp</span><span class="o">.</span><span class="n">url</span>
+            <span class="k">print</span> <span class="n">rsp</span><span class="o">.</span><span class="n">content</span>
+    
+<div class="viewcode-block" id="User.validate_session"><a class="viewcode-back" href="../../user.html#pyTOP.user.User.validate_session">[docs]</a>    <span class="k">def</span> <span class="nf">validate_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_ts</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        检查Session是否过期, 验证Session可用性</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">session_ts</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
+        <span class="k">if</span> <span class="n">ts</span> <span class="o">&gt;</span> <span class="p">(</span> <span class="n">now</span> <span class="o">+</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">10</span> <span class="p">)</span> <span class="ow">or</span> <span class="n">now</span> <span class="o">&gt;</span> <span class="p">(</span> <span class="n">ts</span> <span class="o">+</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">30</span> <span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+        </div>
+<div class="viewcode-block" id="User.refresh_session"><a class="viewcode-back" href="../../user.html#pyTOP.user.User.refresh_session">[docs]</a>    <span class="k">def</span> <span class="nf">refresh_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sessionkey</span><span class="p">,</span> <span class="n">refresh_token</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Refresh Session Token</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">refresh_token</span><span class="p">:</span>
+            <span class="n">refresh_token</span> <span class="o">=</span> <span class="n">sessionkey</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;appkey&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">API_KEY</span><span class="p">,</span>
+            <span class="s">&#39;sessionkey&#39;</span>  <span class="p">:</span> <span class="n">sessionkey</span><span class="p">,</span>
+            <span class="s">&#39;refresh_token&#39;</span><span class="p">:</span> <span class="n">refresh_token</span>
+        <span class="p">}</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;</span><span class="si">%s%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">iteritems</span><span class="p">())])</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP_SECRET</span>
+        <span class="n">params</span><span class="p">[</span><span class="s">&#39;sign&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">md5</span><span class="p">(</span><span class="n">src</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="n">form_data</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">rsp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">?</span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">REFRESH_TOKEN_URL</span><span class="p">,</span> <span class="n">form_data</span><span class="p">))</span>
+        <span class="n">rsp</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">rsp</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s">&#39;error&#39;</span> <span class="ow">in</span> <span class="n">rsp</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">TOPException</span><span class="p">(</span><span class="n">rsp</span><span class="p">[</span><span class="s">&#39;error&#39;</span><span class="p">],</span> <span class="n">rsp</span><span class="p">[</span><span class="s">&#39;error_description&#39;</span><span class="p">])</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="n">rsp</span><span class="p">[</span><span class="s">&#39;re_expires_in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rsp</span><span class="p">[</span><span class="s">&#39;re_expires_in&#39;</span><span class="p">])</span>
+        <span class="n">rsp</span><span class="p">[</span><span class="s">&#39;expires_in&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rsp</span><span class="p">[</span><span class="s">&#39;expires_in&#39;</span><span class="p">])</span>
+        <span class="n">rsp</span><span class="p">[</span><span class="s">&#39;session&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rsp</span><span class="p">[</span><span class="s">&#39;top_session&#39;</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">rsp</span><span class="p">[</span><span class="s">&#39;top_session&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">rsp</span>
+    </div>
+    <span class="k">def</span> <span class="nf">extract_form_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soup</span><span class="p">):</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="nb">input</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s">&#39;input&#39;</span><span class="p">):</span>
+            <span class="c"># ignore submit/image with no name attribute</span>
+            <span class="k">if</span> <span class="nb">input</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;submit&#39;</span><span class="p">,</span> <span class="s">&#39;image&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">input</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">):</span>
+                <span class="k">continue</span>
+            
+            <span class="c"># single element nome/value fields</span>
+            <span class="k">if</span> <span class="nb">input</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;text&#39;</span><span class="p">,</span> <span class="s">&#39;hidden&#39;</span><span class="p">,</span> <span class="s">&#39;password&#39;</span><span class="p">,</span> <span class="s">&#39;submit&#39;</span><span class="p">,</span> <span class="s">&#39;image&#39;</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+                <span class="k">if</span> <span class="nb">input</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">):</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="nb">input</span><span class="p">[</span><span class="s">&#39;value&#39;</span><span class="p">]</span>
+                <span class="n">fields</span><span class="p">[</span><span class="nb">input</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span>
+                <span class="k">continue</span>
+            
+            <span class="c"># checkboxes and radios</span>
+            <span class="k">if</span> <span class="nb">input</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;checkbox&#39;</span><span class="p">,</span> <span class="s">&#39;radio&#39;</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+                <span class="k">if</span> <span class="nb">input</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;checked&#39;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="nb">input</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">):</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="nb">input</span><span class="p">[</span><span class="s">&#39;value&#39;</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="s">&#39;on&#39;</span>
+                <span class="k">if</span> <span class="s">&#39;name&#39;</span> <span class="ow">in</span> <span class="nb">input</span> <span class="ow">and</span> <span class="n">fields</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">])</span> <span class="ow">and</span> <span class="n">value</span><span class="p">:</span>
+                    <span class="n">fields</span><span class="p">[</span><span class="nb">input</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span>
+                
+                <span class="k">if</span> <span class="s">&#39;name&#39;</span> <span class="ow">in</span> <span class="nb">input</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">fields</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]):</span>
+                    <span class="n">fields</span><span class="p">[</span><span class="nb">input</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span>
+                
+                <span class="k">continue</span>
+            
+            <span class="k">assert</span> <span class="bp">False</span><span class="p">,</span> <span class="s">&#39;input type </span><span class="si">%s</span><span class="s"> not supported&#39;</span> <span class="o">%</span> <span class="nb">input</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span>
+        
+        <span class="c"># textareas</span>
+        <span class="k">for</span> <span class="n">textarea</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s">&#39;textarea&#39;</span><span class="p">):</span>
+            <span class="n">fields</span><span class="p">[</span><span class="n">textarea</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">textarea</span><span class="o">.</span><span class="n">string</span> <span class="ow">or</span> <span class="s">&#39;&#39;</span>
+        
+        <span class="c"># select fields</span>
+        <span class="k">for</span> <span class="n">select</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s">&#39;select&#39;</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+            <span class="n">options</span> <span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s">&#39;option&#39;</span><span class="p">)</span>
+            <span class="n">is_multiple</span> <span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;multiple&#39;</span><span class="p">)</span>
+            <span class="n">selected_options</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">option</span> <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">options</span>
+                <span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;selected&#39;</span><span class="p">)</span>
+            <span class="p">]</span>
+            
+            <span class="c"># If no select options, go with the first one</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">selected_options</span> <span class="ow">and</span> <span class="n">options</span><span class="p">:</span>
+                <span class="n">selected_options</span> <span class="o">=</span> <span class="p">[</span><span class="n">options</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_multiple</span><span class="p">:</span>
+                <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_options</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_options</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">selected_options</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;value&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">option</span><span class="p">[</span><span class="s">&#39;value&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">selected_options</span><span class="p">]</span>
+            
+            <span class="n">fields</span><span class="p">[</span><span class="n">select</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span>
+        
+        <span class="k">return</span> <span class="n">fields</span>
+    
+</div>
+<div class="viewcode-block" id="Users"><a class="viewcode-back" href="../../user.html#pyTOP.user.Users">[docs]</a><span class="k">class</span> <span class="nc">Users</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Users</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;users&#39;</span><span class="p">:</span><span class="n">User</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;users&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="Users.get"><a class="viewcode-back" href="../../user.html#pyTOP.user.Users.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nicks</span><span class="o">=</span><span class="p">[],</span> <span class="n">fields</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.users.get 获取多个用户信息&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.users.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;nicks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nicks</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">()</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span>
+    </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../pyTOP.html" >pyTOP</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

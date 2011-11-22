@@ -1,0 +1,174 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>用户 API &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="类目 API" href="category.html" />
+    <link rel="prev" title="Welcome to pyTOP’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="category.html" title="类目 API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to pyTOP’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<span id="user"></span><h1>用户 API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<p>提供了用户基本信息查询功能</p>
+<span class="target" id="module-user"></span><dl class="class">
+<dt id="user.User">
+<em class="property">class </em><tt class="descclassname">user.</tt><tt class="descname">User</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/user.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>用户</p>
+<dl class="method">
+<dt id="user.User.get">
+<tt class="descname">get</tt><big>(</big><em>nick=''</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>session=None</em><big>)</big><a class="reference internal" href="_modules/user.html#User.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user.User.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.user.get 获取单个用户信息;</p>
+<p>在传入session的情况下,可以不传nick，表示取当前用户信息；否则nick必须传.
+自用型应用不需要传入nick</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="user.User.refresh_session">
+<tt class="descname">refresh_session</tt><big>(</big><em>sessionkey</em>, <em>refresh_token=None</em><big>)</big><a class="reference internal" href="_modules/user.html#User.refresh_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user.User.refresh_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refresh Session Token</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="user.User.validate_session">
+<tt class="descname">validate_session</tt><big>(</big><em>session_ts</em><big>)</big><a class="reference internal" href="_modules/user.html#User.validate_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user.User.validate_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>检查Session是否过期, 验证Session可用性</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="user.Location">
+<em class="property">class </em><tt class="descclassname">user.</tt><tt class="descname">Location</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/user.html#Location"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user.Location" title="Permalink to this definition">¶</a></dt>
+<dd><p>用户地址</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="user.UserCredit">
+<em class="property">class </em><tt class="descclassname">user.</tt><tt class="descname">UserCredit</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/user.html#UserCredit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user.UserCredit" title="Permalink to this definition">¶</a></dt>
+<dd><p>用户信用</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="user.Users">
+<em class="property">class </em><tt class="descclassname">user.</tt><tt class="descname">Users</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/user.html#Users"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user.Users" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="user.Users.get">
+<tt class="descname">get</tt><big>(</big><em>nicks=</em><span class="optional">[</span><span class="optional">]</span>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/user.html#Users.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#user.Users.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.users.get 获取多个用户信息</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to pyTOP&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="category.html"
+                        title="next chapter">类目 API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/user.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="category.html" title="类目 API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to pyTOP’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

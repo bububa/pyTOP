@@ -1,0 +1,226 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>shop &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for shop</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># encoding: utf-8</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">shop.py</span>
+
+<span class="sd">Created by 徐 光硕 on 2011-11-18.</span>
+<span class="sd">Copyright (c) 2011 __MyCompanyName__. All rights reserved.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">api</span> <span class="kn">import</span> <span class="n">TOP</span><span class="p">,</span> <span class="n">TOPRequest</span><span class="p">,</span> <span class="n">TOPDate</span>
+
+<div class="viewcode-block" id="ShopCat"><a class="viewcode-back" href="../shop.html#shop.ShopCat">[docs]</a><span class="k">class</span> <span class="nc">ShopCat</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;店铺类目&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ShopCat</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;cid&#39;</span><span class="p">,</span><span class="s">&#39;parent_cid&#39;</span><span class="p">,</span><span class="s">&#39;name&#39;</span><span class="p">,</span><span class="s">&#39;is_parent&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="ShopCats"><a class="viewcode-back" href="../shop.html#shop.ShopCats">[docs]</a><span class="k">class</span> <span class="nc">ShopCats</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;店铺类目&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ShopCats</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;shop_cats&#39;</span><span class="p">:</span><span class="n">ShopCat</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;shop_cats&#39;</span><span class="p">,]</span>
+    
+<div class="viewcode-block" id="ShopCats.get"><a class="viewcode-back" href="../shop.html#shop.ShopCats.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.shopcats.list.get 获取前台展示的店铺类目</span>
+<span class="sd">        </span>
+<span class="sd">        此API获取淘宝面向买家的浏览导航类目 跟后台卖家商品管理的类目有差异&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.shopcats.list.get&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">shopCat</span> <span class="o">=</span> <span class="n">ShopCat</span><span class="p">()</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="n">shopCat</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shop_cats</span>
+    
+</div></div>
+<div class="viewcode-block" id="ShopScore"><a class="viewcode-back" href="../shop.html#shop.ShopScore">[docs]</a><span class="k">class</span> <span class="nc">ShopScore</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;店铺动态评分信息&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ShopScore</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;item_score&#39;</span><span class="p">,</span><span class="s">&#39;service_score&#39;</span><span class="p">,</span><span class="s">&#39;delivery_score&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="SellerCat"><a class="viewcode-back" href="../shop.html#shop.SellerCat">[docs]</a><span class="k">class</span> <span class="nc">SellerCat</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;店铺内卖家自定义类目&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SellerCat</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;created&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span> <span class="s">&#39;modified&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;cid&#39;</span><span class="p">,</span><span class="s">&#39;parent_cid&#39;</span><span class="p">,</span><span class="s">&#39;name&#39;</span><span class="p">,</span><span class="s">&#39;pic_url&#39;</span><span class="p">,</span><span class="s">&#39;sort_order&#39;</span><span class="p">,</span><span class="s">&#39;created&#39;</span><span class="p">,</span><span class="s">&#39;modified&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="SellerCat.add"><a class="viewcode-back" href="../shop.html#shop.SellerCat.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">pict_url</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">parent_cid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sort_order</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.sellercats.list.add 添加卖家自定义类目</span>
+<span class="sd">        </span>
+<span class="sd">        此API添加卖家店铺内自定义类目 父类目parent_cid值等于0：表示此类目为店铺下的一级类目，值不等于0：表示此类目有父类目 注：因为缓存的关系,添加的新类目需8个小时后才可以在淘宝页面上正常显示，但是不影响在该类目下商品发布&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.sellercats.list.add&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">if</span> <span class="n">pict_url</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;pict_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pict_url</span>
+        <span class="k">if</span> <span class="n">parent_cid</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;parent_cid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parent_cid</span>
+        <span class="k">if</span> <span class="n">sort_order</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;sort_order&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sort_order</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">)[</span><span class="s">&#39;seller_cat&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    </div>
+<div class="viewcode-block" id="SellerCat.update"><a class="viewcode-back" href="../shop.html#shop.SellerCat.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cid</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pict_url</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sort_order</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.sellercats.list.update 更新卖家自定义类目</span>
+<span class="sd">        </span>
+<span class="sd">        此API更新卖家店铺内自定义类目 注：因为缓存的关系，添加的新类目需8个小时后才可以在淘宝页面上正常显示，但是不影响在该类目下商品发布&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.sellercats.list.update&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;cid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cid</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">if</span> <span class="n">pict_url</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;pict_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pict_url</span>
+        <span class="k">if</span> <span class="n">sort_order</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;sort_order&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sort_order</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">)[</span><span class="s">&#39;seller_cat&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    
+</div></div>
+<div class="viewcode-block" id="SellerCats"><a class="viewcode-back" href="../shop.html#shop.SellerCats">[docs]</a><span class="k">class</span> <span class="nc">SellerCats</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;店铺内卖家自定义类目&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SellerCats</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;seller_cats&#39;</span><span class="p">:</span><span class="n">SellerCat</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;seller_cats&#39;</span><span class="p">,]</span>
+    
+<div class="viewcode-block" id="SellerCats.get"><a class="viewcode-back" href="../shop.html#shop.SellerCats.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nick</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.sellercats.list.get 获取前台展示的店铺内卖家自定义商品类目</span>
+<span class="sd">        </span>
+<span class="sd">        此API添加卖家店铺内自定义类目 父类目parent_cid值等于0：表示此类目为店铺下的一级类目，值不等于0：表示此类目有父类目 注：因为缓存的关系,添加的新类目需8个小时后才可以在淘宝页面上正常显示，但是不影响在该类目下商品发布&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.sellercats.list.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;nick&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nick</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">seller_cats</span>
+    
+</div></div>
+<div class="viewcode-block" id="Shop"><a class="viewcode-back" href="../shop.html#shop.Shop">[docs]</a><span class="k">class</span> <span class="nc">Shop</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;店铺信息&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Shop</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;created&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span> <span class="s">&#39;modified&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span><span class="s">&#39;shop_score&#39;</span><span class="p">:</span><span class="n">ShopScore</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;sid&#39;</span><span class="p">,</span><span class="s">&#39;cid&#39;</span><span class="p">,</span><span class="s">&#39;nick&#39;</span><span class="p">,</span><span class="s">&#39;name&#39;</span><span class="p">,</span><span class="s">&#39;title&#39;</span><span class="p">,</span><span class="s">&#39;desc&#39;</span><span class="p">,</span><span class="s">&#39;bulletin&#39;</span><span class="p">,</span><span class="s">&#39;pic_path&#39;</span><span class="p">,</span><span class="s">&#39;created&#39;</span><span class="p">,</span><span class="s">&#39;modified&#39;</span><span class="p">,</span><span class="s">&#39;shop_score&#39;</span><span class="p">,</span><span class="s">&#39;remain_count&#39;</span><span class="p">,</span><span class="s">&#39;all_count&#39;</span><span class="p">,</span><span class="s">&#39;used_count&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="Shop.get"><a class="viewcode-back" href="../shop.html#shop.Shop.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nick</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.shop.get 获取卖家店铺的基本信息</span>
+<span class="sd">        </span>
+<span class="sd">        获取卖家店铺的基本信息&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.shop.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;nick&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nick</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">)[</span><span class="s">&#39;shop&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    </div>
+<div class="viewcode-block" id="Shop.remainshowcase_get"><a class="viewcode-back" href="../shop.html#shop.Shop.remainshowcase_get">[docs]</a>    <span class="k">def</span> <span class="nf">remainshowcase_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.shop.remainshowcase.get 获取卖家店铺剩余橱窗数量</span>
+<span class="sd">        </span>
+<span class="sd">        获取卖家店铺剩余橱窗数量，已用橱窗数量，总橱窗数量（对于B卖家，后两个参数返回-1）&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.shop.remainshowcase.get&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">)[</span><span class="s">&#39;shop&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    </div>
+<div class="viewcode-block" id="Shop.update"><a class="viewcode-back" href="../shop.html#shop.Shop.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">bulletin</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.shop.remainshowcase.get 获取卖家店铺剩余橱窗数量</span>
+<span class="sd">        </span>
+<span class="sd">        目前只支持标题、公告和描述的更新&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.shop.remainshowcase.get&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">title</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="k">if</span> <span class="n">bulletin</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;bulletin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bulletin</span>
+        <span class="k">if</span> <span class="n">desc</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;desc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">desc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">)[</span><span class="s">&#39;shop&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

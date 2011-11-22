@@ -21,26 +21,30 @@ import time
 from BeautifulSoup import BeautifulSoup
 
 class Location(TOP):
+    '''用户地址'''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Location, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['zip','address','city','state','country','district']
     
 
 class UserCredit(TOP):
+    '''用户信用'''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(UserCredit, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['level','score','total_num','good_num']
     
 
 class User(TOP):
+    '''用户'''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(User, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'buyer_credit':UserCredit, 'seller_credit':UserCredit, 'location':Location, 'created':TOPDate, 'last_visit':TOPDate, 'birthday':TOPDate}
         self.fields = ['user_id','uid','nick','sex','buyer_credit','seller_credit','location','created','last_visit','birthday','type','has_more_pic','item_img_num','item_img_size','prop_img_num','prop_img_size','auto_repost','promoted_type','status','alipay_bind','consumer_protection','alipay_account','alipay_no','avatar','liangpin','sign_food_seller_promise','has_shop','is_lightning_consignment','has_sub_stock','vip_info','email','magazine_subscribe','vertical_market','online_gaming']
         
     def get(self, nick='', fields=[], session=None):
-        '''taobao.user.get 获取单个用户信息
-        *在传入session的情况下,可以不传nick，表示取当前用户信息；否则nick必须传.
+        '''taobao.user.get 获取单个用户信息;
+        
+        在传入session的情况下,可以不传nick，表示取当前用户信息；否则nick必须传.
         自用型应用不需要传入nick'''
         request = TOPRequest('taobao.user.get')
         request['nick'] = nick
@@ -98,6 +102,9 @@ class User(TOP):
             print rsp.content
     
     def validate_session(self, session_ts):
+        '''
+        检查Session是否过期, 验证Session可用性
+        '''
         now = time()
         ts = session_ts / 1000;
         if ts > ( now + 60 * 10 ) or now > ( ts + 60 * 30 ):
@@ -105,6 +112,9 @@ class User(TOP):
         return True
         
     def refresh_session(self, sessionkey, refresh_token=None):
+        '''
+        Refresh Session Token
+        '''
         if not refresh_token:
             refresh_token = sessionkey
         params = {
@@ -127,7 +137,6 @@ class User(TOP):
         return rsp
     
     def extract_form_fields(self, soup):
-        "Turn a BeautifulSoup form in to a dict of fields and default values"
         fields = {}
         for input in soup.findAll('input'):
             # ignore submit/image with no name attribute

@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>crm &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for crm</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># encoding: utf-8</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">crm.py</span>
+
+<span class="sd">Created by 徐 光硕 on 2011-11-18.</span>
+<span class="sd">Copyright (c) 2011 __MyCompanyName__. All rights reserved.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">api</span> <span class="kn">import</span> <span class="n">TOP</span><span class="p">,</span> <span class="n">TOPRequest</span><span class="p">,</span> <span class="n">TOPDate</span>
+
+<div class="viewcode-block" id="GroupDomain"><a class="viewcode-back" href="../crm.html#crm.GroupDomain">[docs]</a><span class="k">class</span> <span class="nc">GroupDomain</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;分组简单定义&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GroupDomain</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;group_id&#39;</span><span class="p">,</span><span class="s">&#39;group_name&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="BasicMember"><a class="viewcode-back" href="../crm.html#crm.BasicMember">[docs]</a><span class="k">class</span> <span class="nc">BasicMember</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;表示会员关系的基本信息字段，用于会员列表的基本查询&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BasicMember</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;last_trade_time&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;buyer_nick&#39;</span><span class="p">,</span><span class="s">&#39;status&#39;</span><span class="p">,</span><span class="s">&#39;grade&#39;</span><span class="p">,</span><span class="s">&#39;trade_count&#39;</span><span class="p">,</span><span class="s">&#39;trade_amount&#39;</span><span class="p">,</span><span class="s">&#39;last_trade_time&#39;</span><span class="p">,</span><span class="s">&#39;close_trade_count&#39;</span><span class="p">,</span><span class="s">&#39;close_trade_amount&#39;</span><span class="p">,</span><span class="s">&#39;item_num&#39;</span><span class="p">,</span><span class="s">&#39;group_ids&#39;</span><span class="p">,</span><span class="s">&#39;relation_source&#39;</span><span class="p">,</span><span class="s">&#39;biz_order_id&#39;</span><span class="p">,</span><span class="s">&#39;buyer_id&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="GradePromotion"><a class="viewcode-back" href="../crm.html#crm.GradePromotion">[docs]</a><span class="k">class</span> <span class="nc">GradePromotion</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;卖家设置的等级优惠信息&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GradePromotion</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;cur_grade&#39;</span><span class="p">,</span><span class="s">&#39;cur_grade_name&#39;</span><span class="p">,</span><span class="s">&#39;discount&#39;</span><span class="p">,</span><span class="s">&#39;next_upgrade_amount&#39;</span><span class="p">,</span><span class="s">&#39;next_upgrade_count&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="RuleData"><a class="viewcode-back" href="../crm.html#crm.RuleData">[docs]</a><span class="k">class</span> <span class="nc">RuleData</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;规则相关信息&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RuleData</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;grouplist&#39;</span><span class="p">:</span><span class="n">GroupDomain</span><span class="p">,</span><span class="s">&#39;start_trade_time&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span><span class="s">&#39;end_trade_time&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;rule_id&#39;</span><span class="p">,</span><span class="s">&#39;seller_id&#39;</span><span class="p">,</span><span class="s">&#39;rule_name&#39;</span><span class="p">,</span><span class="s">&#39;grouplist&#39;</span><span class="p">,</span><span class="s">&#39;start_trade_time&#39;</span><span class="p">,</span><span class="s">&#39;end_trade_time&#39;</span><span class="p">,</span><span class="s">&#39;min_avg_price&#39;</span><span class="p">,</span><span class="s">&#39;max_avg_price&#39;</span><span class="p">,</span><span class="s">&#39;min_trade_count&#39;</span><span class="p">,</span><span class="s">&#39;max_trade_count&#39;</span><span class="p">,</span><span class="s">&#39;min_item_count&#39;</span><span class="p">,</span><span class="s">&#39;max_item_count&#39;</span><span class="p">,</span><span class="s">&#39;min_close_trade_count&#39;</span><span class="p">,</span><span class="s">&#39;max_close_trade_count&#39;</span><span class="p">,</span><span class="s">&#39;min_trade_amount&#39;</span><span class="p">,</span><span class="s">&#39;max_trade_amount&#39;</span><span class="p">,</span><span class="s">&#39;relation_source&#39;</span><span class="p">,</span><span class="s">&#39;province&#39;</span><span class="p">,</span><span class="s">&#39;grade&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="CrmMember"><a class="viewcode-back" href="../crm.html#crm.CrmMember">[docs]</a><span class="k">class</span> <span class="nc">CrmMember</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;会员信息对象&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CrmMember</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;buyer_nick&#39;</span><span class="p">,</span><span class="s">&#39;status&#39;</span><span class="p">,</span><span class="s">&#39;grade&#39;</span><span class="p">,</span><span class="s">&#39;trade_count&#39;</span><span class="p">,</span><span class="s">&#39;trade_amount&#39;</span><span class="p">,</span><span class="s">&#39;close_trade_count&#39;</span><span class="p">,</span><span class="s">&#39;close_trade_amount&#39;</span><span class="p">,</span><span class="s">&#39;item_num&#39;</span><span class="p">,</span><span class="s">&#39;biz_order_id&#39;</span><span class="p">,</span><span class="s">&#39;group_ids&#39;</span><span class="p">,</span><span class="s">&#39;province&#39;</span><span class="p">,</span><span class="s">&#39;city&#39;</span><span class="p">,</span><span class="s">&#39;avg_price&#39;</span><span class="p">,</span><span class="s">&#39;relation_source&#39;</span><span class="p">,</span><span class="s">&#39;last_trade_time&#39;</span><span class="p">,</span><span class="s">&#39;item_close_count&#39;</span><span class="p">,</span><span class="s">&#39;buyer_id&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="Group"><a class="viewcode-back" href="../crm.html#crm.Group">[docs]</a><span class="k">class</span> <span class="nc">Group</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;描述分组的数据结构&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Group</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;group_create&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span> <span class="s">&#39;group_modify&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;group_id&#39;</span><span class="p">,</span><span class="s">&#39;group_name&#39;</span><span class="p">,</span><span class="s">&#39;group_create&#39;</span><span class="p">,</span><span class="s">&#39;group_modify&#39;</span><span class="p">,</span><span class="s">&#39;status&#39;</span><span class="p">,</span><span class="s">&#39;member_count&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="Group.add"><a class="viewcode-back" href="../crm.html#crm.Group.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_name</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.group.add 卖家创建一个分组</span>
+<span class="sd">        </span>
+<span class="sd">        卖家创建一个新的分组，接口返回一个创建成功的分组的id&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.group.add&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;group_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;is_success&#39;</span><span class="p">,</span> <span class="s">&#39;group_id&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_success</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_id</span>
+    </div>
+<div class="viewcode-block" id="Group.append"><a class="viewcode-back" href="../crm.html#crm.Group.append">[docs]</a>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">from_group_id</span><span class="p">,</span> <span class="n">to_group_id</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.group.append 将一个分组添加到另外一个分组</span>
+<span class="sd">        </span>
+<span class="sd">        将某分组下的所有会员添加到另一个分组,注</span>
+<span class="sd">        </span>
+<span class="sd">        - 1.该操作为异步任务，建议先调用taobao.crm.grouptask.check 确保涉及分组上没有任务；</span>
+<span class="sd">        - 2.若分组下某会员分组数超最大限额，则该会员不会被添加到新分组，同时不影响其余会员添加分组，接口调用依然返回成功。&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.group.append&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;from_group_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">from_group_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;to_group_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">to_group_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;is_success&#39;</span><span class="p">,])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_success</span>
+    </div>
+<div class="viewcode-block" id="Group.delete"><a class="viewcode-back" href="../crm.html#crm.Group.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.group.delete 删除分组</span>
+<span class="sd">        </span>
+<span class="sd">        将该分组下的所有会员移除出该组，同时删除该分组。注：删除分组为异步任务，必须先调用taobao.crm.grouptask.check 确保涉及属性上没有任务。&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.group.delete&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;group_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;is_success&#39;</span><span class="p">,])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_success</span>
+    </div>
+<div class="viewcode-block" id="Group.move"><a class="viewcode-back" href="../crm.html#crm.Group.move">[docs]</a>    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">from_group_id</span><span class="p">,</span> <span class="n">to_group_id</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.group.move 分组移动</span>
+<span class="sd">        </span>
+<span class="sd">        将一个分组下的所有会员移动到另一个分组，会员从原分组中删除 注：移动属性为异步任务建议先调用taobao.crm.grouptask.check 确保涉及属性上没有任务。&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.group.move&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;from_group_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">from_group_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;to_group_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">to_group_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;is_success&#39;</span><span class="p">,])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_success</span>
+    </div>
+<div class="viewcode-block" id="Group.update"><a class="viewcode-back" href="../crm.html#crm.Group.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">new_group_name</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.group.update 修改一个已经存在的分组</span>
+<span class="sd">        </span>
+<span class="sd">        修改一个已经存在的分组，接口返回分组的修改是否成功&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.group.update&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;group_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;new_group_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_group_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;is_success&#39;</span><span class="p">,])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_success</span>
+    
+</div></div>
+<div class="viewcode-block" id="Groups"><a class="viewcode-back" href="../crm.html#crm.Groups">[docs]</a><span class="k">class</span> <span class="nc">Groups</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Groups</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;groups&#39;</span><span class="p">:</span><span class="n">Group</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;groups&#39;</span><span class="p">,</span> <span class="s">&#39;total_result&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="Groups.get"><a class="viewcode-back" href="../crm.html#crm.Groups.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_size</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.groups.get 查询卖家的分组</span>
+<span class="sd">        </span>
+<span class="sd">        查询卖家的分组，返回查询到的分组列表，分页返回分组&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.groups.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;page_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_size</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;current_page&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_page</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span>
+    
+</div></div>
+<div class="viewcode-block" id="GroupTask"><a class="viewcode-back" href="../crm.html#crm.GroupTask">[docs]</a><span class="k">class</span> <span class="nc">GroupTask</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GroupTask</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;is_finished&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="GroupTask.check"><a class="viewcode-back" href="../crm.html#crm.GroupTask.check">[docs]</a>    <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.grouptask.check 查询分组任务是否完成</span>
+<span class="sd">        </span>
+<span class="sd">        检查一个分组上是否有异步任务,异步任务包括</span>
+<span class="sd">        </span>
+<span class="sd">        - 1.将一个分组下的所有用户添加到另外一个分组</span>
+<span class="sd">        - 2.将一个分组下的所有用户移动到另外一个分组</span>
+<span class="sd">        - 3.删除某个分组 若分组上有任务则该属性不能被操作。&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.grouptask.check&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;group_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_finished</span>
+    
+</div></div>
+<div class="viewcode-block" id="MemberInfo"><a class="viewcode-back" href="../crm.html#crm.MemberInfo">[docs]</a><span class="k">class</span> <span class="nc">MemberInfo</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MemberInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;is_success&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="MemberInfo.update"><a class="viewcode-back" href="../crm.html#crm.MemberInfo.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buyer_nick</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">grade</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">province</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">city</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.memberinfo.update 编辑会员资料</span>
+<span class="sd">        </span>
+<span class="sd">        检查一个分组上是否有异步任务,异步任务包括</span>
+<span class="sd">        </span>
+<span class="sd">        - 1.将一个分组下的所有用户添加到另外一个分组</span>
+<span class="sd">        - 2.将一个分组下的所有用户移动到另外一个分组</span>
+<span class="sd">        - 3.删除某个分组 若分组上有任务则该属性不能被操作。&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.memberinfo.update&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;buyer_nick&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">buyer_nick</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">status</span>
+        <span class="k">if</span> <span class="n">grade</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;grade&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">grade</span>
+        <span class="k">if</span> <span class="n">province</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;province&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">province</span>
+        <span class="k">if</span> <span class="n">city</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;city&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">city</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_success</span>
+    
+</div></div>
+<div class="viewcode-block" id="Members"><a class="viewcode-back" href="../crm.html#crm.Members">[docs]</a><span class="k">class</span> <span class="nc">Members</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Members</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;members&#39;</span><span class="p">:</span><span class="n">BasicMember</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;members&#39;</span><span class="p">,</span> <span class="s">&#39;total_result&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="Members.get"><a class="viewcode-back" href="../crm.html#crm.Members.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.members.get 获取卖家的会员（基本查询）</span>
+<span class="sd">        </span>
+<span class="sd">        查询卖家的会员，进行基本的查询，返回符合条件的会员列表&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.members.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;current_page&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_page</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;buyer_nick&#39;</span><span class="p">,</span> <span class="s">&#39;grade&#39;</span><span class="p">,</span> <span class="s">&#39;min_trade_amount&#39;</span><span class="p">,</span> <span class="s">&#39;max_trade_amount&#39;</span><span class="p">,</span> <span class="s">&#39;min_trade_count&#39;</span><span class="p">,</span> <span class="s">&#39;max_trade_count&#39;</span><span class="p">,</span> <span class="s">&#39;min_last_trade_time&#39;</span><span class="p">,</span> <span class="s">&#39;max_last_trade_time&#39;</span><span class="p">,</span> <span class="s">&#39;page_size&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span>
+    </div>
+<div class="viewcode-block" id="Members.group_batchadd"><a class="viewcode-back" href="../crm.html#crm.Members.group_batchadd">[docs]</a>    <span class="k">def</span> <span class="nf">group_batchadd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buyer_ids</span><span class="p">,</span> <span class="n">group_ids</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.members.group.batchadd 给一批会员添加一个分组</span>
+<span class="sd">        </span>
+<span class="sd">        为一批会员添加分组，接口返回添加是否成功,如至少有一个会员的分组添加成功，接口就返回成功，否则返回失败，如果当前会员已经拥有当前分组，则直接跳过&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.members.group.batchadd&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;buyer_ids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">buyer_ids</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;group_ids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_ids</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;is_success&#39;</span><span class="p">,</span> <span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_success</span>
+    </div>
+<div class="viewcode-block" id="Members.groups_batchdelete"><a class="viewcode-back" href="../crm.html#crm.Members.groups_batchdelete">[docs]</a>    <span class="k">def</span> <span class="nf">groups_batchdelete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buyer_ids</span><span class="p">,</span> <span class="n">group_ids</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.members.groups.batchdelete 批量删除分组</span>
+<span class="sd">        </span>
+<span class="sd">        批量删除多个会员的公共分组，接口返回删除是否成功，该接口只删除多个会员的公共分组，不是公共分组的，不进行删除。如果入参只输入一个会员，则表示删除该会员的某些分组。&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.members.groups.batchdelete&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;buyer_ids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">buyer_ids</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;group_ids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_ids</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;is_success&#39;</span><span class="p">,</span> <span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_success</span>
+    </div>
+<div class="viewcode-block" id="Members.increment_get"><a class="viewcode-back" href="../crm.html#crm.Members.increment_get">[docs]</a>    <span class="k">def</span> <span class="nf">increment_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.members.increment.get 增量获取卖家会员）</span>
+<span class="sd">        </span>
+<span class="sd">        增量获取会员列表，接口返回符合查询条件的所有会员。任何状态更改都会返回&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.members.increment.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;current_page&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_page</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;grade&#39;</span><span class="p">,</span> <span class="s">&#39;start_modify&#39;</span><span class="p">,</span> <span class="s">&#39;end_modify&#39;</span><span class="p">,</span> <span class="s">&#39;page_size&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span>
+    </div>
+<div class="viewcode-block" id="Members.search"><a class="viewcode-back" href="../crm.html#crm.Members.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.members.search 获取卖家会员（高级查询））</span>
+<span class="sd">        </span>
+<span class="sd">        会员列表的高级查询，接口返回符合条件的会员列表&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.members.search&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;current_page&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_page</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;buyer_nick&#39;</span><span class="p">,</span> <span class="s">&#39;grade&#39;</span><span class="p">,</span> <span class="s">&#39;min_trade_amount&#39;</span><span class="p">,</span> <span class="s">&#39;max_trade_amount&#39;</span><span class="p">,</span> <span class="s">&#39;min_trade_count&#39;</span><span class="p">,</span> <span class="s">&#39;max_trade_count&#39;</span><span class="p">,</span> <span class="s">&#39;min_last_trade_time&#39;</span><span class="p">,</span> <span class="s">&#39;max_last_trade_time&#39;</span><span class="p">,</span> <span class="s">&#39;relation_source&#39;</span><span class="p">,</span> <span class="s">&#39;min_item_num&#39;</span><span class="p">,</span> <span class="s">&#39;min_avg_price&#39;</span><span class="p">,</span> <span class="s">&#39;min_close_trade_num&#39;</span><span class="p">,</span> <span class="s">&#39;province&#39;</span><span class="p">,</span> <span class="s">&#39;city&#39;</span><span class="p">,</span> <span class="s">&#39;group_id&#39;</span><span class="p">,</span> <span class="s">&#39;page_size&#39;</span><span class="p">,</span> <span class="s">&#39;order&#39;</span><span class="p">,</span> <span class="s">&#39;max_avg_price&#39;</span><span class="p">,</span> <span class="s">&#39;max_item_num&#39;</span><span class="p">,</span> <span class="s">&#39;max_close_trade_num&#39;</span><span class="p">,</span> <span class="s">&#39;sort&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;members&#39;</span><span class="p">:</span><span class="n">CrmMember</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span>
+    
+</div></div>
+<div class="viewcode-block" id="Grade"><a class="viewcode-back" href="../crm.html#crm.Grade">[docs]</a><span class="k">class</span> <span class="nc">Grade</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Grade</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;grade_promotions&#39;</span><span class="p">:</span><span class="n">GradePromotion</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;grade_promotions&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="Grade.get"><a class="viewcode-back" href="../crm.html#crm.Grade.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.grade.get 卖家查询等级规则</span>
+<span class="sd">        </span>
+<span class="sd">        卖家查询等级规则，包括普通会员、高级会员、VIP会员、至尊VIP会员四个等级的信息&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.grade.get&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">grade_promotions</span>
+</div></div>
+<div class="viewcode-block" id="Rule"><a class="viewcode-back" href="../crm.html#crm.Rule">[docs]</a><span class="k">class</span> <span class="nc">Rule</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Rule</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;is_success&#39;</span><span class="p">,</span> <span class="s">&#39;rule_id&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="Rule.add"><a class="viewcode-back" href="../crm.html#crm.Rule.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule_name</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.rule.add 分组规则添加</span>
+<span class="sd">        </span>
+<span class="sd">        添加分组规则，规则可用于筛选一定条件的会员。过滤条件可以选择客户来源、会员级别 、交易笔数、交易额、上次交易时间、平均客单价、宝贝件数、省份、关闭交易数等，新建规则时必须至少选择一个以上筛选条件。如果输入的规则的筛选条件不正确则不会进行处理，可以将某些分组挂在这个规则下，对被挂在该规则下的分组，系统对现有满足规则的客户都划分到这个分组（异步任务），若某些会员分组数或规则数超最大限额，则该会员不被操作，同时不影响其余会员操作，接口调用依然返回成功。每个规则可以应用到多个分组，一个用户的规则上限为5个。&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.rule.add&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;rule_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rule_name</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;relation_source&#39;</span><span class="p">,</span> <span class="s">&#39;grade&#39;</span><span class="p">,</span> <span class="s">&#39;min_trade_amount&#39;</span><span class="p">,</span> <span class="s">&#39;max_trade_amount&#39;</span><span class="p">,</span> <span class="s">&#39;min_trade_count&#39;</span><span class="p">,</span> <span class="s">&#39;max_trade_count&#39;</span><span class="p">,</span> <span class="s">&#39;min_last_trade_time&#39;</span><span class="p">,</span> <span class="s">&#39;max_last_trade_time&#39;</span><span class="p">,</span> <span class="s">&#39;min_item_num&#39;</span><span class="p">,</span> <span class="s">&#39;min_avg_price&#39;</span><span class="p">,</span> <span class="s">&#39;min_close_trade_num&#39;</span><span class="p">,</span> <span class="s">&#39;province&#39;</span><span class="p">,</span> <span class="s">&#39;group_ids&#39;</span><span class="p">,</span> <span class="s">&#39;max_avg_price&#39;</span><span class="p">,</span> <span class="s">&#39;max_item_num&#39;</span><span class="p">,</span> <span class="s">&#39;max_close_trade_num&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_success</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rule_id</span>
+    </div>
+<div class="viewcode-block" id="Rule.delete"><a class="viewcode-back" href="../crm.html#crm.Rule.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule_id</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.rule.delete 分组规则删除</span>
+<span class="sd">        </span>
+<span class="sd">        分组规则删除&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.rule.delete&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;rule_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rule_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_success</span>
+    </div>
+<div class="viewcode-block" id="Rule.group_set"><a class="viewcode-back" href="../crm.html#crm.Rule.group_set">[docs]</a>    <span class="k">def</span> <span class="nf">group_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule_id</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">add_groups</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">delete_groups</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.rule.group.set 设置规则适用的分组</span>
+<span class="sd">        </span>
+<span class="sd">        将规则应用或取消应用到分组上，add_groups和delete_groups，两个参数最少填写一个。&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.rule.delete&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;rule_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rule_id</span>
+        <span class="k">if</span> <span class="n">add_groups</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;add_groups&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">add_groups</span>
+        <span class="k">if</span> <span class="n">delete_groups</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;delete_groups&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">delete_groups</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_success</span>
+    
+</div></div>
+<div class="viewcode-block" id="Rules"><a class="viewcode-back" href="../crm.html#crm.Rules">[docs]</a><span class="k">class</span> <span class="nc">Rules</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Rules</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;rule_list&#39;</span><span class="p">:</span><span class="n">RuleData</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;rule_list&#39;</span><span class="p">,</span> <span class="s">&#39;total_result&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="Rules.get"><a class="viewcode-back" href="../crm.html#crm.Rules.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">page_size</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.rules.get 获取规则</span>
+<span class="sd">        </span>
+<span class="sd">        获取现有的规则列表&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.rules.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;current_page&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_page</span>
+        <span class="k">if</span> <span class="n">page_size</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;page_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rule_list</span>
+    
+</div></div>
+<div class="viewcode-block" id="ShopVip"><a class="viewcode-back" href="../crm.html#crm.ShopVip">[docs]</a><span class="k">class</span> <span class="nc">ShopVip</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ShopVip</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;is_success&#39;</span><span class="p">,</span> <span class="p">]</span>
+    
+<div class="viewcode-block" id="ShopVip.cancel"><a class="viewcode-back" href="../crm.html#crm.ShopVip.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.crm.shopvip.cancel 卖家取消店铺vip的优惠</span>
+<span class="sd">        </span>
+<span class="sd">        此接口用于取消VIP优惠&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.crm.shopvip.cancel&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_success</span>
+    </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

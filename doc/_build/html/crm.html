@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>店铺会员管理 API &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="index.html" />
+    <link rel="prev" title="交易 API" href="trade.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="trade.html" title="交易 API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<span id="crm"></span><h1>店铺会员管理 API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<p>API无需订购ecrm工具也可调用。开放淘宝卖家的会员数据，并且提供对会员的相关管理，设置操作。</p>
+<span class="target" id="module-crm"></span><dl class="class">
+<dt id="crm.GroupDomain">
+<em class="property">class </em><tt class="descclassname">crm.</tt><tt class="descname">GroupDomain</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#GroupDomain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.GroupDomain" title="Permalink to this definition">¶</a></dt>
+<dd><p>分组简单定义</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="crm.BasicMember">
+<em class="property">class </em><tt class="descclassname">crm.</tt><tt class="descname">BasicMember</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#BasicMember"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.BasicMember" title="Permalink to this definition">¶</a></dt>
+<dd><p>表示会员关系的基本信息字段，用于会员列表的基本查询</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="crm.GradePromotion">
+<em class="property">class </em><tt class="descclassname">crm.</tt><tt class="descname">GradePromotion</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#GradePromotion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.GradePromotion" title="Permalink to this definition">¶</a></dt>
+<dd><p>卖家设置的等级优惠信息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="crm.RuleData">
+<em class="property">class </em><tt class="descclassname">crm.</tt><tt class="descname">RuleData</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#RuleData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.RuleData" title="Permalink to this definition">¶</a></dt>
+<dd><p>规则相关信息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="crm.CrmMember">
+<em class="property">class </em><tt class="descclassname">crm.</tt><tt class="descname">CrmMember</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#CrmMember"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.CrmMember" title="Permalink to this definition">¶</a></dt>
+<dd><p>会员信息对象</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="crm.Group">
+<em class="property">class </em><tt class="descclassname">crm.</tt><tt class="descname">Group</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#Group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Group" title="Permalink to this definition">¶</a></dt>
+<dd><p>描述分组的数据结构</p>
+<dl class="method">
+<dt id="crm.Group.add">
+<tt class="descname">add</tt><big>(</big><em>group_name</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/crm.html#Group.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Group.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.group.add 卖家创建一个分组</p>
+<p>卖家创建一个新的分组，接口返回一个创建成功的分组的id</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="crm.Group.append">
+<tt class="descname">append</tt><big>(</big><em>from_group_id</em>, <em>to_group_id</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/crm.html#Group.append"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Group.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.group.append 将一个分组添加到另外一个分组</p>
+<p>将某分组下的所有会员添加到另一个分组,注</p>
+<ul class="simple">
+<li>1.该操作为异步任务，建议先调用taobao.crm.grouptask.check 确保涉及分组上没有任务；</li>
+<li>2.若分组下某会员分组数超最大限额，则该会员不会被添加到新分组，同时不影响其余会员添加分组，接口调用依然返回成功。</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="crm.Group.delete">
+<tt class="descname">delete</tt><big>(</big><em>group_id</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/crm.html#Group.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Group.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.group.delete 删除分组</p>
+<p>将该分组下的所有会员移除出该组，同时删除该分组。注：删除分组为异步任务，必须先调用taobao.crm.grouptask.check 确保涉及属性上没有任务。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="crm.Group.move">
+<tt class="descname">move</tt><big>(</big><em>from_group_id</em>, <em>to_group_id</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/crm.html#Group.move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Group.move" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.group.move 分组移动</p>
+<p>将一个分组下的所有会员移动到另一个分组，会员从原分组中删除 注：移动属性为异步任务建议先调用taobao.crm.grouptask.check 确保涉及属性上没有任务。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="crm.Group.update">
+<tt class="descname">update</tt><big>(</big><em>group_id</em>, <em>new_group_name</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/crm.html#Group.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Group.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.group.update 修改一个已经存在的分组</p>
+<p>修改一个已经存在的分组，接口返回分组的修改是否成功</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="crm.Groups">
+<em class="property">class </em><tt class="descclassname">crm.</tt><tt class="descname">Groups</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#Groups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Groups" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="crm.Groups.get">
+<tt class="descname">get</tt><big>(</big><em>page_size</em>, <em>current_page</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/crm.html#Groups.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Groups.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.groups.get 查询卖家的分组</p>
+<p>查询卖家的分组，返回查询到的分组列表，分页返回分组</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="crm.GroupTask">
+<em class="property">class </em><tt class="descclassname">crm.</tt><tt class="descname">GroupTask</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#GroupTask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.GroupTask" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="crm.GroupTask.check">
+<tt class="descname">check</tt><big>(</big><em>group_id</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/crm.html#GroupTask.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.GroupTask.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.grouptask.check 查询分组任务是否完成</p>
+<p>检查一个分组上是否有异步任务,异步任务包括</p>
+<ul class="simple">
+<li>1.将一个分组下的所有用户添加到另外一个分组</li>
+<li>2.将一个分组下的所有用户移动到另外一个分组</li>
+<li>3.删除某个分组 若分组上有任务则该属性不能被操作。</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="crm.MemberInfo">
+<em class="property">class </em><tt class="descclassname">crm.</tt><tt class="descname">MemberInfo</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#MemberInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.MemberInfo" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="crm.MemberInfo.update">
+<tt class="descname">update</tt><big>(</big><em>buyer_nick</em>, <em>status</em>, <em>session</em>, <em>grade=None</em>, <em>province=None</em>, <em>city=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#MemberInfo.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.MemberInfo.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.memberinfo.update 编辑会员资料</p>
+<p>检查一个分组上是否有异步任务,异步任务包括</p>
+<ul class="simple">
+<li>1.将一个分组下的所有用户添加到另外一个分组</li>
+<li>2.将一个分组下的所有用户移动到另外一个分组</li>
+<li>3.删除某个分组 若分组上有任务则该属性不能被操作。</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="crm.Members">
+<em class="property">class </em><tt class="descclassname">crm.</tt><tt class="descname">Members</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#Members"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Members" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="crm.Members.get">
+<tt class="descname">get</tt><big>(</big><em>current_page</em>, <em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/crm.html#Members.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Members.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.members.get 获取卖家的会员（基本查询）</p>
+<p>查询卖家的会员，进行基本的查询，返回符合条件的会员列表</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="crm.Members.group_batchadd">
+<tt class="descname">group_batchadd</tt><big>(</big><em>buyer_ids</em>, <em>group_ids</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/crm.html#Members.group_batchadd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Members.group_batchadd" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.members.group.batchadd 给一批会员添加一个分组</p>
+<p>为一批会员添加分组，接口返回添加是否成功,如至少有一个会员的分组添加成功，接口就返回成功，否则返回失败，如果当前会员已经拥有当前分组，则直接跳过</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="crm.Members.groups_batchdelete">
+<tt class="descname">groups_batchdelete</tt><big>(</big><em>buyer_ids</em>, <em>group_ids</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/crm.html#Members.groups_batchdelete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Members.groups_batchdelete" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.members.groups.batchdelete 批量删除分组</p>
+<p>批量删除多个会员的公共分组，接口返回删除是否成功，该接口只删除多个会员的公共分组，不是公共分组的，不进行删除。如果入参只输入一个会员，则表示删除该会员的某些分组。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="crm.Members.increment_get">
+<tt class="descname">increment_get</tt><big>(</big><em>current_page</em>, <em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/crm.html#Members.increment_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Members.increment_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.members.increment.get 增量获取卖家会员）</p>
+<p>增量获取会员列表，接口返回符合查询条件的所有会员。任何状态更改都会返回</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="crm.Members.search">
+<tt class="descname">search</tt><big>(</big><em>current_page</em>, <em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/crm.html#Members.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Members.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.members.search 获取卖家会员（高级查询））</p>
+<p>会员列表的高级查询，接口返回符合条件的会员列表</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="crm.Grade">
+<em class="property">class </em><tt class="descclassname">crm.</tt><tt class="descname">Grade</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#Grade"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Grade" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="crm.Grade.get">
+<tt class="descname">get</tt><big>(</big><em>session</em><big>)</big><a class="reference internal" href="_modules/crm.html#Grade.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Grade.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.grade.get 卖家查询等级规则</p>
+<p>卖家查询等级规则，包括普通会员、高级会员、VIP会员、至尊VIP会员四个等级的信息</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="crm.Rule">
+<em class="property">class </em><tt class="descclassname">crm.</tt><tt class="descname">Rule</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#Rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Rule" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="crm.Rule.add">
+<tt class="descname">add</tt><big>(</big><em>rule_name</em>, <em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/crm.html#Rule.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Rule.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.rule.add 分组规则添加</p>
+<p>添加分组规则，规则可用于筛选一定条件的会员。过滤条件可以选择客户来源、会员级别 、交易笔数、交易额、上次交易时间、平均客单价、宝贝件数、省份、关闭交易数等，新建规则时必须至少选择一个以上筛选条件。如果输入的规则的筛选条件不正确则不会进行处理，可以将某些分组挂在这个规则下，对被挂在该规则下的分组，系统对现有满足规则的客户都划分到这个分组（异步任务），若某些会员分组数或规则数超最大限额，则该会员不被操作，同时不影响其余会员操作，接口调用依然返回成功。每个规则可以应用到多个分组，一个用户的规则上限为5个。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="crm.Rule.delete">
+<tt class="descname">delete</tt><big>(</big><em>rule_id</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/crm.html#Rule.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Rule.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.rule.delete 分组规则删除</p>
+<p>分组规则删除</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="crm.Rule.group_set">
+<tt class="descname">group_set</tt><big>(</big><em>rule_id</em>, <em>session</em>, <em>add_groups=None</em>, <em>delete_groups=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#Rule.group_set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Rule.group_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.rule.group.set 设置规则适用的分组</p>
+<p>将规则应用或取消应用到分组上，add_groups和delete_groups，两个参数最少填写一个。</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="crm.Rules">
+<em class="property">class </em><tt class="descclassname">crm.</tt><tt class="descname">Rules</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#Rules"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Rules" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="crm.Rules.get">
+<tt class="descname">get</tt><big>(</big><em>current_page</em>, <em>session</em>, <em>page_size=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#Rules.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.Rules.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.rules.get 获取规则</p>
+<p>获取现有的规则列表</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="crm.ShopVip">
+<em class="property">class </em><tt class="descclassname">crm.</tt><tt class="descname">ShopVip</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/crm.html#ShopVip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.ShopVip" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="crm.ShopVip.cancel">
+<tt class="descname">cancel</tt><big>(</big><em>session</em><big>)</big><a class="reference internal" href="_modules/crm.html#ShopVip.cancel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crm.ShopVip.cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.crm.shopvip.cancel 卖家取消店铺vip的优惠</p>
+<p>此接口用于取消VIP优惠</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="trade.html"
+                        title="previous chapter">交易 API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/crm.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="trade.html" title="交易 API"
+             >previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

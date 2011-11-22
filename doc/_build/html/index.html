@@ -1,0 +1,204 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to pyTOP’s documentation! &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="#" />
+    <link rel="next" title="用户 API" href="user.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="user.html" title="用户 API"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome-to-pytop-s-documentation">
+<h1>Welcome to pyTOP&#8217;s documentation!<a class="headerlink" href="#welcome-to-pytop-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<p>This part of the documentation covers all the interfaces of pyTOP.  For
+parts where Requests depends on external libraries, we document the most
+important right here and provide links to the canonical documentation.</p>
+<div class="section" id="basic-api">
+<h2>Basic API<a class="headerlink" href="#basic-api" title="Permalink to this headline">¶</a></h2>
+<p>All of pyTOP&#8217;s functionality can be accessed by these 3 methods.
+They all return an instance of the <tt class="xref py py-class docutils literal"><span class="pre">TOP</span></tt> object.</p>
+<span class="target" id="module-api"></span><dl class="class">
+<dt id="api.TOP">
+<em class="property">class </em><tt class="descclassname">api.</tt><tt class="descname">TOP</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/api.html#TOP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#api.TOP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic API class. All the API models are inherited from this class</p>
+<dl class="method">
+<dt id="api.TOP.create">
+<tt class="descname">create</tt><big>(</big><em>data</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>models={}</em><big>)</big><a class="reference internal" href="_modules/api.html#TOP.create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#api.TOP.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create model attributes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="api.TOP.execute">
+<tt class="descname">execute</tt><big>(</big><em>request</em>, <em>session=None</em>, <em>method='post'</em><big>)</big><a class="reference internal" href="_modules/api.html#TOP.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#api.TOP.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>pyTOP.API &#8211; TOPRequest instance</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="api.TOPRequest">
+<em class="property">class </em><tt class="descclassname">api.</tt><tt class="descname">TOPRequest</tt><big>(</big><em>method_name</em><big>)</big><a class="reference internal" href="_modules/api.html#TOPRequest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#api.TOPRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>pyTOP Request Object</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="api.TOPDate">
+<em class="property">class </em><tt class="descclassname">api.</tt><tt class="descname">TOPDate</tt><a class="reference internal" href="_modules/api.html#TOPDate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#api.TOPDate" title="Permalink to this definition">¶</a></dt>
+<dd><p>pyTOP Date Object</p>
+<dl class="method">
+<dt id="api.TOPDate.create">
+<tt class="descname">create</tt><big>(</big><em>date_str</em><big>)</big><a class="reference internal" href="_modules/api.html#TOPDate.create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#api.TOPDate.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert string to datetime.datetime</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+</div>
+<div class="section" id="exceptions">
+<span id="id1"></span><h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-errors"></span><dl class="exception">
+<dt id="errors.TOPException">
+<em class="property">exception </em><tt class="descclassname">errors.</tt><tt class="descname">TOPException</tt><big>(</big><em>code</em>, <em>msg=None</em><big>)</big><a class="reference internal" href="_modules/errors.html#TOPException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#errors.TOPException" title="Permalink to this definition">¶</a></dt>
+<dd><p>There was an ambiguous exception that occurred while handling your
+TOP request.</p>
+</dd></dl>
+
+</div>
+<hr class="docutils" />
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user.html">用户 API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="category.html">类目 API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="item.html">商品 API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shop.html">店铺 API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trade.html">交易 API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crm.html">店铺会员管理 API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sellercenter.html">子账号管理 API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wangwang.html">旺旺 API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">物流 API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="favorite.html">收藏夹 API</a></li>
+</ul>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to pyTOP&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#basic-api">Basic API</a></li>
+<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+<li><a class="reference internal" href="#api">API</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="user.html"
+                        title="next chapter">用户 API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="user.html" title="用户 API"
+             >next</a> |</li>
+        <li><a href="#">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

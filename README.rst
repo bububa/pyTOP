@@ -26,7 +26,7 @@ Requirements
 
 - Requests (https://github.com/kennethreitz/requests)
 - Urllib3 (http://code.google.com/p/urllib3/)
-
+- Dateutil (http://labix.org/python-dateutil)
 
 Installation
 ------------

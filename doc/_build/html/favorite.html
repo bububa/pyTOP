@@ -1,0 +1,140 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>收藏夹 API &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="index.html" />
+    <link rel="prev" title="物流 API" href="logistics.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="logistics.html" title="物流 API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<span id="favorite"></span><h1>收藏夹 API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<p>提供了收藏夹添加和查询功能</p>
+<span class="target" id="module-favorite"></span><dl class="class">
+<dt id="favorite.CollectItem">
+<em class="property">class </em><tt class="descclassname">favorite.</tt><tt class="descname">CollectItem</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/favorite.html#CollectItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#favorite.CollectItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>商品或店铺的信息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="favorite.Favorite">
+<em class="property">class </em><tt class="descclassname">favorite.</tt><tt class="descname">Favorite</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/favorite.html#Favorite"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#favorite.Favorite" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="favorite.Favorite.add">
+<tt class="descname">add</tt><big>(</big><em>item_numid</em>, <em>collect_type</em>, <em>shared</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/favorite.html#Favorite.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#favorite.Favorite.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.favorite.add 添加收藏夹</p>
+<p>根据用户昵称和收藏目标的数字id以及收藏目标的类型，实现收藏行为</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="favorite.Favorite.search">
+<tt class="descname">search</tt><big>(</big><em>user_nick</em>, <em>collect_type</em>, <em>page_no</em>, <em>session=None</em><big>)</big><a class="reference internal" href="_modules/favorite.html#Favorite.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#favorite.Favorite.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.favorite.search 查询</p>
+<p>查询淘宝用户收藏的商品或店铺信息.(收藏有公开和未公开两种，不入参sessionkey的只能获得公开的收藏，而入参了sessionkey的能获得未公开的收藏。)</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="logistics.html"
+                        title="previous chapter">物流 API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/favorite.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="logistics.html" title="物流 API"
+             >previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

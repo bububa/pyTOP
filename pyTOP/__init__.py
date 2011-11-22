@@ -23,7 +23,7 @@ from .user import User, Location, UserCredit, Users
 # 类目 API
 from .category import PropValue, SellerAuthorize, ItemCat, ItemProps, ItemPropValues
 # 商品 API
-from .item import Item, Items, Sku, Skus, ItemImg, PropImg, Video, ItemCategory, ProductPropImg, ProductImg, AfterSale, ItemTemplate, ItemTelplates, ItemSearch, Product, Products
+from .item import Item, Items, Sku, Skus, ItemImg, PropImg, Video, ItemCategory, ProductPropImg, ProductImg, AfterSale, ItemTemplate, ItemTemplates, ItemSearch, Product, Products
 # 店铺 API
 from .shop import ShopCat, ShopCats, ShopScore, SellerCat, SellerCats, Shop
 # 交易 API

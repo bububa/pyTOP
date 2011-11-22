@@ -10,12 +10,14 @@ Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 from api import TOP, TOPRequest
 
 class PropValue(TOP):
+    '''属性值'''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(PropValue, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['cid','pid','prop_name','vid','name','name_alias','is_parent','status','sort_order']
     
 
 class SellerAuthorize(TOP):
+    '''授权'''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(SellerAuthorize, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'item_cats':ItemCat, 'brands':Brand}
@@ -23,17 +25,20 @@ class SellerAuthorize(TOP):
     
 
 class ItemCat(TOP):
+    '''商品类目结构'''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ItemCat, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['cid','parent_cid','name','is_parent','status','sort_order']
     
 class Brand(TOP):
+    '''品牌'''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Brand, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['vid','name','pid','prop_name']
    
 
 class ItemProp(TOP):
+    '''商品属性'''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(ItemProp, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'prop_values':PropValue}
@@ -78,7 +83,7 @@ class ItemProps(TOP):
     
     def get(self, cid, fields=[], **kwargs):
         '''taobao.itemprops.get 获取标准商品类目属性
-        ===============================
+        
         Q：能否通过图形化界面获取特定类目下面的属性及属性值? 
         A：请点击属性工具，通过图形化界面直接获取上述数据 
         Q：关键属性，非关键属性，销售属性有什么区别？ A：产品的关键属性是必填的，关键属性＋类目id确定一个产品，非关键属性，是分类上除了关键属性和销售属性以外的属性。销售属性是只有一件实物的商品才能确定的一个属性，如：N73　红色，黑色。没有实物不能确定。 
@@ -106,7 +111,7 @@ class ItemPropValues(TOP):
     
     def get(self, cid, pvs=None, fields=[]):
         '''taobao.itempropvalues.get 获取标准类目属性值
-        ===============================
+        
         传入类目ID,必需是叶子类目，通过taobao.itemcats.get获取类目ID 返回字段目前支持有：cid,pid,prop_name,vid,name,name_alias,status,sort_order 作用:获取标准类目属性值'''
         request = TOPRequest('taobao.itempropvalues.get')
         if not fields:

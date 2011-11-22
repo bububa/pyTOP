@@ -1,0 +1,437 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>物流 API &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="index.html" />
+    <link rel="prev" title="旺旺 API" href="wangwang.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="wangwang.html" title="旺旺 API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<span id="logistics"></span><h1>物流 API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<p>提供了发货，物流单详情，区域地址和物流公司信息查询功能</p>
+<span class="target" id="module-logistics"></span><dl class="class">
+<dt id="logistics.TransitStepInfo">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">TransitStepInfo</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#TransitStepInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.TransitStepInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>物流跟踪信息的一条</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.Area">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">Area</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#Area"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.Area" title="Permalink to this definition">¶</a></dt>
+<dd><p>地址区域结构</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.DeliveryTemplate">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">DeliveryTemplate</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#DeliveryTemplate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.DeliveryTemplate" title="Permalink to this definition">¶</a></dt>
+<dd><p>运费模板对象</p>
+<dl class="method">
+<dt id="logistics.DeliveryTemplate.add">
+<tt class="descname">add</tt><big>(</big><em>name</em>, <em>assumer</em>, <em>valuation</em>, <em>template_types</em>, <em>template_dests</em>, <em>template_start_standards</em>, <em>template_start_fees</em>, <em>template_add_standards</em>, <em>template_add_fees</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/logistics.html#DeliveryTemplate.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.DeliveryTemplate.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.delivery.template.add 新增运费模板</p>
+<p>新增运费模板</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="logistics.DeliveryTemplate.delete">
+<tt class="descname">delete</tt><big>(</big><em>template_id</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/logistics.html#DeliveryTemplate.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.DeliveryTemplate.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.delivery.template.delete 删除运费模板</p>
+<p>根据用户指定的模板ID删除指定的模板</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="logistics.DeliveryTemplate.get">
+<tt class="descname">get</tt><big>(</big><em>template_ids</em>, <em>session</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/logistics.html#DeliveryTemplate.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.DeliveryTemplate.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.delivery.template.get 获取用户指定运费模板信息</p>
+<p>获取用户指定运费模板信息</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="logistics.DeliveryTemplate.update">
+<tt class="descname">update</tt><big>(</big><em>template_id</em>, <em>assumer</em>, <em>template_types</em>, <em>template_dests</em>, <em>template_start_standards</em>, <em>template_start_fees</em>, <em>template_add_standards</em>, <em>template_add_fees</em>, <em>session</em>, <em>name=None</em><big>)</big><a class="reference internal" href="_modules/logistics.html#DeliveryTemplate.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.DeliveryTemplate.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.delivery.template.update 修改运费模板</p>
+<p>修改运费模板</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.DeliveryTemplates">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">DeliveryTemplates</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#DeliveryTemplates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.DeliveryTemplates" title="Permalink to this definition">¶</a></dt>
+<dd><p>运费模板对象</p>
+<dl class="method">
+<dt id="logistics.DeliveryTemplates.get">
+<tt class="descname">get</tt><big>(</big><em>session</em><big>)</big><a class="reference internal" href="_modules/logistics.html#DeliveryTemplates.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.DeliveryTemplates.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.delivery.templates.get 获取用户下所有模板</p>
+<p>根据用户ID获取用户下所有模板</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.PartnerDetail">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">PartnerDetail</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#PartnerDetail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.PartnerDetail" title="Permalink to this definition">¶</a></dt>
+<dd><p>物流公司详细信息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.LogisticsCompany">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">LogisticsCompany</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsCompany"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsCompany" title="Permalink to this definition">¶</a></dt>
+<dd><p>物流公司基础数据结构</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.LogisticsCompanies">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">LogisticsCompanies</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsCompanies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsCompanies" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="logistics.LogisticsCompanies.get">
+<tt class="descname">get</tt><big>(</big><em>session</em>, <em>is_recommended=None</em>, <em>order_mode=None</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsCompanies.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsCompanies.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.logistics.companies.get 查询物流公司信息</p>
+<p>查询淘宝网合作的物流公司信息，用于发货接口。</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.PostageMode">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">PostageMode</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#PostageMode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.PostageMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>运费方式模板收费方式</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.Shipping">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">Shipping</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#Shipping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.Shipping" title="Permalink to this definition">¶</a></dt>
+<dd><p>物流数据结构</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.TopFee">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">TopFee</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#TopFee"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.TopFee" title="Permalink to this definition">¶</a></dt>
+<dd><p>运费模板中运费信息对象</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.Postage">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">Postage</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#Postage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.Postage" title="Permalink to this definition">¶</a></dt>
+<dd><p>运费模板结构</p>
+<dl class="method">
+<dt id="logistics.Postage.add">
+<tt class="descname">add</tt><big>(</big><em>name</em>, <em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/logistics.html#Postage.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.Postage.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.postage.add 添加邮费模板</p>
+<p>添加邮费模板</p>
+<p>新增的邮费模板属于当前会话用户</p>
+<p>postage_mode_types、postage_mode_dests、postage_mode_prices、 postage_mode_increases四个字段组合起来表示邮费的子模板列表。每个邮费子模板都包含了type（邮费类型，有post、 express、ems可以选择）、dest（邮费模板应用地区，每个模板可以使用于多个地区，每个地区填入他的代码，地区与地区之间用半角逗号分隔）、 price（邮费基价）、increment（邮费增价）四个部分。如果有多个子模板，则将他们的4个部分分别组合，之间用半角分号隔开（注意每个模板的每个部分的位置要一样。即，子模板1号的type、dest、price、increment都要排在这四个参数的第一位；子模板2号要排在第二位……以此类推）</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="logistics.Postage.delete">
+<tt class="descname">delete</tt><big>(</big><em>postage_id</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/logistics.html#Postage.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.Postage.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.postage.delete 删除单个运费模板</p>
+<p>删除单个邮费模板 postage_id对应的邮费模板要属于当前会话用户</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="logistics.Postage.get">
+<tt class="descname">get</tt><big>(</big><em>postage_id</em>, <em>nick</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/logistics.html#Postage.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.Postage.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.postage.get 获取单个运费模板</p>
+<p>获取单个邮费模板</p>
+<p>postage_id对应的邮费模板要属于nick所对应的用户</p>
+<ul class="simple">
+<li>Q：是否必须是模板所有者才能够使用这个接口?</li>
+<li>A： 不是的,只要给出了邮费模板id和创建者的昵称就可以使用</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="logistics.Postage.update">
+<tt class="descname">update</tt><big>(</big><em>postage_id</em>, <em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/logistics.html#Postage.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.Postage.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.postage.update 修改邮费模板</p>
+<ul class="simple">
+<li>修改邮费模板</li>
+<li>修改的邮费模板属于当前会话用户</li>
+<li>修改的邮费子模板要传入子模板id，否则作为添加子模板处理。postage_mode_types、 postage_mode_dests、postage_mode_prices、postage_mode_increases四个字段的处理逻辑见 taobao.postage.add中的描述</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.Postages">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">Postages</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#Postages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.Postages" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="logistics.Postages.get">
+<tt class="descname">get</tt><big>(</big><em>session</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/logistics.html#Postages.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.Postages.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.postages.get 获取卖家的运费模板</p>
+<p>获得当前会话用户的所有邮费模板</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.AddressResult">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">AddressResult</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#AddressResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.AddressResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>地址库返回数据信息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.LogisticsPartner">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">LogisticsPartner</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsPartner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsPartner" title="Permalink to this definition">¶</a></dt>
+<dd><p>查询揽送范围之内的物流公司信息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.LogisticsPartners">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">LogisticsPartners</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsPartners"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsPartners" title="Permalink to this definition">¶</a></dt>
+<dd><p>查询揽送范围之内的物流公司信息</p>
+<dl class="method">
+<dt id="logistics.LogisticsPartners.get">
+<tt class="descname">get</tt><big>(</big><em>service_type</em>, <em>source_id=None</em>, <em>target_id=None</em>, <em>goods_value=None</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsPartners.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsPartners.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.logistics.partners.get 查询支持起始地到目的地范围的物流公司</p>
+<p>查询物流公司信息（可以查询目的地可不可达情况）</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.LogisticsAddress">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">LogisticsAddress</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsAddress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsAddress" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="logistics.LogisticsAddress.add">
+<tt class="descname">add</tt><big>(</big><em>contact_name</em>, <em>province</em>, <em>city</em>, <em>addr</em>, <em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsAddress.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsAddress.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.logistics.address.add 卖家地址库新增接口</p>
+<p>通过此接口新增卖家地址库,卖家最多可添加5条地址库,新增第一条卖家地址，将会自动设为默认地址库</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="logistics.LogisticsAddress.modify">
+<tt class="descname">modify</tt><big>(</big><em>contact_id</em>, <em>contact_name</em>, <em>province</em>, <em>city</em>, <em>addr</em>, <em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsAddress.modify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsAddress.modify" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.logistics.address.modify 卖家地址库修改</p>
+<p>卖家地址库修改</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="logistics.LogisticsAddress.remove">
+<tt class="descname">remove</tt><big>(</big><em>contact_id</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsAddress.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsAddress.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.logistics.address.remove 删除卖家地址库</p>
+<p>用此接口删除卖家地址库</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="logistics.LogisticsAddress.search">
+<tt class="descname">search</tt><big>(</big><em>session</em>, <em>rdef=None</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsAddress.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsAddress.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.logistics.address.search 查询卖家地址库</p>
+<p>通过此接口查询卖家地址库，</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.LogisticsDummy">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">LogisticsDummy</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsDummy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsDummy" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="logistics.LogisticsDummy.send">
+<tt class="descname">send</tt><big>(</big><em>tid</em>, <em>session</em>, <em>feature=None</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsDummy.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsDummy.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.logistics.dummy.send 无需物流（虚拟）发货处理</p>
+<p>用户调用该接口可实现无需物流（虚拟）发货,使用该接口发货，交易订单状态会直接变成卖家已发货</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.LogisticsOffline">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">LogisticsOffline</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsOffline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsOffline" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="logistics.LogisticsOffline.send">
+<tt class="descname">send</tt><big>(</big><em>tid</em>, <em>out_sid</em>, <em>company_code</em>, <em>session</em>, <em>sender_id=None</em>, <em>cancel_id=None</em>, <em>feature=None</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsOffline.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsOffline.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.logistics.offline.send 自己联系物流（线下物流）发货</p>
+<p>用户调用该接口可实现自己联系发货（线下物流），使用该接口发货，交易订单状态会直接变成卖家已发货。不支持货到付款、在线下单类型的订单。</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.LogisticsOnline">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">LogisticsOnline</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsOnline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsOnline" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="logistics.LogisticsOnline.cancel">
+<tt class="descname">cancel</tt><big>(</big><em>tid</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsOnline.cancel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsOnline.cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.logistics.online.cancel 取消物流订单接口</p>
+<p>调此接口取消发货的订单，重新选择物流公司发货。前提是物流公司未揽收货物。对未发货和已经被物流公司揽收的物流订单，是不能取消的。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="logistics.LogisticsOnline.confirm">
+<tt class="descname">confirm</tt><big>(</big><em>tid</em>, <em>out_sid</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsOnline.confirm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsOnline.confirm" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.logistics.online.confirm 确认发货通知接口</p>
+<p>确认发货的目的是让交易流程继承走下去，确认发货后交易状态会由【买家已付款】变为【卖家已发货】，然后买家才可以确认收货，货款打入卖家账号。货到付款的订单除外</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="logistics.LogisticsOnline.send">
+<tt class="descname">send</tt><big>(</big><em>tid</em>, <em>company_code</em>, <em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsOnline.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsOnline.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.logistics.online.send 在线订单发货处理（支持货到付款）</p>
+<ul class="simple">
+<li>用户调用该接口可实现在线订单发货（支持货到付款）</li>
+<li>调用该接口实现在线下单发货，有两种情况：</li>
+<li>如果不输入运单号的情况：交易状态不会改变，需要调用taobao.logistics.online.confirm确认发货后交易状态才会变成卖家已发货。</li>
+<li>如果输入运单号的情况发货：交易订单状态会直接变成卖家已发货 。</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.Orders">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">Orders</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#Orders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.Orders" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="logistics.Orders.detail_get">
+<tt class="descname">detail_get</tt><big>(</big><em>session</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/logistics.html#Orders.detail_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.Orders.detail_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.logistics.orders.detail.get 批量查询物流订单,返回详细信息</p>
+<p>查询物流订单的详细信息，涉及用户隐私字段。（注：该API主要是提供给卖家查询物流订单使用，买家查询物流订单，建议使用taobao.logistics.trace.search）</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="logistics.Orders.get">
+<tt class="descname">get</tt><big>(</big><em>session</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/logistics.html#Orders.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.Orders.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.logistics.orders.get 批量查询物流订单</p>
+<p>批量查询物流订单。（注：该API主要是提供给卖家查询物流订单使用，买家查询物流订单，建议使用taobao.logistics.trace.search）</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.LogisticsTrace">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">LogisticsTrace</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsTrace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsTrace" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="logistics.LogisticsTrace.search">
+<tt class="descname">search</tt><big>(</big><em>tid</em>, <em>seller_nick</em><big>)</big><a class="reference internal" href="_modules/logistics.html#LogisticsTrace.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.LogisticsTrace.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.logistics.trace.search 物流流转信息查询</p>
+<p>用户根据淘宝交易号查询物流流转信息，如2010-8-10 15：23：00到达杭州集散地</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="logistics.TopatsDelivery">
+<em class="property">class </em><tt class="descclassname">logistics.</tt><tt class="descname">TopatsDelivery</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT='sandbox'</em><big>)</big><a class="reference internal" href="_modules/logistics.html#TopatsDelivery"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.TopatsDelivery" title="Permalink to this definition">¶</a></dt>
+<dd><p>运费模板结构</p>
+<dl class="method">
+<dt id="logistics.TopatsDelivery.send">
+<tt class="descname">send</tt><big>(</big><em>tids</em>, <em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/logistics.html#TopatsDelivery.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#logistics.TopatsDelivery.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.topats.delivery.send 异步批量物流发货api</p>
+<p>使用指南：http://open.taobao.com/dev/index.php/ATS%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97</p>
+<ul class="simple">
+<li>1.提供异步批量物流发货功能</li>
+<li>2.一次最多发货40个订单</li>
+<li>3.提交任务会进行初步任务校验，如果成功会返回任务号和创建时间，如果失败就报错</li>
+<li>4.可以接收淘宝发出的任务完成消息，也可以过一段时间来取结果。获取结果接口为taobao.topats.result.get</li>
+<li>5.此api执行完成发送的通知消息格式为{&#8220;task&#8221;:{&#8220;task_id&#8221;:123456,&#8221;created&#8221;:&#8221;2010-8-19&#8221;}}</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="wangwang.html"
+                        title="previous chapter">旺旺 API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/logistics.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="wangwang.html" title="旺旺 API"
+             >previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

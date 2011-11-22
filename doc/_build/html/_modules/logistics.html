@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>logistics &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for logistics</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># encoding: utf-8</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">logistics.py</span>
+
+<span class="sd">Created by 徐 光硕 on 2011-11-18.</span>
+<span class="sd">Copyright (c) 2011 __MyCompanyName__. All rights reserved.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">api</span> <span class="kn">import</span> <span class="n">TOP</span><span class="p">,</span> <span class="n">TOPRequest</span><span class="p">,</span> <span class="n">TOPDate</span>
+<span class="kn">from</span> <span class="nn">user</span> <span class="kn">import</span> <span class="n">Location</span>
+<span class="kn">from</span> <span class="nn">trade</span> <span class="kn">import</span> <span class="n">Task</span><span class="p">,</span> <span class="n">Subtask</span>
+
+<div class="viewcode-block" id="TransitStepInfo"><a class="viewcode-back" href="../logistics.html#logistics.TransitStepInfo">[docs]</a><span class="k">class</span> <span class="nc">TransitStepInfo</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;物流跟踪信息的一条&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TransitStepInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;status_time&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;status_time&#39;</span><span class="p">,</span><span class="s">&#39;status_desc&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="Area"><a class="viewcode-back" href="../logistics.html#logistics.Area">[docs]</a><span class="k">class</span> <span class="nc">Area</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;地址区域结构&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Area</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;parent_id&#39;</span><span class="p">,</span> <span class="s">&#39;zip&#39;</span><span class="p">]</span>
+    
+</div>
+<span class="k">class</span> <span class="nc">Areas</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;地址区域结构&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Areas</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;areas&#39;</span><span class="p">:</span><span class="n">Area</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;areas&#39;</span><span class="p">,]</span>
+    
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.areas.get 查询地址区域</span>
+<span class="sd">        </span>
+<span class="sd">        查询标准地址区域代码信息 参考：http://www.stats.gov.cn/tjbz/xzqhdm/t20100623_402652267.htm&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.areas.get&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">area</span> <span class="o">=</span> <span class="n">Area</span><span class="p">()</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="n">area</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">areas</span>
+    
+
+<div class="viewcode-block" id="DeliveryTemplate"><a class="viewcode-back" href="../logistics.html#logistics.DeliveryTemplate">[docs]</a><span class="k">class</span> <span class="nc">DeliveryTemplate</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;运费模板对象&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DeliveryTemplate</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;fee_list&#39;</span><span class="p">:</span><span class="n">TopFee</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;template_id&#39;</span><span class="p">,</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;assumer&#39;</span><span class="p">,</span> <span class="s">&#39;valuation&#39;</span><span class="p">,</span> <span class="s">&#39;fee_list&#39;</span><span class="p">,</span> <span class="s">&#39;supports&#39;</span><span class="p">,</span> <span class="s">&#39;created&#39;</span><span class="p">,</span> <span class="s">&#39;modified&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="DeliveryTemplate.add"><a class="viewcode-back" href="../logistics.html#logistics.DeliveryTemplate.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">assumer</span><span class="p">,</span> <span class="n">valuation</span><span class="p">,</span> <span class="n">template_types</span><span class="p">,</span> <span class="n">template_dests</span><span class="p">,</span> <span class="n">template_start_standards</span><span class="p">,</span> <span class="n">template_start_fees</span><span class="p">,</span> <span class="n">template_add_standards</span><span class="p">,</span> <span class="n">template_add_fees</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.delivery.template.add 新增运费模板</span>
+<span class="sd">        </span>
+<span class="sd">        新增运费模板&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.delivery.template.add&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;assumer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">assumer</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;valuation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">valuation</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;template_types&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_types</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;template_dests&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_dests</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;template_start_standards&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_start_standards</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;template_start_fees&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_start_fees</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;template_add_standards&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_add_standards</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;template_add_fees&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_add_fees</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">)[</span><span class="s">&#39;delivery_template&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    </div>
+<div class="viewcode-block" id="DeliveryTemplate.delete"><a class="viewcode-back" href="../logistics.html#logistics.DeliveryTemplate.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_id</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.delivery.template.delete 删除运费模板</span>
+<span class="sd">        </span>
+<span class="sd">        根据用户指定的模板ID删除指定的模板&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.delivery.template.delete&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;template_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;complete&#39;</span><span class="p">,</span> <span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">complete</span>
+    </div>
+<div class="viewcode-block" id="DeliveryTemplate.get"><a class="viewcode-back" href="../logistics.html#logistics.DeliveryTemplate.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_ids</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.delivery.template.get 获取用户指定运费模板信息</span>
+<span class="sd">        </span>
+<span class="sd">        获取用户指定运费模板信息&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.delivery.template.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;template_ids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_ids</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;delivery_templates&#39;</span><span class="p">,</span> <span class="s">&#39;total_results&#39;</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;delivery_templates&#39;</span><span class="p">:</span><span class="n">DeliveryTemplate</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delivery_templates</span>
+    </div>
+<div class="viewcode-block" id="DeliveryTemplate.update"><a class="viewcode-back" href="../logistics.html#logistics.DeliveryTemplate.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_id</span><span class="p">,</span> <span class="n">assumer</span><span class="p">,</span> <span class="n">template_types</span><span class="p">,</span> <span class="n">template_dests</span><span class="p">,</span> <span class="n">template_start_standards</span><span class="p">,</span> <span class="n">template_start_fees</span><span class="p">,</span> <span class="n">template_add_standards</span><span class="p">,</span> <span class="n">template_add_fees</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.delivery.template.update 修改运费模板</span>
+<span class="sd">        </span>
+<span class="sd">        修改运费模板&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.delivery.template.update&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;assumer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">assumer</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;template_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;template_types&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_types</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;template_dests&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_dests</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;template_start_standards&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_start_standards</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;template_start_fees&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_start_fees</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;template_add_standards&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_add_standards</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;template_add_fees&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_add_fees</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;complete&#39;</span><span class="p">,</span> <span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">complete</span>
+    
+</div></div>
+<div class="viewcode-block" id="DeliveryTemplates"><a class="viewcode-back" href="../logistics.html#logistics.DeliveryTemplates">[docs]</a><span class="k">class</span> <span class="nc">DeliveryTemplates</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;运费模板对象&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DeliveryTemplates</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;delivery_templates&#39;</span><span class="p">:</span><span class="n">DeliveryTemplate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;delivery_templates&#39;</span><span class="p">,</span><span class="s">&#39;total_results&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="DeliveryTemplates.get"><a class="viewcode-back" href="../logistics.html#logistics.DeliveryTemplates.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.delivery.templates.get 获取用户下所有模板</span>
+<span class="sd">        </span>
+<span class="sd">        根据用户ID获取用户下所有模板&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.delivery.templates.get&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delivery_templates</span>
+    
+</div></div>
+<div class="viewcode-block" id="PartnerDetail"><a class="viewcode-back" href="../logistics.html#logistics.PartnerDetail">[docs]</a><span class="k">class</span> <span class="nc">PartnerDetail</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;物流公司详细信息&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PartnerDetail</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;account_no&#39;</span><span class="p">,</span><span class="s">&#39;company_code&#39;</span><span class="p">,</span> <span class="s">&#39;company_id&#39;</span><span class="p">,</span> <span class="s">&#39;full_name&#39;</span><span class="p">,</span> <span class="s">&#39;company_name&#39;</span><span class="p">,</span> <span class="s">&#39;wangwang_id&#39;</span><span class="p">,</span> <span class="s">&#39;reg_mail_no&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="LogisticsCompany"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsCompany">[docs]</a><span class="k">class</span> <span class="nc">LogisticsCompany</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;物流公司基础数据结构&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LogisticsCompany</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">,</span><span class="s">&#39;code&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;reg_mail_no&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="LogisticsCompanies"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsCompanies">[docs]</a><span class="k">class</span> <span class="nc">LogisticsCompanies</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LogisticsCompanies</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;logistics_companies&#39;</span><span class="p">:</span><span class="n">LogisticsCompany</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;logistics_companies&#39;</span><span class="p">,]</span>
+    
+<div class="viewcode-block" id="LogisticsCompanies.get"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsCompanies.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">is_recommended</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">order_mode</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.logistics.companies.get 查询物流公司信息</span>
+<span class="sd">        </span>
+<span class="sd">        查询淘宝网合作的物流公司信息，用于发货接口。&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.logistics.companies.get&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">lc</span> <span class="o">=</span> <span class="n">LogisticsCompany</span><span class="p">()</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="n">lc</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="k">if</span> <span class="n">is_recommended</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;is_recommended&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">is_recommended</span>
+        <span class="k">if</span> <span class="n">order_mode</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;order_mode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">order_mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">logistics_companies</span>
+    
+</div></div>
+<div class="viewcode-block" id="PostageMode"><a class="viewcode-back" href="../logistics.html#logistics.PostageMode">[docs]</a><span class="k">class</span> <span class="nc">PostageMode</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;运费方式模板收费方式&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PostageMode</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;postage_id&#39;</span><span class="p">,</span><span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="s">&#39;type&#39;</span><span class="p">,</span> <span class="s">&#39;dests&#39;</span><span class="p">,</span> <span class="s">&#39;price&#39;</span><span class="p">,</span> <span class="s">&#39;increase&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="Shipping"><a class="viewcode-back" href="../logistics.html#logistics.Shipping">[docs]</a><span class="k">class</span> <span class="nc">Shipping</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;物流数据结构&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Shipping</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span><span class="p">{</span><span class="s">&#39;delivery_start&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span> <span class="s">&#39;delivery_end&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span> <span class="s">&#39;location&#39;</span><span class="p">:</span><span class="n">Location</span><span class="p">,</span> <span class="s">&#39;created&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span> <span class="s">&#39;modified&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;tid&#39;</span><span class="p">,</span><span class="s">&#39;order_code&#39;</span><span class="p">,</span> <span class="s">&#39;seller_nick&#39;</span><span class="p">,</span> <span class="s">&#39;buyer_nick&#39;</span><span class="p">,</span> <span class="s">&#39;delivery_start&#39;</span><span class="p">,</span> <span class="s">&#39;delivery_end&#39;</span><span class="p">,</span> <span class="s">&#39;out_sid&#39;</span><span class="p">,</span> <span class="s">&#39;item_title&#39;</span><span class="p">,</span> <span class="s">&#39;receiver_name&#39;</span><span class="p">,</span> <span class="s">&#39;receiver_phone&#39;</span><span class="p">,</span> <span class="s">&#39;receiver_mobile&#39;</span><span class="p">,</span> <span class="s">&#39;location&#39;</span><span class="p">,</span> <span class="s">&#39;status&#39;</span><span class="p">,</span> <span class="s">&#39;type&#39;</span><span class="p">,</span> <span class="s">&#39;freight_payer&#39;</span><span class="p">,</span> <span class="s">&#39;seller_confirm&#39;</span><span class="p">,</span> <span class="s">&#39;company_name&#39;</span><span class="p">,</span> <span class="s">&#39;is_success&#39;</span><span class="p">,</span> <span class="s">&#39;created&#39;</span><span class="p">,</span> <span class="s">&#39;modified&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="TopFee"><a class="viewcode-back" href="../logistics.html#logistics.TopFee">[docs]</a><span class="k">class</span> <span class="nc">TopFee</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;运费模板中运费信息对象&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TopFee</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;service_type&#39;</span><span class="p">,</span><span class="s">&#39;destination&#39;</span><span class="p">,</span> <span class="s">&#39;start_standard&#39;</span><span class="p">,</span> <span class="s">&#39;start_fee&#39;</span><span class="p">,</span> <span class="s">&#39;add_standard&#39;</span><span class="p">,</span> <span class="s">&#39;add_fee&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="Postage"><a class="viewcode-back" href="../logistics.html#logistics.Postage">[docs]</a><span class="k">class</span> <span class="nc">Postage</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;运费模板结构&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Postage</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span><span class="p">{</span><span class="s">&#39;postage_modes&#39;</span><span class="p">:</span><span class="n">PostageMode</span><span class="p">,</span> <span class="s">&#39;created&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span> <span class="s">&#39;modified&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;postage_id&#39;</span><span class="p">,</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;memo&#39;</span><span class="p">,</span> <span class="s">&#39;created&#39;</span><span class="p">,</span> <span class="s">&#39;modified&#39;</span><span class="p">,</span> <span class="s">&#39;post_price&#39;</span><span class="p">,</span> <span class="s">&#39;post_increase&#39;</span><span class="p">,</span> <span class="s">&#39;express_price&#39;</span><span class="p">,</span> <span class="s">&#39;express_increase&#39;</span><span class="p">,</span> <span class="s">&#39;ems_price&#39;</span><span class="p">,</span> <span class="s">&#39;ems_increase&#39;</span><span class="p">,</span> <span class="s">&#39;postage_modes&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="Postage.add"><a class="viewcode-back" href="../logistics.html#logistics.Postage.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.postage.add 添加邮费模板</span>
+<span class="sd">        </span>
+<span class="sd">        添加邮费模板 </span>
+<span class="sd">        </span>
+<span class="sd">        新增的邮费模板属于当前会话用户 </span>
+<span class="sd">        </span>
+<span class="sd">        postage_mode_types、postage_mode_dests、postage_mode_prices、 postage_mode_increases四个字段组合起来表示邮费的子模板列表。每个邮费子模板都包含了type（邮费类型，有post、 express、ems可以选择）、dest（邮费模板应用地区，每个模板可以使用于多个地区，每个地区填入他的代码，地区与地区之间用半角逗号分隔）、 price（邮费基价）、increment（邮费增价）四个部分。如果有多个子模板，则将他们的4个部分分别组合，之间用半角分号隔开（注意每个模板的每个部分的位置要一样。即，子模板1号的type、dest、price、increment都要排在这四个参数的第一位；子模板2号要排在第二位……以此类推）&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.postage.add&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;post_price&#39;</span><span class="p">,</span> <span class="s">&#39;post_increase&#39;</span><span class="p">,</span> <span class="s">&#39;express_price&#39;</span><span class="p">,</span> <span class="s">&#39;express_increase&#39;</span><span class="p">,</span> <span class="s">&#39;ems_price&#39;</span><span class="p">,</span> <span class="s">&#39;ems_increase&#39;</span><span class="p">,</span> <span class="s">&#39;memo&#39;</span><span class="p">,</span> <span class="s">&#39;postage_mode_types&#39;</span><span class="p">,</span> <span class="s">&#39;postage_mode_dests&#39;</span><span class="p">,</span> <span class="s">&#39;postage_mode_prices&#39;</span><span class="p">,</span> <span class="s">&#39;postage_mode_increases&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">)[</span><span class="s">&#39;postage&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    </div>
+<div class="viewcode-block" id="Postage.delete"><a class="viewcode-back" href="../logistics.html#logistics.Postage.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">postage_id</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.postage.delete 删除单个运费模板</span>
+<span class="sd">        </span>
+<span class="sd">        删除单个邮费模板 postage_id对应的邮费模板要属于当前会话用户&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.postage.delete&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;postage_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">postage_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">)[</span><span class="s">&#39;postage&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    </div>
+<div class="viewcode-block" id="Postage.get"><a class="viewcode-back" href="../logistics.html#logistics.Postage.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">postage_id</span><span class="p">,</span> <span class="n">nick</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.postage.get 获取单个运费模板</span>
+<span class="sd">        </span>
+<span class="sd">        获取单个邮费模板 </span>
+<span class="sd">        </span>
+<span class="sd">        postage_id对应的邮费模板要属于nick所对应的用户 </span>
+<span class="sd">        </span>
+<span class="sd">        - Q：是否必须是模板所有者才能够使用这个接口? </span>
+<span class="sd">        - A： 不是的,只要给出了邮费模板id和创建者的昵称就可以使用&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.postage.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;postage_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">postage_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;nick&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nick</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">)[</span><span class="s">&#39;postage&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    </div>
+<div class="viewcode-block" id="Postage.update"><a class="viewcode-back" href="../logistics.html#logistics.Postage.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">postage_id</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.postage.update 修改邮费模板</span>
+<span class="sd">        </span>
+<span class="sd">        - 修改邮费模板 </span>
+<span class="sd">        - 修改的邮费模板属于当前会话用户 </span>
+<span class="sd">        - 修改的邮费子模板要传入子模板id，否则作为添加子模板处理。postage_mode_types、 postage_mode_dests、postage_mode_prices、postage_mode_increases四个字段的处理逻辑见 taobao.postage.add中的描述&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.postage.update&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;postage_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">postage_id</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;post_price&#39;</span><span class="p">,</span> <span class="s">&#39;post_increase&#39;</span><span class="p">,</span> <span class="s">&#39;express_price&#39;</span><span class="p">,</span> <span class="s">&#39;express_increase&#39;</span><span class="p">,</span> <span class="s">&#39;ems_price&#39;</span><span class="p">,</span> <span class="s">&#39;ems_increase&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;memo&#39;</span><span class="p">,</span> <span class="s">&#39;postage_mode_ids&#39;</span><span class="p">,</span> <span class="s">&#39;postage_mode_types&#39;</span><span class="p">,</span> <span class="s">&#39;postage_mode_dests&#39;</span><span class="p">,</span> <span class="s">&#39;postage_mode_prices&#39;</span><span class="p">,</span> <span class="s">&#39;postage_mode_increases&#39;</span><span class="p">,</span> <span class="s">&#39;postage_mode_optTypes&#39;</span><span class="p">,</span> <span class="s">&#39;remove_post&#39;</span><span class="p">,</span> <span class="s">&#39;remove_express&#39;</span><span class="p">,</span> <span class="s">&#39;remove_ems&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">)[</span><span class="s">&#39;postage&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    
+</div></div>
+<div class="viewcode-block" id="Postages"><a class="viewcode-back" href="../logistics.html#logistics.Postages">[docs]</a><span class="k">class</span> <span class="nc">Postages</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Postages</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span><span class="p">{</span><span class="s">&#39;postages&#39;</span><span class="p">:</span><span class="n">Postage</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;postages&#39;</span><span class="p">,</span><span class="s">&#39;total_results&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="Postages.get"><a class="viewcode-back" href="../logistics.html#logistics.Postages.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.postages.get 获取卖家的运费模板</span>
+<span class="sd">        </span>
+<span class="sd">        获得当前会话用户的所有邮费模板&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.postages.get&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">postage</span> <span class="o">=</span> <span class="n">Postage</span><span class="p">()</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="n">postage</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">postages</span>
+    
+</div></div>
+<div class="viewcode-block" id="AddressResult"><a class="viewcode-back" href="../logistics.html#logistics.AddressResult">[docs]</a><span class="k">class</span> <span class="nc">AddressResult</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;地址库返回数据信息&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AddressResult</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span><span class="p">{</span><span class="s">&#39;modify_date&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;postage_id&#39;</span><span class="p">,</span><span class="s">&#39;contact_name&#39;</span><span class="p">,</span> <span class="s">&#39;province&#39;</span><span class="p">,</span> <span class="s">&#39;city&#39;</span><span class="p">,</span> <span class="s">&#39;country&#39;</span><span class="p">,</span> <span class="s">&#39;addr&#39;</span><span class="p">,</span> <span class="s">&#39;zip_code&#39;</span><span class="p">,</span> <span class="s">&#39;phone&#39;</span><span class="p">,</span> <span class="s">&#39;mobile_phone&#39;</span><span class="p">,</span> <span class="s">&#39;seller_company&#39;</span><span class="p">,</span> <span class="s">&#39;memo&#39;</span><span class="p">,</span> <span class="s">&#39;area_id&#39;</span><span class="p">,</span> <span class="s">&#39;send_def&#39;</span><span class="p">,</span> <span class="s">&#39;get_def&#39;</span><span class="p">,</span> <span class="s">&#39;cancel_def&#39;</span><span class="p">,</span> <span class="s">&#39;modify_date&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="LogisticsPartner"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsPartner">[docs]</a><span class="k">class</span> <span class="nc">LogisticsPartner</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;查询揽送范围之内的物流公司信息&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LogisticsPartner</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span><span class="p">{</span><span class="s">&#39;partner&#39;</span><span class="p">:</span><span class="n">ParnterDetail</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;cover_remark&#39;</span><span class="p">,</span><span class="s">&#39;uncover_remark&#39;</span><span class="p">,</span> <span class="s">&#39;partner&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="LogisticsPartners"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsPartners">[docs]</a><span class="k">class</span> <span class="nc">LogisticsPartners</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;查询揽送范围之内的物流公司信息&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LogisticsPartners</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span><span class="p">{</span><span class="s">&#39;logistics_partners&#39;</span><span class="p">:</span><span class="n">LogisticsPartner</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;logistics_partners&#39;</span><span class="p">,]</span>
+    
+<div class="viewcode-block" id="LogisticsPartners.get"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsPartners.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_type</span><span class="p">,</span> <span class="n">source_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">target_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">goods_value</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.logistics.partners.get 查询支持起始地到目的地范围的物流公司</span>
+<span class="sd">        </span>
+<span class="sd">        查询物流公司信息（可以查询目的地可不可达情况）&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.logistics.partners.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;service_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">service_type</span>
+        <span class="k">if</span> <span class="n">source_id</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;source_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">source_id</span>
+        <span class="k">if</span> <span class="n">target_id</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;target_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">target_id</span>
+        <span class="k">if</span> <span class="n">goods_value</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;goods_value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">goods_value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">logistics_partners</span>
+    
+</div></div>
+<div class="viewcode-block" id="LogisticsAddress"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsAddress">[docs]</a><span class="k">class</span> <span class="nc">LogisticsAddress</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LogisticsAddress</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;address_result&#39;</span><span class="p">:</span><span class="n">AddressResult</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;address_result&#39;</span><span class="p">,]</span>
+    
+<div class="viewcode-block" id="LogisticsAddress.add"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsAddress.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contact_name</span><span class="p">,</span> <span class="n">province</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.logistics.address.add 卖家地址库新增接口</span>
+<span class="sd">        </span>
+<span class="sd">        通过此接口新增卖家地址库,卖家最多可添加5条地址库,新增第一条卖家地址，将会自动设为默认地址库&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.logistics.address.add&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;contact_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contact_name</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;province&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">province</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;city&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">city</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;addr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">addr</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;country&#39;</span><span class="p">,</span> <span class="s">&#39;zip_code&#39;</span><span class="p">,</span> <span class="s">&#39;phone&#39;</span><span class="p">,</span> <span class="s">&#39;mobile_phone&#39;</span><span class="p">,</span> <span class="s">&#39;seller_company&#39;</span><span class="p">,</span> <span class="s">&#39;memo&#39;</span><span class="p">,</span> <span class="s">&#39;get_def&#39;</span><span class="p">,</span> <span class="s">&#39;cancel_def&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">address_result</span>
+    </div>
+<div class="viewcode-block" id="LogisticsAddress.modify"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsAddress.modify">[docs]</a>    <span class="k">def</span> <span class="nf">modify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contact_id</span><span class="p">,</span> <span class="n">contact_name</span><span class="p">,</span> <span class="n">province</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.logistics.address.modify 卖家地址库修改</span>
+<span class="sd">        </span>
+<span class="sd">        卖家地址库修改&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.logistics.address.modify&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;contact_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contact_id</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;contact_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contact_name</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;province&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">province</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;city&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">city</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;addr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">addr</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;country&#39;</span><span class="p">,</span> <span class="s">&#39;zip_code&#39;</span><span class="p">,</span> <span class="s">&#39;phone&#39;</span><span class="p">,</span> <span class="s">&#39;mobile_phone&#39;</span><span class="p">,</span> <span class="s">&#39;seller_company&#39;</span><span class="p">,</span> <span class="s">&#39;memo&#39;</span><span class="p">,</span> <span class="s">&#39;get_def&#39;</span><span class="p">,</span> <span class="s">&#39;cancel_def&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">address_result</span>
+    </div>
+<div class="viewcode-block" id="LogisticsAddress.remove"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsAddress.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contact_id</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.logistics.address.remove 删除卖家地址库</span>
+<span class="sd">        </span>
+<span class="sd">        用此接口删除卖家地址库&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.logistics.address.remove&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;contact_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contact_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">address_result</span>
+    </div>
+<div class="viewcode-block" id="LogisticsAddress.search"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsAddress.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">rdef</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.logistics.address.search 查询卖家地址库</span>
+<span class="sd">        </span>
+<span class="sd">        通过此接口查询卖家地址库，&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.logistics.address.search&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rdef</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;rdef&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rdef</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;addresses&#39;</span><span class="p">,</span> <span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;addresses&#39;</span><span class="p">:</span><span class="n">AddressResult</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">addresses</span>
+    
+</div></div>
+<div class="viewcode-block" id="LogisticsDummy"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsDummy">[docs]</a><span class="k">class</span> <span class="nc">LogisticsDummy</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LogisticsDummy</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;shipping&#39;</span><span class="p">:</span><span class="n">Shipping</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;shipping&#39;</span><span class="p">,]</span>
+    
+<div class="viewcode-block" id="LogisticsDummy.send"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsDummy.send">[docs]</a>    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tid</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.logistics.dummy.send 无需物流（虚拟）发货处理</span>
+<span class="sd">        </span>
+<span class="sd">        用户调用该接口可实现无需物流（虚拟）发货,使用该接口发货，交易订单状态会直接变成卖家已发货&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.logistics.dummy.send&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;tid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tid</span>
+        <span class="k">if</span> <span class="n">feature</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shipping</span>
+    
+</div></div>
+<div class="viewcode-block" id="LogisticsOffline"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsOffline">[docs]</a><span class="k">class</span> <span class="nc">LogisticsOffline</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LogisticsOffline</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;shipping&#39;</span><span class="p">:</span><span class="n">Shipping</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;shipping&#39;</span><span class="p">,]</span>
+    
+<div class="viewcode-block" id="LogisticsOffline.send"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsOffline.send">[docs]</a>    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tid</span><span class="p">,</span> <span class="n">out_sid</span><span class="p">,</span> <span class="n">company_code</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">sender_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cancel_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.logistics.offline.send 自己联系物流（线下物流）发货</span>
+<span class="sd">        </span>
+<span class="sd">        用户调用该接口可实现自己联系发货（线下物流），使用该接口发货，交易订单状态会直接变成卖家已发货。不支持货到付款、在线下单类型的订单。&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.logistics.offline.send&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;tid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tid</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;out_sid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">out_sid</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;company_code&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">company_code</span>
+        <span class="k">if</span> <span class="n">feature</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span>
+        <span class="k">if</span> <span class="n">sender_id</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;sender_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sender_id</span>
+        <span class="k">if</span> <span class="n">cancel_id</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;cancel_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cancel_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shipping</span>
+    
+</div></div>
+<div class="viewcode-block" id="LogisticsOnline"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsOnline">[docs]</a><span class="k">class</span> <span class="nc">LogisticsOnline</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LogisticsOnline</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+    
+<div class="viewcode-block" id="LogisticsOnline.cancel"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsOnline.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tid</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.logistics.online.cancel 取消物流订单接口</span>
+<span class="sd">        </span>
+<span class="sd">        调此接口取消发货的订单，重新选择物流公司发货。前提是物流公司未揽收货物。对未发货和已经被物流公司揽收的物流订单，是不能取消的。&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.logistics.online.cancel&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;tid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;is_success&#39;</span><span class="p">,</span><span class="s">&#39;modify_time&#39;</span><span class="p">,</span><span class="s">&#39;recreated_order_id&#39;</span><span class="p">],</span> <span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;modify_time&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    </div>
+<div class="viewcode-block" id="LogisticsOnline.confirm"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsOnline.confirm">[docs]</a>    <span class="k">def</span> <span class="nf">confirm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tid</span><span class="p">,</span> <span class="n">out_sid</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.logistics.online.confirm 确认发货通知接口</span>
+<span class="sd">        </span>
+<span class="sd">        确认发货的目的是让交易流程继承走下去，确认发货后交易状态会由【买家已付款】变为【卖家已发货】，然后买家才可以确认收货，货款打入卖家账号。货到付款的订单除外&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.logistics.online.confirm&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;tid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tid</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;out_sid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">out_sid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;shipping&#39;</span><span class="p">,],</span> <span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;shipping&#39;</span><span class="p">:</span><span class="n">Shipping</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shipping</span>
+    </div>
+<div class="viewcode-block" id="LogisticsOnline.send"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsOnline.send">[docs]</a>    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tid</span><span class="p">,</span> <span class="n">company_code</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.logistics.online.send 在线订单发货处理（支持货到付款）</span>
+<span class="sd">        </span>
+<span class="sd">        - 用户调用该接口可实现在线订单发货（支持货到付款） </span>
+<span class="sd">        - 调用该接口实现在线下单发货，有两种情况：</span>
+<span class="sd">        - 如果不输入运单号的情况：交易状态不会改变，需要调用taobao.logistics.online.confirm确认发货后交易状态才会变成卖家已发货。</span>
+<span class="sd">        - 如果输入运单号的情况发货：交易订单状态会直接变成卖家已发货 。&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.logistics.online.send&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;tid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tid</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;company_code&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">company_code</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;out_sid&#39;</span><span class="p">,</span> <span class="s">&#39;sender_id&#39;</span><span class="p">,</span> <span class="s">&#39;cancel_id&#39;</span><span class="p">,</span> <span class="s">&#39;feature&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;shipping&#39;</span><span class="p">,</span> <span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;shipping&#39;</span><span class="p">:</span><span class="n">Shipping</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shipping</span>
+    
+</div></div>
+<div class="viewcode-block" id="Orders"><a class="viewcode-back" href="../logistics.html#logistics.Orders">[docs]</a><span class="k">class</span> <span class="nc">Orders</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Orders</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;shippings&#39;</span><span class="p">:</span><span class="n">Shipping</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;shippings&#39;</span><span class="p">,</span> <span class="s">&#39;total_results&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="Orders.detail_get"><a class="viewcode-back" href="../logistics.html#logistics.Orders.detail_get">[docs]</a>    <span class="k">def</span> <span class="nf">detail_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.logistics.orders.detail.get 批量查询物流订单,返回详细信息</span>
+<span class="sd">        </span>
+<span class="sd">        查询物流订单的详细信息，涉及用户隐私字段。（注：该API主要是提供给卖家查询物流订单使用，买家查询物流订单，建议使用taobao.logistics.trace.search）&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.logistics.orders.detail.get&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">shipping</span> <span class="o">=</span> <span class="n">Shipping</span><span class="p">()</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="n">shipping</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;tid&#39;</span><span class="p">,</span> <span class="s">&#39;buyer_nick&#39;</span><span class="p">,</span> <span class="s">&#39;status&#39;</span><span class="p">,</span> <span class="s">&#39;seller_confirm&#39;</span><span class="p">,</span> <span class="s">&#39;receiver_name&#39;</span><span class="p">,</span> <span class="s">&#39;start_created&#39;</span><span class="p">,</span> <span class="s">&#39;end_created&#39;</span><span class="p">,</span> <span class="s">&#39;freight_payer&#39;</span><span class="p">,</span> <span class="s">&#39;type&#39;</span><span class="p">,</span> <span class="s">&#39;page_no&#39;</span><span class="p">,</span> <span class="s">&#39;page_size&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shippings</span>
+    </div>
+<div class="viewcode-block" id="Orders.get"><a class="viewcode-back" href="../logistics.html#logistics.Orders.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.logistics.orders.get 批量查询物流订单</span>
+<span class="sd">        </span>
+<span class="sd">        批量查询物流订单。（注：该API主要是提供给卖家查询物流订单使用，买家查询物流订单，建议使用taobao.logistics.trace.search）&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.logistics.orders.get&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">shipping</span> <span class="o">=</span> <span class="n">Shipping</span><span class="p">()</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="n">shipping</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;tid&#39;</span><span class="p">,</span> <span class="s">&#39;buyer_nick&#39;</span><span class="p">,</span> <span class="s">&#39;status&#39;</span><span class="p">,</span> <span class="s">&#39;seller_confirm&#39;</span><span class="p">,</span> <span class="s">&#39;receiver_name&#39;</span><span class="p">,</span> <span class="s">&#39;start_created&#39;</span><span class="p">,</span> <span class="s">&#39;end_created&#39;</span><span class="p">,</span> <span class="s">&#39;freight_payer&#39;</span><span class="p">,</span> <span class="s">&#39;type&#39;</span><span class="p">,</span> <span class="s">&#39;page_no&#39;</span><span class="p">,</span> <span class="s">&#39;page_size&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shippings</span>
+    
+</div></div>
+<div class="viewcode-block" id="LogisticsTrace"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsTrace">[docs]</a><span class="k">class</span> <span class="nc">LogisticsTrace</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LogisticsTrace</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;trace_list&#39;</span><span class="p">:</span><span class="n">TransitStepInfo</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;out_sid&#39;</span><span class="p">,</span><span class="s">&#39;company_name&#39;</span><span class="p">,</span><span class="s">&#39;tid&#39;</span><span class="p">,</span><span class="s">&#39;status&#39;</span><span class="p">,</span><span class="s">&#39;trace_list&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="LogisticsTrace.search"><a class="viewcode-back" href="../logistics.html#logistics.LogisticsTrace.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tid</span><span class="p">,</span> <span class="n">seller_nick</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.logistics.trace.search 物流流转信息查询</span>
+<span class="sd">        </span>
+<span class="sd">        用户根据淘宝交易号查询物流流转信息，如2010-8-10 15：23：00到达杭州集散地&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.logistics.address.add&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;tid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tid</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;seller_nick&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">seller_nick</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    
+</div></div>
+<div class="viewcode-block" id="TopatsDelivery"><a class="viewcode-back" href="../logistics.html#logistics.TopatsDelivery">[docs]</a><span class="k">class</span> <span class="nc">TopatsDelivery</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;运费模板结构&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="s">&#39;sandbox&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TopatsDelivery</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span><span class="p">{</span><span class="s">&#39;task&#39;</span><span class="p">:</span><span class="n">Task</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;task&#39;</span><span class="p">,]</span>
+        
+<div class="viewcode-block" id="TopatsDelivery.send"><a class="viewcode-back" href="../logistics.html#logistics.TopatsDelivery.send">[docs]</a>    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tids</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.topats.delivery.send 异步批量物流发货api</span>
+<span class="sd">        </span>
+<span class="sd">        使用指南：http://open.taobao.com/dev/index.php/ATS%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97 </span>
+<span class="sd">        </span>
+<span class="sd">        - 1.提供异步批量物流发货功能 </span>
+<span class="sd">        - 2.一次最多发货40个订单 </span>
+<span class="sd">        - 3.提交任务会进行初步任务校验，如果成功会返回任务号和创建时间，如果失败就报错 </span>
+<span class="sd">        - 4.可以接收淘宝发出的任务完成消息，也可以过一段时间来取结果。获取结果接口为taobao.topats.result.get </span>
+<span class="sd">        - 5.此api执行完成发送的通知消息格式为{&quot;task&quot;:{&quot;task_id&quot;:123456,&quot;created&quot;:&quot;2010-8-19&quot;}}&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.postage.add&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;tids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tids</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;company_codes&#39;</span><span class="p">,</span> <span class="s">&#39;out_sids&#39;</span><span class="p">,</span> <span class="s">&#39;seller_name&#39;</span><span class="p">,</span> <span class="s">&#39;seller_area_id&#39;</span><span class="p">,</span> <span class="s">&#39;seller_address&#39;</span><span class="p">,</span> <span class="s">&#39;seller_zip&#39;</span><span class="p">,</span> <span class="s">&#39;seller_phone&#39;</span><span class="p">,</span> <span class="s">&#39;seller_mobile&#39;</span><span class="p">,</span> <span class="s">&#39;order_types&#39;</span><span class="p">,</span> <span class="s">&#39;memos&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span>
+    </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

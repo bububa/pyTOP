@@ -1,0 +1,140 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pyTOP &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for pyTOP</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># encoding: utf-8</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">pyTOP</span>
+<span class="sd">~~~~~~~~</span>
+
+<span class="sd">:copyright: (c) 2011 by Prof Syd Xu.</span>
+<span class="sd">:license: ISC, see LICENSE for more details.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__title__</span> <span class="o">=</span> <span class="s">&#39;pyTOP&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s">&#39;0.1.0&#39;</span>
+<span class="n">__build__</span> <span class="o">=</span> <span class="mh">0x000800</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;Prof Syd Xu&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s">&#39;ISC&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s">&#39;Copyright 2011 Prof Syd Xu&#39;</span>
+
+<span class="c"># basic API</span>
+<span class="kn">from</span> <span class="nn">.api</span> <span class="kn">import</span> <span class="n">TOP</span><span class="p">,</span> <span class="n">TOPDate</span><span class="p">,</span> <span class="n">TOPRequest</span>
+<span class="c"># 用户 API</span>
+<span class="kn">from</span> <span class="nn">.user</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Location</span><span class="p">,</span> <span class="n">UserCredit</span><span class="p">,</span> <span class="n">Users</span>
+<span class="c"># 类目 API</span>
+<span class="kn">from</span> <span class="nn">.category</span> <span class="kn">import</span> <span class="n">PropValue</span><span class="p">,</span> <span class="n">SellerAuthorize</span><span class="p">,</span> <span class="n">ItemCat</span><span class="p">,</span> <span class="n">ItemProps</span><span class="p">,</span> <span class="n">ItemPropValues</span>
+<span class="c"># 商品 API</span>
+<span class="kn">from</span> <span class="nn">.item</span> <span class="kn">import</span> <span class="n">Item</span><span class="p">,</span> <span class="n">Items</span><span class="p">,</span> <span class="n">Sku</span><span class="p">,</span> <span class="n">Skus</span><span class="p">,</span> <span class="n">ItemImg</span><span class="p">,</span> <span class="n">PropImg</span><span class="p">,</span> <span class="n">Video</span><span class="p">,</span> <span class="n">ItemCategory</span><span class="p">,</span> <span class="n">ProductPropImg</span><span class="p">,</span> <span class="n">ProductImg</span><span class="p">,</span> <span class="n">AfterSale</span><span class="p">,</span> <span class="n">ItemTemplate</span><span class="p">,</span> <span class="n">ItemTelplates</span><span class="p">,</span> <span class="n">ItemSearch</span><span class="p">,</span> <span class="n">Product</span><span class="p">,</span> <span class="n">Products</span>
+<span class="c"># 店铺 API</span>
+<span class="kn">from</span> <span class="nn">.shop</span> <span class="kn">import</span> <span class="n">ShopCat</span><span class="p">,</span> <span class="n">ShopCats</span><span class="p">,</span> <span class="n">ShopScore</span><span class="p">,</span> <span class="n">SellerCat</span><span class="p">,</span> <span class="n">SellerCats</span><span class="p">,</span> <span class="n">Shop</span>
+<span class="c"># 交易 API</span>
+<span class="kn">from</span> <span class="nn">.trade</span> <span class="kn">import</span> <span class="n">PromotionDetail</span><span class="p">,</span> <span class="n">OrderAmount</span><span class="p">,</span> <span class="n">Order</span><span class="p">,</span> <span class="n">TradeAmount</span><span class="p">,</span> <span class="n">TradeAccountDetail</span><span class="p">,</span> <span class="n">Task</span><span class="p">,</span> <span class="n">Trade</span><span class="p">,</span> <span class="n">Trades</span><span class="p">,</span> <span class="n">Subtask</span><span class="p">,</span> <span class="n">TradeConfirmFee</span><span class="p">,</span> <span class="n">TradeRate</span><span class="p">,</span> <span class="n">TradRates</span>
+<span class="c"># 店铺会员管理 API</span>
+<span class="kn">from</span> <span class="nn">.crm</span> <span class="kn">import</span> <span class="n">GroupDomain</span><span class="p">,</span> <span class="n">BasicMember</span><span class="p">,</span> <span class="n">GradePromotion</span><span class="p">,</span> <span class="n">RuleData</span><span class="p">,</span> <span class="n">CrmMember</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Groups</span><span class="p">,</span> <span class="n">GroupTask</span><span class="p">,</span> <span class="n">MemberInfo</span><span class="p">,</span> <span class="n">Members</span><span class="p">,</span> <span class="n">Grade</span><span class="p">,</span> <span class="n">Rule</span><span class="p">,</span> <span class="n">Rules</span><span class="p">,</span> <span class="n">ShopVip</span>
+<span class="c"># 子账号管理 API</span>
+<span class="kn">from</span> <span class="nn">.sellercenter</span> <span class="kn">import</span> <span class="n">SubUserInfo</span><span class="p">,</span> <span class="n">SubUsers</span>
+<span class="c"># 旺旺 API</span>
+<span class="kn">from</span> <span class="nn">.wangwang</span> <span class="kn">import</span> <span class="n">EService</span><span class="p">,</span> <span class="n">WaitingTimesOnDay</span><span class="p">,</span> <span class="n">NonReplyStatOnDay</span><span class="p">,</span> <span class="n">StaffEvalStatOnDay</span><span class="p">,</span> <span class="n">OnlineTimesOnDay</span><span class="p">,</span> <span class="n">Msg</span><span class="p">,</span> <span class="n">NonreplyStatById</span><span class="p">,</span> <span class="n">StaffEvalStatById</span><span class="p">,</span> <span class="n">ReplyStatOnDay</span><span class="p">,</span> <span class="n">Evaluation</span><span class="p">,</span> <span class="n">OnlineTimeById</span><span class="p">,</span> <span class="n">WaitingTimeById</span><span class="p">,</span> <span class="n">ReplyStatById</span><span class="p">,</span> <span class="n">LoginLog</span><span class="p">,</span> <span class="n">EvalDetail</span><span class="p">,</span> <span class="n">StreamWeight</span><span class="p">,</span> <span class="n">Chatpeer</span><span class="p">,</span> <span class="n">GroupMember</span>
+<span class="c"># 物流 API</span>
+<span class="kn">from</span> <span class="nn">.logistics</span> <span class="kn">import</span> <span class="n">TransitStepInfo</span><span class="p">,</span> <span class="n">Area</span><span class="p">,</span> <span class="n">DeliveryTemplate</span><span class="p">,</span> <span class="n">DeliveryTemplates</span><span class="p">,</span> <span class="n">PartnerDetail</span><span class="p">,</span> <span class="n">LogisticsCompany</span><span class="p">,</span> <span class="n">LogisticsCompanies</span><span class="p">,</span> <span class="n">PostageMode</span><span class="p">,</span> <span class="n">Shipping</span><span class="p">,</span> <span class="n">TopFee</span><span class="p">,</span> <span class="n">Postage</span><span class="p">,</span> <span class="n">Postages</span><span class="p">,</span> <span class="n">AddressResult</span><span class="p">,</span> <span class="n">LogisticsPartner</span><span class="p">,</span> <span class="n">LogisticsPartners</span><span class="p">,</span> <span class="n">LogisticsAddress</span><span class="p">,</span> <span class="n">LogisticsDummy</span><span class="p">,</span> <span class="n">LogisticsOffline</span><span class="p">,</span> <span class="n">LogisticsOnline</span><span class="p">,</span> <span class="n">Orders</span><span class="p">,</span> <span class="n">LogisticsTrace</span><span class="p">,</span> <span class="n">TopatsDelivery</span>
+<span class="c"># 收藏夹 API</span>
+<span class="kn">from</span> <span class="nn">.favorite</span> <span class="kn">import</span> <span class="n">CollectItem</span><span class="p">,</span> <span class="n">Favorite</span>
+<span class="c"># insight API</span>
+<span class="kn">from</span> <span class="nn">.insight</span> <span class="kn">import</span> <span class="n">INWordBase</span><span class="p">,</span> <span class="n">INCategoryBase</span><span class="p">,</span> <span class="n">INWordAnalysis</span><span class="p">,</span> <span class="n">INCategoryAnalysis</span><span class="p">,</span> <span class="n">INCategoryProperties</span><span class="p">,</span> <span class="n">INCategory</span><span class="p">,</span> <span class="n">INWordCategory</span><span class="p">,</span> <span class="n">INRecordBase</span><span class="p">,</span> <span class="n">INCategoryAnalysisTop</span><span class="p">,</span> <span class="n">INCategoryChildTop</span><span class="p">,</span> <span class="n">INCategoryTop</span><span class="p">,</span> <span class="n">INWordAnalysisTop</span><span class="p">,</span> <span class="n">WordBase</span><span class="p">,</span> <span class="n">CatsBase</span><span class="p">,</span> <span class="n">WordAnalysis</span><span class="p">,</span> <span class="n">CatsAnalysis</span><span class="p">,</span> <span class="n">CatsForecast</span><span class="p">,</span> <span class="n">CatsTopWord</span><span class="p">,</span> <span class="n">CatsRelatedWord</span><span class="p">,</span> <span class="n">WordsCats</span><span class="p">,</span> <span class="n">Cats</span><span class="p">,</span> <span class="n">TopLevelCats</span><span class="p">,</span> <span class="n">CreativeIDs</span><span class="p">,</span> <span class="n">AdGroupIDs</span><span class="p">,</span> <span class="n">KeywordIDs</span><span class="p">,</span> <span class="n">CatMatchedIDs</span>
+<span class="c"># Campagin API</span>
+<span class="kn">from</span> <span class="nn">.campaign</span> <span class="kn">import</span> <span class="n">AreaOption</span><span class="p">,</span> <span class="n">ChannelOption</span><span class="p">,</span> <span class="n">Campaign</span><span class="p">,</span> <span class="n">Campaigns</span><span class="p">,</span> <span class="n">CampaignArea</span><span class="p">,</span> <span class="n">CampaignBudget</span><span class="p">,</span> <span class="n">CampaignPlatform</span><span class="p">,</span> <span class="n">CampaignSchedule</span><span class="p">,</span> <span class="n">ADGroups</span><span class="p">,</span> <span class="n">ADGroup</span><span class="p">,</span> <span class="n">ADGroupCatmatch</span><span class="p">,</span> <span class="n">Creative</span><span class="p">,</span> <span class="n">Creatives</span><span class="p">,</span> <span class="n">CreativeRecord</span><span class="p">,</span> <span class="n">Keyword</span><span class="p">,</span> <span class="n">Keywords</span><span class="p">,</span> <span class="n">AccountRecord</span><span class="p">,</span> <span class="n">RecommendWord</span><span class="p">,</span> <span class="n">RankedItem</span><span class="p">,</span> <span class="n">ADGroupPage</span><span class="p">,</span> <span class="n">RecommendWordPage</span><span class="p">,</span> <span class="n">Result</span><span class="p">,</span> <span class="n">Customers</span><span class="p">,</span> <span class="n">Account</span><span class="p">,</span> <span class="n">Tools</span>
+<span class="c"># Customize Exceptions</span>
+<span class="kn">from</span> <span class="nn">.errors</span> <span class="kn">import</span> <span class="n">TOPException</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

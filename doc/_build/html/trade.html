@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>交易 API &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="index.html" />
+    <link rel="prev" title="店铺 API" href="shop.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="shop.html" title="店铺 API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<span id="trade"></span><h1>交易 API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<p>提供了订单下载，修改收货地址、修改交易备注等功能</p>
+<span class="target" id="module-trade"></span><dl class="class">
+<dt id="trade.PromotionDetail">
+<em class="property">class </em><tt class="descclassname">trade.</tt><tt class="descname">PromotionDetail</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#PromotionDetail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.PromotionDetail" title="Permalink to this definition">¶</a></dt>
+<dd><p>交易的优惠信息详情</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="trade.OrderAmount">
+<em class="property">class </em><tt class="descclassname">trade.</tt><tt class="descname">OrderAmount</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#OrderAmount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.OrderAmount" title="Permalink to this definition">¶</a></dt>
+<dd><p>子订单的帐务数据结构</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="trade.Order">
+<em class="property">class </em><tt class="descclassname">trade.</tt><tt class="descname">Order</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#Order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Order" title="Permalink to this definition">¶</a></dt>
+<dd><p>订单结构</p>
+<dl class="method">
+<dt id="trade.Order.ordersku_update">
+<tt class="descname">ordersku_update</tt><big>(</big><em>oid</em>, <em>sku_id=None</em>, <em>sku_props=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#Order.ordersku_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Order.ordersku_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.trade.ordersku.update 更新交易订单的销售属性</p>
+<p>需要商家或以上权限才可调用此接口，可重复调用本接口更新交易备注，本接口同时具有添加备注的功能</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="trade.TradeAmount">
+<em class="property">class </em><tt class="descclassname">trade.</tt><tt class="descname">TradeAmount</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradeAmount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradeAmount" title="Permalink to this definition">¶</a></dt>
+<dd><p>交易订单的帐务信息详情</p>
+<dl class="method">
+<dt id="trade.TradeAmount.get">
+<tt class="descname">get</tt><big>(</big><em>tid</em>, <em>session</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/trade.html#TradeAmount.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradeAmount.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.trade.amount.get 交易订单帐务查询</p>
+<p>卖家查询该笔交易订单的资金帐务相关的数据</p>
+<ul class="simple">
+<li><ol class="first arabic">
+<li>只供卖家使用，买家不可使用</li>
+</ol>
+</li>
+<li><ol class="first arabic" start="2">
+<li>可查询所有的状态的订单，但不同状态时订单的相关数据可能会有不同</li>
+</ol>
+</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="trade.TradeAccountDetail">
+<em class="property">class </em><tt class="descclassname">trade.</tt><tt class="descname">TradeAccountDetail</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradeAccountDetail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradeAccountDetail" title="Permalink to this definition">¶</a></dt>
+<dd><p>淘宝卖家绑定的支付宝账户的财务明细</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="trade.Task">
+<em class="property">class </em><tt class="descclassname">trade.</tt><tt class="descname">Task</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#Task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Task" title="Permalink to this definition">¶</a></dt>
+<dd><p>批量异步任务结果</p>
+<dl class="method">
+<dt id="trade.Task.accountreport_get">
+<tt class="descname">accountreport_get</tt><big>(</big><em>start_created</em>, <em>end_created</em>, <em>session</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/trade.html#Task.accountreport_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Task.accountreport_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.topats.trade.accountreport.get 异步获取淘宝卖家绑定的支付宝账户的财务明细</p>
+<ul class="simple">
+<li>1.提供异步下载用户支付宝对账信息接口</li>
+<li>2.一次调用最多支持下载3个月的对账信息</li>
+<li>3.仅能获取2010年6月10日以后的信息</li>
+<li>4.提交任务会进行初步任务校验，如果成功会返回任务号和创建时间，如果失败就报错</li>
+<li>5.可以接收淘宝发出的任务完成消息，也可以过一段时间来取结果。获取结果接口为taobao.topats.result.get</li>
+<li>6.支付宝证书签名方法见文档：“<a class="reference external" href="http://open.taobao.com/dev/index.php">http://open.taobao.com/dev/index.php</a>/如何数字证书签名”</li>
+<li>7.此api执行完成发送的通知消息格式为{&#8220;task&#8221;:{&#8220;task_id&#8221;:123456,&#8221;created&#8221;:&#8221;2010-8-19&#8221;}}</li>
+<li>8.此任务是大数据任务，获取任务结果时只能得到下载url</li>
+<li>9.子任务结果解析见TradeAccountDetail结构体说明</li>
+<li>10.此接口执行任务时间段为：00:00:00-09:30:00;11:00:00-14:00:00;17:00:00-20:00:00;22:30:00-23:59:59，只有在这段时间内才能返回查询结果</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="trade.Task.fullinfo_get">
+<tt class="descname">fullinfo_get</tt><big>(</big><em>tids</em>, <em>session</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/trade.html#Task.fullinfo_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Task.fullinfo_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.topats.trades.fullinfo.get 异步批量获取交易订单详情api</p>
+<p>使用指南：http://open.taobao.com/dev/index.php/ATS%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97 
+- 1.提供异步批量获取订单详情功能 
+- 2.一次调用最多支持40个订单 
+- 3.提交任务会进行初步任务校验，如果成功会返回任务号和创建时间，如果失败就报错 
+- 4.可以接收淘宝发出的任务完成消息，也可以过一段时间来取结果。获取结果接口为taobao.topats.result.get 
+- 5.此api执行完成发送的通知消息格式为{&#8220;task&#8221;:{&#8220;task_id&#8221;:123456,&#8221;created&#8221;:&#8221;2010-8-19&#8221;}}果</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trade.Task.get">
+<tt class="descname">get</tt><big>(</big><em>task_id</em><big>)</big><a class="reference internal" href="_modules/trade.html#Task.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Task.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.topats.result.get 获取异步任务结果</p>
+<p>使用指南：http://open.taobao.com/doc/detail.htm?id=30</p>
+<ul class="simple">
+<li>1.此接口用于获取异步任务处理的结果，传入的task_id必需属于当前的appKey才可以</li>
+<li>2.此接口只返回执行完成的任务结果，未执行完的返回结果里面不包含任务结果，只有任务id，执行状态</li>
+<li>3.执行完成的每个task的子任务结果内容与单个任务的结果结构一致。如：taobao.topats.trades.fullinfo.get返回的子任务结果就会是Trade的结构体。</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="trade.Trade">
+<em class="property">class </em><tt class="descclassname">trade.</tt><tt class="descname">Trade</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#Trade"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Trade" title="Permalink to this definition">¶</a></dt>
+<dd><p>交易结构</p>
+<dl class="method">
+<dt id="trade.Trade.close">
+<tt class="descname">close</tt><big>(</big><em>tid</em>, <em>close_reason</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/trade.html#Trade.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Trade.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.trade.close 卖家关闭一笔交易</p>
+<p>关闭一笔订单，可以是主订单或子订单。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trade.Trade.fullinfo_get">
+<tt class="descname">fullinfo_get</tt><big>(</big><em>tid</em>, <em>session</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/trade.html#Trade.fullinfo_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Trade.fullinfo_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.trade.fullinfo.get 获取单笔交易的详细信息</p>
+<p>获取单笔交易的详细信息</p>
+<ul class="simple">
+<li>1.只有在交易成功的状态下才能取到交易佣金，其它状态下取到的都是零或空值</li>
+<li>2.只有单笔订单的情况下Trade数据结构中才包含商品相关的信息</li>
+<li>3.获取到的Order中的payment字段在单笔子订单时包含物流费用，多笔子订单时不包含物流费用 注：包含以下字段的返回会增加TOP的后台压力，请仅在确实需要的情况下才去获取：commission_fee, buyer_alipay_no, seller_alipay_no, buyer_email, seller_mobile, seller_phone, seller_name, seller_email, timeout_action_time, item_memo, trade_memo, title, available_confirm_fee</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="trade.Trade.get">
+<tt class="descname">get</tt><big>(</big><em>tid</em>, <em>session</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/trade.html#Trade.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Trade.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.trade.get 获取单笔交易的部分信息(性能高)</p>
+<p>获取单笔交易的部分信息</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trade.Trade.memo_add">
+<tt class="descname">memo_add</tt><big>(</big><em>tid</em>, <em>memo</em>, <em>session</em>, <em>flag=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#Trade.memo_add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Trade.memo_add" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.trade.memo.add 对一笔交易添加备注</p>
+<p>根据登录用户的身份（买家或卖家），自动添加相应的交易备注,不能重复调用些接口添加备注，需要更新备注请用taobao.trade.memo.update</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trade.Trade.memo_update">
+<tt class="descname">memo_update</tt><big>(</big><em>tid</em>, <em>session</em>, <em>memo=None</em>, <em>flag=None</em>, <em>reset=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#Trade.memo_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Trade.memo_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.trade.memo.update 修改一笔交易备注</p>
+<p>需要商家或以上权限才可调用此接口，可重复调用本接口更新交易备注，本接口同时具有添加备注的功能</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trade.Trade.postage_update">
+<tt class="descname">postage_update</tt><big>(</big><em>tid</em>, <em>post_fee</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/trade.html#Trade.postage_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Trade.postage_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.trade.postage.update 修改订单邮费价格</p>
+<p>修改订单邮费接口，通过传入订单编号和邮费价格，修改订单的邮费，返回修改时间modified,邮费post_fee,总费用total_fee。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trade.Trade.receivetime_delay">
+<tt class="descname">receivetime_delay</tt><big>(</big><em>tid</em>, <em>days</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/trade.html#Trade.receivetime_delay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Trade.receivetime_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.trade.receivetime.delay 延长交易收货时间</p>
+<p>延长交易收货时间</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trade.Trade.shippingaddress_update">
+<tt class="descname">shippingaddress_update</tt><big>(</big><em>tid</em>, <em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trade.html#Trade.shippingaddress_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Trade.shippingaddress_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.trade.shippingaddress.update 更改交易的收货地址</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trade.Trade.snapshot_get">
+<tt class="descname">snapshot_get</tt><big>(</big><em>tid, session, fields=['snapshot']</em><big>)</big><a class="reference internal" href="_modules/trade.html#Trade.snapshot_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Trade.snapshot_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.trade.snapshot.get 交易快照查询</p>
+<p>交易快照查询 目前只支持类型为“旺店标准版(600)”或“旺店入门版(610)”的交易 对于“旺店标准版”类型的交易，返回的snapshot字段为交易快照编号 对于“旺店入门版”类型的交易，返回的snapshot字段为JSON结构的数据(其中的shopPromotion包含了优惠，积分等信息）</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="trade.Trades">
+<em class="property">class </em><tt class="descclassname">trade.</tt><tt class="descname">Trades</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#Trades"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Trades" title="Permalink to this definition">¶</a></dt>
+<dd><p>批量异步任务的子任务结果</p>
+<dl class="method">
+<dt id="trade.Trades.bought_get">
+<tt class="descname">bought_get</tt><big>(</big><em>session</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trade.html#Trades.bought_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Trades.bought_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.trades.bought.get 搜索当前会话用户作为买家达成的交易记录</p>
+<p>搜索当前会话用户作为买家达成的交易记录(目前只能查询三个月以内的订单)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trade.Trades.sold_get">
+<tt class="descname">sold_get</tt><big>(</big><em>session</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trade.html#Trades.sold_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Trades.sold_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.trades.sold.get 搜索当前会话用户作为卖家已卖出的交易数据</p>
+<p>搜索当前会话用户作为卖家已卖出的交易数据(只能获取到三个月以内的交易信息)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trade.Trades.sold_increment_get">
+<tt class="descname">sold_increment_get</tt><big>(</big><em>session</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trade.html#Trades.sold_increment_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Trades.sold_increment_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.trades.sold.increment.get 搜索当前会话用户作为卖家已卖出的增量交易数据</p>
+<ul class="simple">
+<li><ol class="first arabic">
+<li>搜索当前会话用户作为卖家已卖出的增量交易数据</li>
+</ol>
+</li>
+<li><ol class="first arabic" start="2">
+<li>只能查询时间跨度为一天的增量交易记录：start_modified：2011-7-1 16:00:00 end_modified： 2011-7-2 15:59:59（注意不能写成16:00:00）</li>
+</ol>
+</li>
+<li><ol class="first arabic" start="3">
+<li>返回数据结果为创建订单时间的倒序</li>
+</ol>
+</li>
+<li><ol class="first arabic" start="4">
+<li>只能查询3个月内修改过的数据，超过这个时间的数据无法通过taobao.trade.fullinfo.get获取详情。</li>
+</ol>
+</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="trade.Subtask">
+<em class="property">class </em><tt class="descclassname">trade.</tt><tt class="descname">Subtask</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#Subtask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.Subtask" title="Permalink to this definition">¶</a></dt>
+<dd><p>批量异步任务的子任务结果</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="trade.TradeConfirmFee">
+<em class="property">class </em><tt class="descclassname">trade.</tt><tt class="descname">TradeConfirmFee</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradeConfirmFee"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradeConfirmFee" title="Permalink to this definition">¶</a></dt>
+<dd><p>确认收货费用结构</p>
+<dl class="method">
+<dt id="trade.TradeConfirmFee.get">
+<tt class="descname">get</tt><big>(</big><em>tid</em>, <em>is_detail</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradeConfirmFee.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradeConfirmFee.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.trade.confirmfee.get 获取交易确认收货费用</p>
+<p>获取交易确认收货费用 可以获取主订单或子订单的确认收货费用</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="trade.TradeRate">
+<em class="property">class </em><tt class="descclassname">trade.</tt><tt class="descname">TradeRate</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradeRate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradeRate" title="Permalink to this definition">¶</a></dt>
+<dd><p>评价列表</p>
+<dl class="method">
+<dt id="trade.TradeRate.add">
+<tt class="descname">add</tt><big>(</big><em>tid</em>, <em>result</em>, <em>role</em>, <em>session</em>, <em>oid=None</em>, <em>content=None</em>, <em>anony=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradeRate.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradeRate.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.traderate.add 新增单个评价</p>
+<p>新增单个评价(注：在评价之前需要对订单成功的时间进行判定（end_time）,如果超过15天，不能再通过该接口进行评价)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trade.TradeRate.list_add">
+<tt class="descname">list_add</tt><big>(</big><em>tid</em>, <em>result</em>, <em>role</em>, <em>session</em>, <em>oid=None</em>, <em>content=None</em>, <em>anony=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradeRate.list_add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradeRate.list_add" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.traderate.list.add 针对父子订单新增批量评价</p>
+<p>针对父子订单新增批量评价(注：在评价之前需要对订单成功的时间进行判定（end_time）,如果超过15天，不用再通过该接口进行评价)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="trade.TradRates">
+<em class="property">class </em><tt class="descclassname">trade.</tt><tt class="descname">TradRates</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradRates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradRates" title="Permalink to this definition">¶</a></dt>
+<dd><p>确认收货费用结构</p>
+<dl class="method">
+<dt id="trade.TradRates.get">
+<tt class="descname">get</tt><big>(</big><em>rate_type</em>, <em>role</em>, <em>session</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradRates.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradRates.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.traderates.get 搜索评价信息</p>
+<p>搜索评价信息，只能获取距今180天内的评价记录</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trade.TradRates.search">
+<tt class="descname">search</tt><big>(</big><em>num_iid</em>, <em>seller_nick</em>, <em>page_no=None</em>, <em>page_size=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradRates.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradRates.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.traderates.search 商品评价查询接口</p>
+<p>通过商品id查询对应的评价信息</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="shop.html"
+                        title="previous chapter">店铺 API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/trade.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="shop.html" title="店铺 API"
+             >previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>
