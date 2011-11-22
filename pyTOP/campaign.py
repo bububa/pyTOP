@@ -391,7 +391,7 @@ class CreativeRecord(TOP):
     '''创意修改记录，只记录最后一次修改'''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(CreativeRecord, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
-        self.models = {'create_time':TOPDate, 'last_update_time':TOPDate, 'modify_time'TOPDate}
+        self.models = {'create_time':TOPDate, 'last_update_time':TOPDate, 'modify_time':TOPDate}
         self.fields = ['nick','creative_id','title','old_title','img_url','old_img_url','audit_status','audit_desc','modify_time','create_time','last_update_time']
     
 

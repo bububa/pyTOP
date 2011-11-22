@@ -1,93 +1,50 @@
-Requests: HTTP for Humans
+pyTOP: Taobao Open Platform API python Wrapper
 =========================
 
-Requests is an ISC Licensed HTTP library, written in Python, for human
-beings.
-
-Most existing Python modules for sending HTTP requests are extremely
-verbose and cumbersome. Python's builtin urllib2 module provides most of
-the HTTP capabilities you should need, but the api is thoroughly broken.
-It requires an enormous amount of work (even method overrides) to
-perform the simplest of tasks.
-
-Things shouldn't be this way. Not in Python.
-
-::
-
-    >>> r = requests.get('https://api.github.com', auth=('user', 'pass'))
-    >>> r.status_code
-    204
-    >>> r.headers['content-type']
-    'application/json'
-    >>> r.content
-    ...
-
-See `the same code, without Requests <https://gist.github.com/973705>`_.
-
-Requests allow you to send  **HEAD**, **GET**, **POST**, **PUT**,
-**PATCH**, and **DELETE** HTTP requests. You can add headers, form data,
-multipart files, and parameters with simple Python dictionaries, and access the
-response data in the same way. It's powered by httplib, but it does
-all the hard work and crazy hacks for you.
+pyTOP is an ISC Licensed Taobao Open Platform API library, written in Python.
 
 
 Features
 --------
 
-- Extremely simple HEAD, GET, POST, PUT, PATCH, DELETE Requests.
-- Gevent support for Asyncronous Requests.
-- Sessions with cookie persistience.
-- Basic, Digest, and Custom Authentication support.
-- Automatic form-encoding of dictionaries
-- A simple dictionary interface for request/response cookies.
-- Multipart file uploads.
-- Automatc decoding of Unicode, gzip, and deflate responses.
-- Full support for unicode URLs and domain names.
+- 用户 API
+- 类目 API
+- 商品 API
+- 店铺 API
+- 交易 API
+- 店铺会员管理 API
+- 子账号管理 API
+- 旺旺 API
+- 收藏夹 API
+- insight API
+- campagin API
 
 
-Usage
------
+Requirements
+------------
 
-It couldn't be simpler. ::
-
-    >>> import requests
-    >>> r = requests.get('http://google.com')
-
-
-HTTPS? Basic Authentication? ::
-
-    >>> r = requests.get('https://httpbin.ep.io/basic-auth/user/pass')
-    >>> r.status_code
-    401
-
-
-Uh oh, we're not authorized! Let's add authentication. ::
-
-    >>> r = requests.get('https://httpbin.ep.io/basic-auth/user/pass', auth=('user', 'pass'))
-
-    >>> r.status_code
-    200
-
-    >>> r.headers['content-type']
-    'application/json'
-
-    >>> r.content
-    '{"authenticated": true, "user": "user"}'
+- Requests (https://github.com/kennethreitz/requests)
+- Urllib3 (http://code.google.com/p/urllib3/)
 
 
 Installation
 ------------
 
-To install requests, simply: ::
+To install pyTOP, first download the files then simply: ::
 
-    $ pip install requests
+    $ python setup.py install
 
-Or, if you absolutely must: ::
 
-    $ easy_install requests
+Usage
+-----
 
-But, you really shouldn't do that.
+::
 
+    >>> user = User()
+    >>> user.get('bububa')
+    >>> print user
+    <User: user_id=180018765, uid=520be25d2ae9de5ea1d6a784e67d6edf, nick=bububa, buyer_credit=<UserCredit: level=0, score=0, total_num=0, good_num=0>, seller_credit=<UserCredit: level=0, score=0, total_num=0, good_num=0>, created=2011-11-21 15:11:47, last_visit=2011-11-21 15:12:07, type=C, has_shop=False, is_lightning_consignment=False>
+    ...
 
 
 Contribute
@@ -98,5 +55,5 @@ Contribute
 #. Write a test which shows that the bug was fixed or that the feature works as expected.
 #. Send a pull request and bug the maintainer until it gets merged and published. :) Make sure to add yourself to AUTHORS_.
 
-.. _`the repository`: http://github.com/kennethreitz/requests
-.. _AUTHORS: http://github.com/kennethreitz/requests/blob/master/AUTHORS
+.. _`the repository`: http://github.com/bububa/pyTOP
+.. _AUTHORS: http://github.com/bububa/pyTOP/blob/master/AUTHORS
