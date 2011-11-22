@@ -1,2 +1,29 @@
-.DS_Store
+#python specific
+*.mo
+*.egg-info
+*.egg
+*.EGG
+*.EGG-INFO
+bin
+build
+develop-eggs
+downloads
+eggs
+fake-eggs
+parts
+dist
+.installed.cfg
+.mr.developer.cfg
+.hg
+.bzr
+.svn
 *.pyc
+*.pyo
+*.tmp*
+
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
