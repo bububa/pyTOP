@@ -18,6 +18,7 @@ import base64
 from api import TOP, TOPRequest, TOPDate
 from systime import SysTime
 import time
+from BeautifulSoup import BeautifulSoup
 
 class Location(TOP):
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
@@ -49,20 +50,52 @@ class User(TOP):
         self.create(self.execute(request, session)['user'])
         return self
     
-    def login(self, app_user_nick=None, target=None):
+    def logout(self):
         systime = SysTime()
         params = {
             'app_key' : self.API_KEY,
             'timestamp'  : systime.get(),
             'sign_method' : self.SIGN_METHOD,
         }
-        if app_user_nick!=None: params['app_user_nick'] = app_user_nick
-        if target!=None: params['target'] = target
-        src = self.APP_SECRET + ''.join(["%s%s" % (k, v) for k, v in sorted(params.iteritems())])
-        params['sign'] = md5(src).hexdigest()
+        src = self.APP_SECRET + ''.join(["%s%s" % (k, v) for k, v in sorted(params.iteritems())]) + self.APP_SECRET
+        params['sign'] = md5(src).hexdigest().upper()
         form_data = urllib.urlencode(params)
-        rsp = requests.get('%s?%s'%(self.LOGIN_URL, form_data))
-        print rsp.url
+        rsp = requests.get('%s?%s'%(self.LOGOUT_URL, form_data))
+        if 'login.taobao.com' in rsp.url: return True
+        return False
+        
+    def login(self, username='', passwd='', app_user_nick=None, target=None, use_taobaoid=False):
+        if use_taobaoid:
+            systime = SysTime()
+            params = {
+                'app_key' : self.API_KEY,
+                'timestamp'  : systime.get(),
+                'sign_method' : self.SIGN_METHOD,
+            }
+            if app_user_nick!=None: params['app_user_nick'] = app_user_nick
+            if target!=None: params['target'] = target
+            src = self.APP_SECRET + ''.join(["%s%s" % (k, v) for k, v in sorted(params.iteritems())]) + self.APP_SECRET
+            params['sign'] = md5(src).hexdigest().upper()
+            form_data = urllib.urlencode(params)
+            rsp = requests.get('%s?%s'%(self.TaobaoID_URL, form_data))
+            print rsp.content
+        else:
+            rsp = requests.get('%s%s'%(self.LOGIN_URL, self.API_KEY))
+            soup = BeautifulSoup(rsp.content)
+            iframe_src = soup.find('iframe')['src']
+            rsp = requests.get(iframe_src)
+            print rsp.url
+            #s = requests.session()
+            login_url = 'https://login.taobao.com/member/login.jhtml'
+            soup = BeautifulSoup(rsp.content)
+            login_url = soup.find('form')['action']
+            #inputs = soup.findAll('input')
+            forms = self.extract_form_fields(soup)
+            forms['TPL_username'] = username
+            forms['TPL_password'] = passwd
+            rsp = requests.post(login_url, data=forms)
+            print rsp.url
+            print rsp.content
     
     def validate_session(self, session_ts):
         now = time()
@@ -79,7 +112,7 @@ class User(TOP):
             'sessionkey'  : sessionkey,
             'refresh_token': refresh_token
         }
-        src = ''.join(["%s%s" % (k, v) for k, v in sorted(params.iteritems())]) + self.PRODUCT_APP_SECRET
+        src = ''.join(["%s%s" % (k, v) for k, v in sorted(params.iteritems())]) + self.APP_SECRET
         params['sign'] = md5(src).hexdigest().upper()
         form_data = urllib.urlencode(params)
         rsp = requests.get('%s?%s'%(self.REFRESH_TOKEN_URL, form_data))
@@ -89,7 +122,72 @@ class User(TOP):
             return None
         rsp['re_expires_in'] = int(rsp['re_expires_in'])
         rsp['expires_in'] = int(rsp['expires_in'])
+        rsp['session'] = rsp['top_session']
+        del rsp['top_session']
         return rsp
+    
+    def extract_form_fields(self, soup):
+        "Turn a BeautifulSoup form in to a dict of fields and default values"
+        fields = {}
+        for input in soup.findAll('input'):
+            # ignore submit/image with no name attribute
+            if input['type'] in ('submit', 'image') and not input.has_key('name'):
+                continue
+            
+            # single element nome/value fields
+            if input['type'] in ('text', 'hidden', 'password', 'submit', 'image'):
+                value = ''
+                if input.has_key('value'):
+                    value = input['value']
+                fields[input['name']] = value
+                continue
+            
+            # checkboxes and radios
+            if input['type'] in ('checkbox', 'radio'):
+                value = ''
+                if input.has_key('checked'):
+                    if input.has_key('value'):
+                        value = input['value']
+                    else:
+                        value = 'on'
+                if 'name' in input and fields.has_key(input['name']) and value:
+                    fields[input['name']] = value
+                
+                if 'name' in input and not fields.has_key(input['name']):
+                    fields[input['name']] = value
+                
+                continue
+            
+            assert False, 'input type %s not supported' % input['type']
+        
+        # textareas
+        for textarea in soup.findAll('textarea'):
+            fields[textarea['name']] = textarea.string or ''
+        
+        # select fields
+        for select in soup.findAll('select'):
+            value = ''
+            options = select.findAll('option')
+            is_multiple = select.has_key('multiple')
+            selected_options = [
+                option for option in options
+                if option.has_key('selected')
+            ]
+            
+            # If no select options, go with the first one
+            if not selected_options and options:
+                selected_options = [options[0]]
+            
+            if not is_multiple:
+                assert(len(selected_options) < 2)
+                if len(selected_options) == 1:
+                    value = selected_options[0]['value']
+            else:
+                value = [option['value'] for option in selected_options]
+            
+            fields[select['name']] = value
+        
+        return fields
     
 
 class Users(TOP):

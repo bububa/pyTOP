@@ -6,6 +6,7 @@ api.py
 Created by 徐 光硕 on 2011-11-14.
 Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 """
+from os import getenv
 import time
 import datetime
 from dateutil.parser import *
@@ -45,6 +46,8 @@ class TOP(object):
         self.PRODUCT_APP_SECRET = '9f127588ceb726905e078b64ab88a361'
         self.PRODUCT_LOGIN_URL = 'http://container.api.taobao.com/container?appkey='
         self.PRODUCT_API_URL = 'http://gw.api.taobao.com/router/rest'
+        self.LOGOUT_URL = 'http://container.api.taobao.com/container/logoff'
+        self.TaobaoID_URL = 'http://container.api.taobao.com/container/identify'
         #淘宝测试环境
         self.SANDBOX_API_KEY = '12422885'
         self.SANDBOX_APP_SECRET = 'sandbox8ceb726905e078b64ab88a361'
@@ -58,8 +61,11 @@ class TOP(object):
         self.SIGN_METHOD = 'md5'  
         self.API_VERSION = '2.0'  
         self.SDK_VERSON = 'pyTOP_0.1.0'
-        if not self.ENVIRONMENT and os.getenv(self.OS_ENV):
-            self.ENVIRONMENT = self.OS_ENV
+        if not self.ENVIRONMENT:
+            if getenv(self.OS_ENV):
+                self.ENVIRONMENT = self.OS_ENV
+            else:
+                self.ENVIRONMENT = 'sandbox'
         if self.ENVIRONMENT == 'sandbox':
             if API_KEY:
                 self.SANDBOX_API_KEY = API_KEY
