@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>分销 API &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="index.html" />
+    <link rel="up" title="pyTOP’s API Document" href="api.html" />
+    <link rel="prev" title="系统时间 API" href="systime.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="systime.html" title="系统时间 API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" accesskey="U">pyTOP&#8217;s API Document</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<span id="fenxiao"></span><h1>分销 API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<p>提供了分销商信息和采购单信息的查询以及分销产品的添加和更新等功能</p>
+<span class="target" id="module-fenxiao"></span><dl class="class">
+<dt id="fenxiao.Discount">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">Discount</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#Discount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.Discount" title="Permalink to this definition">¶</a></dt>
+<dd><p>折扣信息</p>
+<dl class="method">
+<dt id="fenxiao.Discount.add">
+<tt class="descname">add</tt><big>(</big><em>discount_name</em>, <em>target_types</em>, <em>target_ids</em>, <em>discount_types</em>, <em>discount_values</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#Discount.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.Discount.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.discount.add 新增等级折扣</p>
+<p>新增等级折扣</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fenxiao.Discount.update">
+<tt class="descname">update</tt><big>(</big><em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#Discount.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.Discount.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.discount.update 修改等级折扣</p>
+<p>修改等级折扣</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.Discounts">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">Discounts</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#Discounts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.Discounts" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="fenxiao.Discounts.get">
+<tt class="descname">get</tt><big>(</big><em>session</em>, <em>discount_id=None</em>, <em>ext_fields=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#Discounts.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.Discounts.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.discounts.get 获取折扣信息</p>
+<p>查询折扣信息</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.DiscountDetail">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">DiscountDetail</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#DiscountDetail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.DiscountDetail" title="Permalink to this definition">¶</a></dt>
+<dd><p>折扣详情信息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.FenxiaoSku">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">FenxiaoSku</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoSku"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoSku" title="Permalink to this definition">¶</a></dt>
+<dd><p>分销产品SKU</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.FenxiaoItemRecord">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">FenxiaoItemRecord</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoItemRecord"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoItemRecord" title="Permalink to this definition">¶</a></dt>
+<dd><p>分销商品下载记录</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.Cooperation">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">Cooperation</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#Cooperation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.Cooperation" title="Permalink to this definition">¶</a></dt>
+<dd><p>合作分销关系</p>
+<dl class="method">
+<dt id="fenxiao.Cooperation.get">
+<tt class="descname">get</tt><big>(</big><em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#Cooperation.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.Cooperation.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.cooperation.get 获取供应商的合作关系信息</p>
+<p>获取供应商的合作关系信息</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fenxiao.Cooperation.update">
+<tt class="descname">update</tt><big>(</big><em>distributor_id</em>, <em>grade_id</em>, <em>session</em>, <em>trade_type=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#Cooperation.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.Cooperation.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.cooperation.update 更新合作关系等级</p>
+<p>供应商更新合作的分销商等级</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.FenxiaoGrade">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">FenxiaoGrade</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoGrade"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoGrade" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.FenxiaoGrades">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">FenxiaoGrades</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoGrades"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoGrades" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="fenxiao.FenxiaoGrades.get">
+<tt class="descname">get</tt><big>(</big><em>session</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoGrades.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoGrades.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.grades.get 分销商等级查询</p>
+<p>根据供应商ID，查询他的分销商等级信息</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.Receiver">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">Receiver</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#Receiver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.Receiver" title="Permalink to this definition">¶</a></dt>
+<dd><p>收货人详细信息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.LoginUser">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">LoginUser</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#LoginUser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.LoginUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>登录分销用户信息</p>
+<dl class="method">
+<dt id="fenxiao.LoginUser.get">
+<tt class="descname">get</tt><big>(</big><em>session</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#LoginUser.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.LoginUser.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.login.user.get 获取分销用户登录信息</p>
+<p>获取用户登录信息</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.Distributor">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">Distributor</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#Distributor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.Distributor" title="Permalink to this definition">¶</a></dt>
+<dd><p>分销API返回数据结构</p>
+<dl class="method">
+<dt id="fenxiao.Distributor.items_get">
+<tt class="descname">items_get</tt><big>(</big><em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#Distributor.items_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.Distributor.items_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.distributor.items.get 查询商品下载记录</p>
+<p>供应商查询分销商商品下载记录。</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.Distributors">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">Distributors</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#Distributors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.Distributors" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="fenxiao.Distributors.get">
+<tt class="descname">get</tt><big>(</big><em>nicks</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#Distributors.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.Distributors.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.distributors.get 获取分销商信息</p>
+<p>查询和当前登录供应商有合作关系的分销商的信息</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.PurchaseOrder">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">PurchaseOrder</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#PurchaseOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.PurchaseOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>采购单及子采购单信息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.FenxiaoProduct">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">FenxiaoProduct</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoProduct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoProduct" title="Permalink to this definition">¶</a></dt>
+<dd><p>分销产品</p>
+<dl class="method">
+<dt id="fenxiao.FenxiaoProduct.add">
+<tt class="descname">add</tt><big>(</big><em>name</em>, <em>productcat_id</em>, <em>standard_price</em>, <em>retail_price_low</em>, <em>retail_price_high</em>, <em>category_id</em>, <em>quantity</em>, <em>alarm_number</em>, <em>desc</em>, <em>prov</em>, <em>city</em>, <em>postage_type</em>, <em>have_invoice</em>, <em>have_guarantee</em>, <em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoProduct.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoProduct.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.product.add 添加产品</p>
+<p>添加分销平台产品数据。业务逻辑与分销系统前台页面一致</p>
+<ul class="simple">
+<li>产品图片默认为空</li>
+<li>产品发布后默认为下架状态</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="fenxiao.FenxiaoProduct.image_delete">
+<tt class="descname">image_delete</tt><big>(</big><em>product_id</em>, <em>position</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoProduct.image_delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoProduct.image_delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.product.image.delete 产品图片删除</p>
+<p>产品图片删除，只删除图片信息，不真正删除图片</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fenxiao.FenxiaoProduct.image_upload">
+<tt class="descname">image_upload</tt><big>(</big><em>product_id</em>, <em>position</em>, <em>session</em>, <em>pic_path=None</em>, <em>image=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoProduct.image_upload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoProduct.image_upload" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.product.image.upload 产品图片上传</p>
+<p>产品主图图片空间相对路径或绝对路径添加或更新，或者是图片上传。如果指定位置的图片已存在，则覆盖原有信息，如果位置为1,自动设为主图。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fenxiao.FenxiaoProduct.sku_add">
+<tt class="descname">sku_add</tt><big>(</big><em>product_id</em>, <em>standard_price</em>, <em>properties</em>, <em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoProduct.sku_add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoProduct.sku_add" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.product.sku.add 产品sku添加接口</p>
+<p>添加产品SKU信息</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fenxiao.FenxiaoProduct.sku_delete">
+<tt class="descname">sku_delete</tt><big>(</big><em>product_id</em>, <em>properties</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoProduct.sku_delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoProduct.sku_delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.product.sku.delete 产品SKU删除接口</p>
+<p>根据sku properties删除sku数据</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fenxiao.FenxiaoProduct.sku_update">
+<tt class="descname">sku_update</tt><big>(</big><em>product_id</em>, <em>properties</em>, <em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoProduct.sku_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoProduct.sku_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.product.sku.update 产品sku编辑接口</p>
+<p>产品SKU信息更新</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fenxiao.FenxiaoProduct.skus_get">
+<tt class="descname">skus_get</tt><big>(</big><em>product_id</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoProduct.skus_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoProduct.skus_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.product.skus.get SKU查询接口</p>
+<p>产品sku查询</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fenxiao.FenxiaoProduct.update">
+<tt class="descname">update</tt><big>(</big><em>pid</em>, <em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoProduct.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoProduct.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.product.update 更新产品</p>
+<ul class="simple">
+<li>更新分销平台产品数据，不传更新数据返回失败</li>
+<li>对sku进行增、删操作时，原有的sku_ids字段会被忽略，请使用sku_properties和sku_properties_del。</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.FenxiaoProducts">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">FenxiaoProducts</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoProducts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoProducts" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="fenxiao.FenxiaoProducts.get">
+<tt class="descname">get</tt><big>(</big><em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoProducts.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoProducts.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.products.get 查询产品列表</p>
+<p>查询供应商的产品数据
+- 入参传入pids将优先查询，即只按这个条件查询。 
+- 入参传入sku_number将优先查询(没有传入pids)，即只按这个条件查询(最多显示50条) 
+- 入参fields传skus将查询sku的数据，不传该参数默认不查询，返回产品的其它信息。 
+- 入参fields传入images将查询多图数据，不传只返回主图数据。 
+- 入参fields仅对传入pids生效（只有按ID查询时，才能查询额外的数据） 
+- 查询结果按照产品发布时间倒序，即时间近的数据在前。</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.SubPurchaseOrder">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">SubPurchaseOrder</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#SubPurchaseOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.SubPurchaseOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>子采购单详细信息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.ProductCat">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">ProductCat</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#ProductCat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.ProductCat" title="Permalink to this definition">¶</a></dt>
+<dd><p>产品线</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.ProductCats">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">ProductCats</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#ProductCats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.ProductCats" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="fenxiao.ProductCats.get">
+<tt class="descname">get</tt><big>(</big><em>session</em>, <em>fields=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#ProductCats.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.ProductCats.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.productcats.get 查询产品线列表</p>
+<p>查询供应商的所有产品线数据。根据登陆用户来查询，不需要其他入参</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.FenxiaoOrder">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">FenxiaoOrder</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoOrder" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="fenxiao.FenxiaoOrder.confirm_paid">
+<tt class="descname">confirm_paid</tt><big>(</big><em>purchase_order_id</em>, <em>session</em>, <em>confirm_remark=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoOrder.confirm_paid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoOrder.confirm_paid" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.order.confirm.paid 确认收款</p>
+<p>供应商确认收款（非支付宝交易）。</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fenxiao.FenxiaoOrders">
+<em class="property">class </em><tt class="descclassname">fenxiao.</tt><tt class="descname">FenxiaoOrders</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoOrders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoOrders" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="fenxiao.FenxiaoOrders.get">
+<tt class="descname">get</tt><big>(</big><em>session</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/fenxiao.html#FenxiaoOrders.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fenxiao.FenxiaoOrders.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.fenxiao.orders.get 查询采购单信息</p>
+<p>分销商或供应商均可用此接口查询采购单信息. (发货处理请调用物流API中的发货接口)</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="systime.html"
+                        title="previous chapter">系统时间 API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/fenxiao.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="systime.html" title="系统时间 API"
+             >previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" >pyTOP&#8217;s API Document</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

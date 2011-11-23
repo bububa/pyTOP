@@ -1,0 +1,167 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>评价 API &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="index.html" />
+    <link rel="up" title="pyTOP’s API Document" href="api.html" />
+    <link rel="next" title="系统时间 API" href="systime.html" />
+    <link rel="prev" title="收藏夹 API" href="favorite.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="systime.html" title="系统时间 API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="favorite.html" title="收藏夹 API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" accesskey="U">pyTOP&#8217;s API Document</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<span id="traderate"></span><h1>评价 API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<p>提供了评价的添加和查询功能</p>
+<span class="target" id="module-traderate"></span><dl class="class">
+<dt id="traderate.TradeRate">
+<em class="property">class </em><tt class="descclassname">traderate.</tt><tt class="descname">TradeRate</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/traderate.html#TradeRate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#traderate.TradeRate" title="Permalink to this definition">¶</a></dt>
+<dd><p>评价列表</p>
+<dl class="method">
+<dt id="traderate.TradeRate.add">
+<tt class="descname">add</tt><big>(</big><em>tid</em>, <em>result</em>, <em>role</em>, <em>session</em>, <em>oid=None</em>, <em>content=None</em>, <em>anony=None</em><big>)</big><a class="reference internal" href="_modules/traderate.html#TradeRate.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#traderate.TradeRate.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.traderate.add 新增单个评价</p>
+<p>新增单个评价(注：在评价之前需要对订单成功的时间进行判定（end_time）,如果超过15天，不能再通过该接口进行评价)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="traderate.TradeRate.list_add">
+<tt class="descname">list_add</tt><big>(</big><em>tid</em>, <em>result</em>, <em>role</em>, <em>session</em>, <em>oid=None</em>, <em>content=None</em>, <em>anony=None</em><big>)</big><a class="reference internal" href="_modules/traderate.html#TradeRate.list_add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#traderate.TradeRate.list_add" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.traderate.list.add 针对父子订单新增批量评价</p>
+<p>针对父子订单新增批量评价(注：在评价之前需要对订单成功的时间进行判定（end_time）,如果超过15天，不用再通过该接口进行评价)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="traderate.TradeRates">
+<em class="property">class </em><tt class="descclassname">traderate.</tt><tt class="descname">TradeRates</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/traderate.html#TradeRates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#traderate.TradeRates" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="traderate.TradeRates.get">
+<tt class="descname">get</tt><big>(</big><em>rate_type</em>, <em>role</em>, <em>session</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/traderate.html#TradeRates.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#traderate.TradeRates.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.traderates.get 搜索评价信息</p>
+<p>搜索评价信息，只能获取距今180天内的评价记录</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="traderate.TradeRates.search">
+<tt class="descname">search</tt><big>(</big><em>num_iid</em>, <em>seller_nick</em>, <em>page_no=1</em>, <em>page_size=20</em><big>)</big><a class="reference internal" href="_modules/traderate.html#TradeRates.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#traderate.TradeRates.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.traderates.search 商品评价查询接口</p>
+<p>通过商品id查询对应的评价信息</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="favorite.html"
+                        title="previous chapter">收藏夹 API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="systime.html"
+                        title="next chapter">系统时间 API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/traderate.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="systime.html" title="系统时间 API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="favorite.html" title="收藏夹 API"
+             >previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" >pyTOP&#8217;s API Document</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

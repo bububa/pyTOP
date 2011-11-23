@@ -42,6 +42,8 @@ from .favorite import CollectItem, Favorite
 from .traderate import TradeRate, TradeRates
 # 系统十佳 API
 from .systime import SysTime
+# 分销 API
+from .fenxiao import Discount, Discounts, DiscountDetail, FenxiaoSku, FenxiaoItemRecord, Cooperation, FenxiaoGrade, FenxiaoGrades, Receiver, LoginUser, Distributor, Distributors, PurchaseOrder, FenxiaoProduct, FenxiaoProducts, SubPurchaseOrder, ProductCat, ProductCats, FenxiaoOrder, FenxiaoOrders
 # insight API
 from .insight import INWordBase, INCategoryBase, INWordAnalysis, INCategoryAnalysis, INCategoryProperties, INCategory, INWordCategory, INRecordBase, INCategoryAnalysisTop, INCategoryChildTop, INCategoryTop, INWordAnalysisTop, WordBase, CatsBase, WordAnalysis, CatsAnalysis, CatsForecast, CatsTopWord, CatsRelatedWord, WordsCats, Cats, TopLevelCats, CreativeIDs, AdGroupIDs, KeywordIDs, CatMatchedIDs
 # Campagin API

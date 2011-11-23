@@ -16,7 +16,7 @@ class SysTime(TOP):
     
     def get(self):
         '''taobao.time.get 获取前台展示的店铺类目
-        ==============================
+        
         获取淘宝系统当前时间'''
         request = TOPRequest('taobao.time.get')
         self.create(self.execute(request))

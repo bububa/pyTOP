@@ -59,6 +59,7 @@ API
    favorite
    traderate
    systime
+   fenxiao
 
 ---------------------
 

@@ -57,6 +57,9 @@ API
    wangwang
    logistics
    favorite
+   traderate
+   systime
+   fenxiao
 
 ---------------------
 

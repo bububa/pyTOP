@@ -19,6 +19,7 @@ Features
 - 评价 API
 - 收藏夹 API
 - 系统时间 API
+- 分销 API
 - insight API
 - campagin API
 
