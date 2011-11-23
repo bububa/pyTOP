@@ -1,0 +1,189 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>主动通知业务 API &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="index.html" />
+    <link rel="up" title="pyTOP’s API Document" href="api.html" />
+    <link rel="prev" title="淘客 API" href="taobaoke.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="taobaoke.html" title="淘客 API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" accesskey="U">pyTOP&#8217;s API Document</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<span id="increment"></span><h1>主动通知业务 API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<p>配合主动通知业务，提供商品，交易，退款和评价等数据或状态变更的查询功能</p>
+<span class="target" id="module-increment"></span><dl class="class">
+<dt id="increment.NotifyRefund">
+<em class="property">class </em><tt class="descclassname">increment.</tt><tt class="descname">NotifyRefund</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/increment.html#NotifyRefund"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#increment.NotifyRefund" title="Permalink to this definition">¶</a></dt>
+<dd><p>退款通知消息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="increment.NotifyItem">
+<em class="property">class </em><tt class="descclassname">increment.</tt><tt class="descname">NotifyItem</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/increment.html#NotifyItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#increment.NotifyItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>商品通知消息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="increment.NotifyTrade">
+<em class="property">class </em><tt class="descclassname">increment.</tt><tt class="descname">NotifyTrade</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/increment.html#NotifyTrade"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#increment.NotifyTrade" title="Permalink to this definition">¶</a></dt>
+<dd><p>交易通知消息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="increment.AppCustomer">
+<em class="property">class </em><tt class="descclassname">increment.</tt><tt class="descname">AppCustomer</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/increment.html#AppCustomer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#increment.AppCustomer" title="Permalink to this definition">¶</a></dt>
+<dd><p>开通增量消息服务的应用用户</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="increment.Increment">
+<em class="property">class </em><tt class="descclassname">increment.</tt><tt class="descname">Increment</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/increment.html#Increment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#increment.Increment" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="increment.Increment.customer_permit">
+<tt class="descname">customer_permit</tt><big>(</big><em>session</em><big>)</big><a class="reference internal" href="_modules/increment.html#Increment.customer_permit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#increment.Increment.customer_permit" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.increment.customer.permit 开通增量消息服务</p>
+<p>提供app为自己的用户开通增量消息服务功能</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="increment.Increment.customer_stop">
+<tt class="descname">customer_stop</tt><big>(</big><em>nick</em>, <em>session</em><big>)</big><a class="reference internal" href="_modules/increment.html#Increment.customer_stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#increment.Increment.customer_stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.increment.customer.stop 关闭用户的增量消息服务</p>
+<p>供应用关闭其用户的增量消息服务功能，这样可以节省ISV的流量。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="increment.Increment.customers_get">
+<tt class="descname">customers_get</tt><big>(</big><em>session</em>, <em>page_no=1</em>, <em>page_size=10</em>, <em>nicks=None</em><big>)</big><a class="reference internal" href="_modules/increment.html#Increment.customers_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#increment.Increment.customers_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.increment.customers.get 查询应用为用户开通的增量消息服务</p>
+<p>提供查询应用为自身用户所开通的增量消息服务信息。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="increment.Increment.items_get">
+<tt class="descname">items_get</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/increment.html#Increment.items_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#increment.Increment.items_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.increment.items.get 获取商品变更通知信息</p>
+<p>开通主动通知业务的APP可以通过该接口获取商品变更通知信息 建议获取增量消息的时间间隔是：半个小时</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="increment.Increment.refunds_get">
+<tt class="descname">refunds_get</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/increment.html#Increment.refunds_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#increment.Increment.refunds_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.increment.refunds.get 获取退款变更通知信息</p>
+<p>开通主动通知业务的APP可以通过该接口获取用户的退款变更通知信息 建议在获取增量消息的时间间隔是：半个小时</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="increment.Increment.trades_get">
+<tt class="descname">trades_get</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/increment.html#Increment.trades_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#increment.Increment.trades_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.increment.trades.get 获取交易和评价变更通知信息</p>
+<p>开通主动通知业务的APP可以通过该接口获取用户的交易和评价变更通知信息 建议在获取增量消息的时间间隔是：半个小时</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="taobaoke.html"
+                        title="previous chapter">淘客 API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/increment.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="taobaoke.html" title="淘客 API"
+             >previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" >pyTOP&#8217;s API Document</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

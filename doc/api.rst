@@ -61,6 +61,7 @@ API
    systime
    fenxiao
    taobaoke
+   increment
 
 ---------------------
 

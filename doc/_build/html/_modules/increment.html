@@ -1,0 +1,204 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>increment &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for increment</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># encoding: utf-8</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">increment.py</span>
+
+<span class="sd">配合主动通知业务，提供商品，交易，退款和评价等数据或状态变更的查询功能</span>
+
+<span class="sd">Created by 徐 光硕 on 2011-11-23.</span>
+<span class="sd">Copyright (c) 2011 __MyCompanyName__. All rights reserved.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">api</span> <span class="kn">import</span> <span class="n">TOP</span><span class="p">,</span> <span class="n">TOPRequest</span><span class="p">,</span> <span class="n">TOPDate</span>
+
+<div class="viewcode-block" id="NotifyRefund"><a class="viewcode-back" href="../increment.html#increment.NotifyRefund">[docs]</a><span class="k">class</span> <span class="nc">NotifyRefund</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;退款通知消息&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NotifyRefund</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;modified&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;rid&#39;</span><span class="p">,</span><span class="s">&#39;tid&#39;</span><span class="p">,</span><span class="s">&#39;oid&#39;</span><span class="p">,</span><span class="s">&#39;seller_nick&#39;</span><span class="p">,</span><span class="s">&#39;buyer_nick&#39;</span><span class="p">,</span><span class="s">&#39;refund_fee&#39;</span><span class="p">,</span><span class="s">&#39;status&#39;</span><span class="p">,</span><span class="s">&#39;modified&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="NotifyItem"><a class="viewcode-back" href="../increment.html#increment.NotifyItem">[docs]</a><span class="k">class</span> <span class="nc">NotifyItem</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;商品通知消息&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NotifyItem</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;modified&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;sku_id&#39;</span><span class="p">,</span><span class="s">&#39;sku_num&#39;</span><span class="p">,</span><span class="s">&#39;status&#39;</span><span class="p">,</span><span class="s">&#39;increment&#39;</span><span class="p">,</span><span class="s">&#39;iid&#39;</span><span class="p">,</span><span class="s">&#39;num_iid&#39;</span><span class="p">,</span><span class="s">&#39;title&#39;</span><span class="p">,</span><span class="s">&#39;nick&#39;</span><span class="p">,</span><span class="s">&#39;num&#39;</span><span class="p">,</span><span class="s">&#39;changed_fields&#39;</span><span class="p">,</span><span class="s">&#39;price&#39;</span><span class="p">,</span><span class="s">&#39;modified&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="NotifyTrade"><a class="viewcode-back" href="../increment.html#increment.NotifyTrade">[docs]</a><span class="k">class</span> <span class="nc">NotifyTrade</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;交易通知消息&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NotifyTrade</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;modified&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;oid&#39;</span><span class="p">,</span><span class="s">&#39;tid&#39;</span><span class="p">,</span><span class="s">&#39;seller_nick&#39;</span><span class="p">,</span><span class="s">&#39;buyer_nick&#39;</span><span class="p">,</span><span class="s">&#39;payment&#39;</span><span class="p">,</span><span class="s">&#39;trade_mark&#39;</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;status&#39;</span><span class="p">,</span><span class="s">&#39;modified&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="AppCustomer"><a class="viewcode-back" href="../increment.html#increment.AppCustomer">[docs]</a><span class="k">class</span> <span class="nc">AppCustomer</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;开通增量消息服务的应用用户&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AppCustomer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;created&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;nick&#39;</span><span class="p">,</span><span class="s">&#39;created&#39;</span><span class="p">,</span><span class="s">&#39;status&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="Increment"><a class="viewcode-back" href="../increment.html#increment.Increment">[docs]</a><span class="k">class</span> <span class="nc">Increment</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Increment</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+    
+<div class="viewcode-block" id="Increment.customer_permit"><a class="viewcode-back" href="../increment.html#increment.Increment.customer_permit">[docs]</a>    <span class="k">def</span> <span class="nf">customer_permit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.increment.customer.permit 开通增量消息服务</span>
+<span class="sd">        </span>
+<span class="sd">        提供app为自己的用户开通增量消息服务功能&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.increment.customer.permit&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;app_customer&#39;</span><span class="p">,],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;app_customer&#39;</span><span class="p">:</span><span class="n">AppCustomer</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app_customer</span>
+    </div>
+<div class="viewcode-block" id="Increment.customer_stop"><a class="viewcode-back" href="../increment.html#increment.Increment.customer_stop">[docs]</a>    <span class="k">def</span> <span class="nf">customer_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nick</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.increment.customer.stop 关闭用户的增量消息服务</span>
+<span class="sd">        </span>
+<span class="sd">        供应用关闭其用户的增量消息服务功能，这样可以节省ISV的流量。&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.increment.customer.stop&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;nick&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nick</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;is_success&#39;</span><span class="p">,])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_success</span>
+    </div>
+<div class="viewcode-block" id="Increment.customers_get"><a class="viewcode-back" href="../increment.html#increment.Increment.customers_get">[docs]</a>    <span class="k">def</span> <span class="nf">customers_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">page_no</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">page_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">nicks</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.increment.customers.get 查询应用为用户开通的增量消息服务</span>
+<span class="sd">        </span>
+<span class="sd">        提供查询应用为自身用户所开通的增量消息服务信息。&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.increment.customers.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;page_no&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_no</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;page_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_size</span>
+        <span class="k">if</span> <span class="n">nicks</span><span class="o">!=</span><span class="bp">None</span><span class="p">:</span> <span class="n">request</span><span class="p">[</span><span class="s">&#39;nicks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nicks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;app_customers&#39;</span><span class="p">,</span> <span class="s">&#39;total_results&#39;</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;app_customers&#39;</span><span class="p">:</span><span class="n">AppCustomer</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app_customers</span>
+    </div>
+<div class="viewcode-block" id="Increment.items_get"><a class="viewcode-back" href="../increment.html#increment.Increment.items_get">[docs]</a>    <span class="k">def</span> <span class="nf">items_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.increment.items.get 获取商品变更通知信息</span>
+<span class="sd">        </span>
+<span class="sd">        开通主动通知业务的APP可以通过该接口获取商品变更通知信息 建议获取增量消息的时间间隔是：半个小时&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.increment.items.get&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;status&#39;</span><span class="p">,</span> <span class="s">&#39;nick&#39;</span><span class="p">,</span> <span class="s">&#39;start_modified&#39;</span><span class="p">,</span> <span class="s">&#39;end_modified&#39;</span><span class="p">,</span> <span class="s">&#39;page_no&#39;</span><span class="p">,</span> <span class="s">&#39;page_size&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;notify_items&#39;</span><span class="p">,</span> <span class="s">&#39;total_results&#39;</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;notify_items&#39;</span><span class="p">:</span><span class="n">NotifyItem</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">notify_items</span>
+    </div>
+<div class="viewcode-block" id="Increment.refunds_get"><a class="viewcode-back" href="../increment.html#increment.Increment.refunds_get">[docs]</a>    <span class="k">def</span> <span class="nf">refunds_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.increment.refunds.get 获取退款变更通知信息</span>
+<span class="sd">        </span>
+<span class="sd">        开通主动通知业务的APP可以通过该接口获取用户的退款变更通知信息 建议在获取增量消息的时间间隔是：半个小时&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.increment.refunds.get&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;status&#39;</span><span class="p">,</span> <span class="s">&#39;nick&#39;</span><span class="p">,</span> <span class="s">&#39;start_modified&#39;</span><span class="p">,</span> <span class="s">&#39;end_modified&#39;</span><span class="p">,</span> <span class="s">&#39;page_no&#39;</span><span class="p">,</span> <span class="s">&#39;page_size&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;notify_refunds&#39;</span><span class="p">,</span> <span class="s">&#39;total_results&#39;</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;notify_refunds&#39;</span><span class="p">:</span><span class="n">NotifyRefund</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">notify_refunds</span>
+    </div>
+<div class="viewcode-block" id="Increment.trades_get"><a class="viewcode-back" href="../increment.html#increment.Increment.trades_get">[docs]</a>    <span class="k">def</span> <span class="nf">trades_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.increment.trades.get 获取交易和评价变更通知信息</span>
+<span class="sd">        </span>
+<span class="sd">        开通主动通知业务的APP可以通过该接口获取用户的交易和评价变更通知信息 建议在获取增量消息的时间间隔是：半个小时&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.increment.trades.get&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;status&#39;</span><span class="p">,</span> <span class="s">&#39;nick&#39;</span><span class="p">,</span> <span class="s">&#39;type&#39;</span><span class="p">,</span> <span class="s">&#39;start_modified&#39;</span><span class="p">,</span> <span class="s">&#39;end_modified&#39;</span><span class="p">,</span> <span class="s">&#39;page_no&#39;</span><span class="p">,</span> <span class="s">&#39;page_size&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;notify_trades&#39;</span><span class="p">,</span> <span class="s">&#39;total_results&#39;</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;notify_trades&#39;</span><span class="p">:</span><span class="n">NotifyTrade</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">notify_trades</span>
+    </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>
