@@ -40,6 +40,8 @@ from .logistics import TransitStepInfo, Area, DeliveryTemplate, DeliveryTemplate
 from .favorite import CollectItem, Favorite
 # 评价 API
 from .traderate import TradeRate, TradeRates
+# 系统十佳 API
+from .systime import SysTime
 # insight API
 from .insight import INWordBase, INCategoryBase, INWordAnalysis, INCategoryAnalysis, INCategoryProperties, INCategory, INWordCategory, INRecordBase, INCategoryAnalysisTop, INCategoryChildTop, INCategoryTop, INWordAnalysisTop, WordBase, CatsBase, WordAnalysis, CatsAnalysis, CatsForecast, CatsTopWord, CatsRelatedWord, WordsCats, Cats, TopLevelCats, CreativeIDs, AdGroupIDs, KeywordIDs, CatMatchedIDs
 # Campagin API
