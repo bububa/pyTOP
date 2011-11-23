@@ -57,6 +57,7 @@ API
    wangwang
    logistics
    favorite
+   traderate
 
 ---------------------
 
