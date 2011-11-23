@@ -48,6 +48,8 @@ from .fenxiao import Discount, Discounts, DiscountDetail, FenxiaoSku, FenxiaoIte
 from .taobaoke import TaobaokeReportMember, TaobaokeReport, TaobaokeItemDetail, TaobaokeItem, TaobaokeShop, TaobaokeShops, Taobaoke
 # 主动通知业务 API
 from .increment import NotifyRefund, NotifyItem, NotifyTrade, AppCustomer, Increment
+# 在线订购 API
+from .vas import ArticleUserSubscribe, ArticleBizOrder, ArticleSub, Vas
 # insight API
 from .insight import INWordBase, INCategoryBase, INWordAnalysis, INCategoryAnalysis, INCategoryProperties, INCategory, INWordCategory, INRecordBase, INCategoryAnalysisTop, INCategoryChildTop, INCategoryTop, INWordAnalysisTop, WordBase, CatsBase, WordAnalysis, CatsAnalysis, CatsForecast, CatsTopWord, CatsRelatedWord, WordsCats, Cats, TopLevelCats, CreativeIDs, AdGroupIDs, KeywordIDs, CatMatchedIDs
 # Campagin API

@@ -1,0 +1,162 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>在线订购 API &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="index.html" />
+    <link rel="up" title="pyTOP’s API Document" href="api.html" />
+    <link rel="prev" title="主动通知业务 API" href="increment.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="increment.html" title="主动通知业务 API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" accesskey="U">pyTOP&#8217;s API Document</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<span id="vas"></span><h1>在线订购 API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<p>提供用户应用订购关系相关查询</p>
+<span class="target" id="module-vas"></span><dl class="class">
+<dt id="vas.ArticleUserSubscribe">
+<em class="property">class </em><tt class="descclassname">vas.</tt><tt class="descname">ArticleUserSubscribe</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/vas.html#ArticleUserSubscribe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vas.ArticleUserSubscribe" title="Permalink to this definition">¶</a></dt>
+<dd><p>用户订购信息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="vas.ArticleBizOrder">
+<em class="property">class </em><tt class="descclassname">vas.</tt><tt class="descname">ArticleBizOrder</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/vas.html#ArticleBizOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vas.ArticleBizOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>应用订单信息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="vas.ArticleSub">
+<em class="property">class </em><tt class="descclassname">vas.</tt><tt class="descname">ArticleSub</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/vas.html#ArticleSub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vas.ArticleSub" title="Permalink to this definition">¶</a></dt>
+<dd><p>应用订购信息</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="vas.Vas">
+<em class="property">class </em><tt class="descclassname">vas.</tt><tt class="descname">Vas</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/vas.html#Vas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vas.Vas" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="vas.Vas.order_search">
+<tt class="descname">order_search</tt><big>(</big><em>article_code</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/vas.html#Vas.order_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vas.Vas.order_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.vas.order.search 订单记录导出</p>
+<p>用于ISV查询自己名下的应用及收费项目的订单记录。目前所有应用调用此接口的频率限制为200次/分钟，即每分钟内，所有应用调用此接口的次数加起来最多为200次。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vas.Vas.subsc_search">
+<tt class="descname">subsc_search</tt><big>(</big><em>article_code</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/vas.html#Vas.subsc_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vas.Vas.subsc_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.vas.subsc.search 订购记录导出</p>
+<p>用于ISV查询自己名下的应用及收费项目的订购记录</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vas.Vas.subscribe_get">
+<tt class="descname">subscribe_get</tt><big>(</big><em>nick</em>, <em>article_code</em><big>)</big><a class="reference internal" href="_modules/vas.html#Vas.subscribe_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vas.Vas.subscribe_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.vas.subscribe.get 订购关系查询</p>
+<p>用于ISV根据登录进来的淘宝会员名查询该为该会员开通哪些收费项目，ISV只能查询自己名下的应用及收费项目的订购情况</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="increment.html"
+                        title="previous chapter">主动通知业务 API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/vas.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="increment.html" title="主动通知业务 API"
+             >previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" >pyTOP&#8217;s API Document</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

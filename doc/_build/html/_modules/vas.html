@@ -1,0 +1,169 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vas &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vas</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># encoding: utf-8</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">vas.py</span>
+
+<span class="sd">提供用户应用订购关系相关查询</span>
+
+<span class="sd">Created by 徐 光硕 on 2011-11-23.</span>
+<span class="sd">Copyright (c) 2011 __MyCompanyName__. All rights reserved.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">api</span> <span class="kn">import</span> <span class="n">TOP</span><span class="p">,</span> <span class="n">TOPRequest</span><span class="p">,</span> <span class="n">TOPDate</span>
+
+<div class="viewcode-block" id="ArticleUserSubscribe"><a class="viewcode-back" href="../vas.html#vas.ArticleUserSubscribe">[docs]</a><span class="k">class</span> <span class="nc">ArticleUserSubscribe</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;用户订购信息&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ArticleUserSubscribe</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;deadline&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;item_code&#39;</span><span class="p">,</span><span class="s">&#39;deadline&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="ArticleBizOrder"><a class="viewcode-back" href="../vas.html#vas.ArticleBizOrder">[docs]</a><span class="k">class</span> <span class="nc">ArticleBizOrder</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;应用订单信息&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ArticleBizOrder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;create&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span><span class="s">&#39;order_cycle_start&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,</span><span class="s">&#39;order_cycle_end&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;biz_order_id&#39;</span><span class="p">,</span><span class="s">&#39;order_id&#39;</span><span class="p">,</span><span class="s">&#39;nick&#39;</span><span class="p">,</span><span class="s">&#39;article_name&#39;</span><span class="p">,</span><span class="s">&#39;article_code&#39;</span><span class="p">,</span><span class="s">&#39;item_name&#39;</span><span class="p">,</span><span class="s">&#39;item_code&#39;</span><span class="p">,</span><span class="s">&#39;create&#39;</span><span class="p">,</span><span class="s">&#39;order_cycle&#39;</span><span class="p">,</span><span class="s">&#39;order_cycle_start&#39;</span><span class="p">,</span><span class="s">&#39;order_cycle_end&#39;</span><span class="p">,</span><span class="s">&#39;biz_type&#39;</span><span class="p">,</span><span class="s">&#39;fee&#39;</span><span class="p">,</span><span class="s">&#39;prom_fee&#39;</span><span class="p">,</span><span class="s">&#39;refund_fee&#39;</span><span class="p">,</span><span class="s">&#39;total_pay_fee&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="ArticleSub"><a class="viewcode-back" href="../vas.html#vas.ArticleSub">[docs]</a><span class="k">class</span> <span class="nc">ArticleSub</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;应用订购信息&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ArticleSub</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;deadline&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;nick&#39;</span><span class="p">,</span><span class="s">&#39;article_name&#39;</span><span class="p">,</span><span class="s">&#39;article_code&#39;</span><span class="p">,</span><span class="s">&#39;item_name&#39;</span><span class="p">,</span><span class="s">&#39;item_code&#39;</span><span class="p">,</span><span class="s">&#39;deadline&#39;</span><span class="p">,</span><span class="s">&#39;status&#39;</span><span class="p">,</span><span class="s">&#39;autosub&#39;</span><span class="p">,</span><span class="s">&#39;expire_notice&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="Vas"><a class="viewcode-back" href="../vas.html#vas.Vas">[docs]</a><span class="k">class</span> <span class="nc">Vas</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Vas</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+    
+<div class="viewcode-block" id="Vas.order_search"><a class="viewcode-back" href="../vas.html#vas.Vas.order_search">[docs]</a>    <span class="k">def</span> <span class="nf">order_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">article_code</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.vas.order.search 订单记录导出</span>
+<span class="sd">        </span>
+<span class="sd">        用于ISV查询自己名下的应用及收费项目的订单记录。目前所有应用调用此接口的频率限制为200次/分钟，即每分钟内，所有应用调用此接口的次数加起来最多为200次。&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.vas.order.search&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;article_code&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">article_code</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;item_code&#39;</span><span class="p">,</span> <span class="s">&#39;nick&#39;</span><span class="p">,</span> <span class="s">&#39;start_created&#39;</span><span class="p">,</span> <span class="s">&#39;end_created&#39;</span><span class="p">,</span> <span class="s">&#39;biz_type&#39;</span><span class="p">,</span> <span class="s">&#39;biz_order_id&#39;</span><span class="p">,</span> <span class="s">&#39;order_id&#39;</span><span class="p">,</span> <span class="s">&#39;page_size&#39;</span><span class="p">,</span><span class="s">&#39;page_no&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;article_biz_orders&#39;</span><span class="p">,</span><span class="s">&#39;total_item&#39;</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;article_biz_orders&#39;</span><span class="p">:</span><span class="n">ArticleBizOrder</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">article_biz_orders</span>
+    </div>
+<div class="viewcode-block" id="Vas.subsc_search"><a class="viewcode-back" href="../vas.html#vas.Vas.subsc_search">[docs]</a>    <span class="k">def</span> <span class="nf">subsc_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">article_code</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.vas.subsc.search 订购记录导出</span>
+<span class="sd">        </span>
+<span class="sd">        用于ISV查询自己名下的应用及收费项目的订购记录&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.vas.subsc.search&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;article_code&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">article_code</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;item_code&#39;</span><span class="p">,</span> <span class="s">&#39;nick&#39;</span><span class="p">,</span> <span class="s">&#39;start_deadline&#39;</span><span class="p">,</span> <span class="s">&#39;end_deadline&#39;</span><span class="p">,</span> <span class="s">&#39;status&#39;</span><span class="p">,</span> <span class="s">&#39;autosub&#39;</span><span class="p">,</span> <span class="s">&#39;expire_notice&#39;</span><span class="p">,</span> <span class="s">&#39;page_size&#39;</span><span class="p">,</span><span class="s">&#39;page_no&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;article_subs&#39;</span><span class="p">,</span><span class="s">&#39;total_item&#39;</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;article_subs&#39;</span><span class="p">:</span><span class="n">ArticleSub</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">article_subs</span>
+    </div>
+<div class="viewcode-block" id="Vas.subscribe_get"><a class="viewcode-back" href="../vas.html#vas.Vas.subscribe_get">[docs]</a>    <span class="k">def</span> <span class="nf">subscribe_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nick</span><span class="p">,</span> <span class="n">article_code</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.vas.subscribe.get 订购关系查询</span>
+<span class="sd">        </span>
+<span class="sd">        用于ISV根据登录进来的淘宝会员名查询该为该会员开通哪些收费项目，ISV只能查询自己名下的应用及收费项目的订购情况&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.vas.subscribe.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;nick&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nick</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;article_code&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">article_code</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;article_user_subscribes&#39;</span><span class="p">,],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;article_user_subscribes&#39;</span><span class="p">:</span><span class="n">ArticleUserSubscribe</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">article_user_subscribes</span>
+    </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>
