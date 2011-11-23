@@ -73,11 +73,11 @@
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<div class="viewcode-block" id="TOPDate"><a class="viewcode-back" href="../index.html#api.TOPDate">[docs]</a><span class="k">class</span> <span class="nc">TOPDate</span><span class="p">:</span>
+<div class="viewcode-block" id="TOPDate"><a class="viewcode-back" href="../api.html#api.TOPDate">[docs]</a><span class="k">class</span> <span class="nc">TOPDate</span><span class="p">:</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    pyTOP Date Object</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TOPDate.create"><a class="viewcode-back" href="../index.html#api.TOPDate.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date_str</span><span class="p">):</span>
+<div class="viewcode-block" id="TOPDate.create"><a class="viewcode-back" href="../api.html#api.TOPDate.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date_str</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Convert string to datetime.datetime</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -87,7 +87,7 @@
             <span class="k">return</span> <span class="n">date_str</span>
     
 </div></div>
-<div class="viewcode-block" id="TOPRequest"><a class="viewcode-back" href="../index.html#api.TOPRequest">[docs]</a><span class="k">class</span> <span class="nc">TOPRequest</span> <span class="p">:</span>
+<div class="viewcode-block" id="TOPRequest"><a class="viewcode-back" href="../api.html#api.TOPRequest">[docs]</a><span class="k">class</span> <span class="nc">TOPRequest</span> <span class="p">:</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    pyTOP Request Object</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -98,7 +98,7 @@
     <span class="k">def</span> <span class="nf">get_method_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">method_name</span>  
     <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">param_value</span><span class="p">)</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_params</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">param_value</span>
 </div>
-<div class="viewcode-block" id="TOP"><a class="viewcode-back" href="../index.html#api.TOP">[docs]</a><span class="k">class</span> <span class="nc">TOP</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="TOP"><a class="viewcode-back" href="../api.html#api.TOP">[docs]</a><span class="k">class</span> <span class="nc">TOP</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Basic API class. All the API models are inherited from this class</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -191,7 +191,7 @@
         <span class="n">strtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s"> </span><span class="si">%X</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">stime</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">strtime</span>
     
-<div class="viewcode-block" id="TOP.execute"><a class="viewcode-back" href="../index.html#api.TOP.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;post&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="TOP.execute"><a class="viewcode-back" href="../api.html#api.TOP.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;post&#39;</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        pyTOP.API -- TOPRequest instance</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -230,7 +230,7 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">rsp</span><span class="p">:</span> <span class="k">return</span> <span class="bp">None</span>
             <span class="k">return</span> <span class="n">rsp</span>
     </div>
-<div class="viewcode-block" id="TOP.create"><a class="viewcode-back" href="../index.html#api.TOP.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[],</span> <span class="n">models</span><span class="o">=</span><span class="p">{}):</span>
+<div class="viewcode-block" id="TOP.create"><a class="viewcode-back" href="../api.html#api.TOP.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[],</span> <span class="n">models</span><span class="o">=</span><span class="p">{}):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Create model attributes</span>
 <span class="sd">        &#39;&#39;&#39;</span>

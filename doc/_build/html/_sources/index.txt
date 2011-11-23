@@ -3,71 +3,72 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pyTOP's documentation!
-=================================
+pyTOP: Taobao Open Platform API python Wrapper
+===============================================
 
-Contents:
-
-This part of the documentation covers all the interfaces of pyTOP.  For
-parts where Requests depends on external libraries, we document the most
-important right here and provide links to the canonical documentation.
+pyTOP is an ISC Licensed Taobao Open Platform API library, written in Python.
 
 
-Basic API
---------------
+Features
+--------
 
-All of pyTOP's functionality can be accessed by these 3 methods.
-They all return an instance of the :class:`TOP <TOP>` object.
-
-.. module:: api
-
-.. autoclass:: TOP
-   :inherited-members:
-
-.. autoclass:: TOPRequest
-  :inherited-members:
-
-.. autoclass:: TOPDate
-  :inherited-members:
-
----------------------
+- 用户 API
+- 类目 API
+- 商品 API
+- 店铺 API
+- 交易 API
+- 店铺会员管理 API
+- 子账号管理 API
+- 旺旺 API
+- 物流 API
+- 收藏夹 API
+- insight API
+- campagin API
 
 
-.. _exceptions:
+Requirements
+------------
 
-Exceptions
---------------
-.. module:: errors
+- Requests (https://github.com/kennethreitz/requests)
+- Urllib3 (http://code.google.com/p/urllib3/)
+- Dateutil (http://labix.org/python-dateutil)
 
-.. autoexception:: TOPException
+Installation
+------------
 
----------------------
+To install pyTOP, first download the files then simply: ::
+
+   $ python setup.py install
 
 
-API
---------------
+Usage
+-----
 
+::
+
+   >>> user = User()
+   >>> user.get('bububa')
+   >>> print user
+   <User: user_id=180018765, uid=520be25d2ae9de5ea1d6a784e67d6edf, nick=bububa, buyer_credit=<UserCredit: level=0, score=0, total_num=0, good_num=0>, seller_credit=<UserCredit: level=0, score=0, total_num=0, good_num=0>, created=2011-11-21 15:11:47, last_visit=2011-11-21 15:12:07, type=C, has_shop=False, is_lightning_consignment=False>
+   ...
+
+
+API Document
+------------
 .. toctree::
    :maxdepth: 2
 
-   user
-   category
-   item
-   shop
-   trade
-   crm
-   sellercenter
-   wangwang
-   logistics
-   favorite
-
----------------------
+   api
 
 
-Indices and tables
-==================
+Contribute
+----------
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+#. Check for open issues or open a fresh issue to start a discussion around a feature idea or a bug. There is a Contributor Friendly tag for issues that should be ideal for people who are not very familiar with the codebase yet.
+#. Fork `the repository`_ on Github to start making your changes to the **develop** branch (or branch off of it).
+#. Write a test which shows that the bug was fixed or that the feature works as expected.
+#. Send a pull request and bug the maintainer until it gets merged and published. :) Make sure to add yourself to AUTHORS_.
+
+.. _`the repository`: http://github.com/bububa/pyTOP
+.. _AUTHORS: http://github.com/bububa/pyTOP/blob/master/AUTHORS
 
