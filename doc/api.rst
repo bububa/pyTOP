@@ -60,6 +60,7 @@ API
    traderate
    systime
    fenxiao
+   taobaoke
 
 ---------------------
 

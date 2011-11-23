@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>taobaoke &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for taobaoke</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># encoding: utf-8</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">taobaoke.py</span>
+
+<span class="sd">提供了淘宝客商品列表和淘宝客单品详情推广，店铺推广，类目和关键字推广以及淘客报表查询等功能</span>
+
+<span class="sd">Created by 徐 光硕 on 2011-11-23.</span>
+<span class="sd">Copyright (c) 2011 __MyCompanyName__. All rights reserved.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">api</span> <span class="kn">import</span> <span class="n">TOP</span><span class="p">,</span> <span class="n">TOPRequest</span><span class="p">,</span> <span class="n">TOPDate</span>
+<span class="kn">from</span> <span class="nn">user</span> <span class="kn">import</span> <span class="n">Location</span>
+<span class="kn">from</span> <span class="nn">item</span> <span class="kn">import</span> <span class="n">Item</span><span class="p">,</span> <span class="n">ItemImg</span><span class="p">,</span> <span class="n">Sku</span><span class="p">,</span> <span class="n">Video</span><span class="p">,</span> <span class="n">PropImg</span>
+
+<div class="viewcode-block" id="TaobaokeReportMember"><a class="viewcode-back" href="../taobaoke.html#taobaoke.TaobaokeReportMember">[docs]</a><span class="k">class</span> <span class="nc">TaobaokeReportMember</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;淘宝客报表成员&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TaobaokeReportMember</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;pay_time&#39;</span><span class="p">:</span><span class="n">TOPDate</span><span class="p">,}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;commission_rate&#39;</span><span class="p">,</span><span class="s">&#39;real_pay_fee&#39;</span><span class="p">,</span><span class="s">&#39;app_key&#39;</span><span class="p">,</span><span class="s">&#39;outer_code&#39;</span><span class="p">,</span><span class="s">&#39;trade_id&#39;</span><span class="p">,</span><span class="s">&#39;pay_time&#39;</span><span class="p">,</span><span class="s">&#39;pay_price&#39;</span><span class="p">,</span><span class="s">&#39;num_iid&#39;</span><span class="p">,</span><span class="s">&#39;item_title&#39;</span><span class="p">,</span><span class="s">&#39;item_num&#39;</span><span class="p">,</span><span class="s">&#39;category_id&#39;</span><span class="p">,</span><span class="s">&#39;category_name&#39;</span><span class="p">,</span><span class="s">&#39;shop_title&#39;</span><span class="p">,</span><span class="s">&#39;commission&#39;</span><span class="p">,</span><span class="s">&#39;iid&#39;</span><span class="p">,</span><span class="s">&#39;seller_nick&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="TaobaokeReport"><a class="viewcode-back" href="../taobaoke.html#taobaoke.TaobaokeReport">[docs]</a><span class="k">class</span> <span class="nc">TaobaokeReport</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;淘宝客报表&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TaobaokeReport</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;taobaoke_report_members&#39;</span><span class="p">:</span><span class="n">TaobaokeReportMember</span><span class="p">,}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;taobaoke_report_members&#39;</span><span class="p">,</span><span class="s">&#39;total_results&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="TaobaokeReport.get"><a class="viewcode-back" href="../taobaoke.html#taobaoke.TaobaokeReport.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">page_no</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">page_size</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.taobaoke.report.get 淘宝客报表查询</span>
+<span class="sd">        </span>
+<span class="sd">        淘宝客报表查询&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.taobaoke.items.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">date</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;page_no&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_no</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;page_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_size</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">)[</span><span class="s">&#39;taobaoke_report&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    
+</div></div>
+<div class="viewcode-block" id="TaobaokeItemDetail"><a class="viewcode-back" href="../taobaoke.html#taobaoke.TaobaokeItemDetail">[docs]</a><span class="k">class</span> <span class="nc">TaobaokeItemDetail</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;淘宝客商品详情&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TaobaokeItemDetail</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;item&#39;</span><span class="p">:</span><span class="n">Item</span><span class="p">,}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;item&#39;</span><span class="p">,</span><span class="s">&#39;click_url&#39;</span><span class="p">,</span><span class="s">&#39;shop_click_url&#39;</span><span class="p">,</span><span class="s">&#39;seller_credit_score&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="TaobaokeItem"><a class="viewcode-back" href="../taobaoke.html#taobaoke.TaobaokeItem">[docs]</a><span class="k">class</span> <span class="nc">TaobaokeItem</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;淘宝客商品&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TaobaokeItem</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;commission_rate&#39;</span><span class="p">,</span><span class="s">&#39;iid&#39;</span><span class="p">,</span><span class="s">&#39;num_iid&#39;</span><span class="p">,</span><span class="s">&#39;title&#39;</span><span class="p">,</span><span class="s">&#39;nick&#39;</span><span class="p">,</span><span class="s">&#39;pic_url&#39;</span><span class="p">,</span><span class="s">&#39;price&#39;</span><span class="p">,</span><span class="s">&#39;click_url&#39;</span><span class="p">,</span><span class="s">&#39;commission&#39;</span><span class="p">,</span><span class="s">&#39;commission_num&#39;</span><span class="p">,</span><span class="s">&#39;commission_volume&#39;</span><span class="p">,</span><span class="s">&#39;shop_click_url&#39;</span><span class="p">,</span><span class="s">&#39;seller_credit_score&#39;</span><span class="p">,</span><span class="s">&#39;item_location&#39;</span><span class="p">,</span><span class="s">&#39;volume&#39;</span><span class="p">,</span><span class="s">&#39;taobaoke_cat_click_url&#39;</span><span class="p">,</span><span class="s">&#39;keyword_click_url&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="TaobaokeShop"><a class="viewcode-back" href="../taobaoke.html#taobaoke.TaobaokeShop">[docs]</a><span class="k">class</span> <span class="nc">TaobaokeShop</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;淘宝客店铺&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TaobaokeShop</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;user_id&#39;</span><span class="p">,</span><span class="s">&#39;shop_title&#39;</span><span class="p">,</span><span class="s">&#39;click_url&#39;</span><span class="p">,</span><span class="s">&#39;commission_rate&#39;</span><span class="p">,</span><span class="s">&#39;seller_credit&#39;</span><span class="p">,</span><span class="s">&#39;shop_type&#39;</span><span class="p">,</span><span class="s">&#39;total_auction&#39;</span><span class="p">,</span><span class="s">&#39;auction_count&#39;</span><span class="p">]</span>
+    
+</div>
+<div class="viewcode-block" id="TaobaokeShops"><a class="viewcode-back" href="../taobaoke.html#taobaoke.TaobaokeShops">[docs]</a><span class="k">class</span> <span class="nc">TaobaokeShops</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TaobaokeShops</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;taobaoke_shops&#39;</span><span class="p">:</span><span class="n">TaobaokeShop</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;taobaoke_shops&#39;</span><span class="p">,</span> <span class="s">&#39;total_results&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="TaobaokeShops.convert"><a class="viewcode-back" href="../taobaoke.html#taobaoke.TaobaokeShops.convert">[docs]</a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sids</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.taobaoke.shops.convert 淘客店铺转换</span>
+<span class="sd">        </span>
+<span class="sd">        淘宝客店铺转换&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.taobaoke.shops.convert&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;num_iids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">num_iids</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">taobaokeShop</span> <span class="o">=</span> <span class="n">TaobaokeShop</span><span class="p">()</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="n">taobaokeShop</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;nick&#39;</span><span class="p">,</span> <span class="s">&#39;outer_code&#39;</span><span class="p">,</span> <span class="s">&#39;pid&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">taobaoke_shops</span>
+    </div>
+<div class="viewcode-block" id="TaobaokeShops.get"><a class="viewcode-back" href="../taobaoke.html#taobaoke.TaobaokeShops.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.taobaoke.shops.get 淘宝客店铺搜索</span>
+<span class="sd">        </span>
+<span class="sd">        提供对参加了淘客推广的店铺的搜索&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.taobaoke.shops.get&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">taobaokeShop</span> <span class="o">=</span> <span class="n">TaobaokeShop</span><span class="p">()</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="n">taobaokeShop</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;cid&#39;</span><span class="p">,</span> <span class="s">&#39;start_credit&#39;</span><span class="p">,</span> <span class="s">&#39;end_credit&#39;</span><span class="p">,</span><span class="s">&#39;start_commissionrate&#39;</span><span class="p">,</span><span class="s">&#39;end_commissionrate&#39;</span><span class="p">,</span><span class="s">&#39;start_auctioncount&#39;</span><span class="p">,</span><span class="s">&#39;end_auctioncount&#39;</span><span class="p">,</span><span class="s">&#39;start_totalaction&#39;</span><span class="p">,</span><span class="s">&#39;end_totalaction&#39;</span><span class="p">,</span><span class="s">&#39;only_mall&#39;</span><span class="p">,</span><span class="s">&#39;keyword&#39;</span><span class="p">,</span><span class="s">&#39;outer_code&#39;</span><span class="p">,</span><span class="s">&#39;page_no&#39;</span><span class="p">,</span><span class="s">&#39;page_size&#39;</span><span class="p">,</span><span class="s">&#39;nick&#39;</span><span class="p">,</span><span class="s">&#39;pid&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">taobaoke_shops</span>
+    
+</div></div>
+<div class="viewcode-block" id="Taobaoke"><a class="viewcode-back" href="../taobaoke.html#taobaoke.Taobaoke">[docs]</a><span class="k">class</span> <span class="nc">Taobaoke</span><span class="p">(</span><span class="n">TOP</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">API_KEY</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ENVIRONMENT</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TaobaokeShop</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span> <span class="n">API_KEY</span><span class="p">,</span> <span class="n">APP_SECRET</span><span class="p">,</span> <span class="n">ENVIRONMENT</span> <span class="p">)</span>
+    
+<div class="viewcode-block" id="Taobaoke.caturl_get"><a class="viewcode-back" href="../taobaoke.html#taobaoke.Taobaoke.caturl_get">[docs]</a>    <span class="k">def</span> <span class="nf">caturl_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.taobaoke.caturl.get 淘宝客类目推广URL</span>
+<span class="sd">        </span>
+<span class="sd">        淘宝客类目推广URL&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.taobaoke.caturl.get&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;q&#39;</span><span class="p">,</span> <span class="s">&#39;cid&#39;</span><span class="p">,</span> <span class="s">&#39;nick&#39;</span><span class="p">,</span> <span class="s">&#39;outer_code&#39;</span><span class="p">,</span> <span class="s">&#39;pid&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;taobaoke_item&#39;</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;taobaoke_item&#39;</span><span class="p">:</span><span class="n">TaobaokeItem</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">taobaoke_item</span>
+    </div>
+<div class="viewcode-block" id="Taobaoke.items_convert"><a class="viewcode-back" href="../taobaoke.html#taobaoke.Taobaoke.items_convert">[docs]</a>    <span class="k">def</span> <span class="nf">items_convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.taobaoke.items.convert 淘客商品转换</span>
+<span class="sd">        </span>
+<span class="sd">        淘宝客商品转换&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.taobaoke.items.convert&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">taobaokeItem</span> <span class="o">=</span> <span class="n">TaobaokeItem</span><span class="p">()</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="n">taobaokeItem</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;nick&#39;</span><span class="p">,</span> <span class="s">&#39;outer_code&#39;</span><span class="p">,</span> <span class="s">&#39;num_iids&#39;</span><span class="p">,</span> <span class="s">&#39;pid&#39;</span><span class="p">,</span> <span class="s">&#39;is_mobile&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;taobaoke_items&#39;</span><span class="p">,</span> <span class="s">&#39;total_results&#39;</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;taobaoke_items&#39;</span><span class="p">:</span><span class="n">TaobaokeItem</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">taobaoke_items</span>
+    </div>
+<div class="viewcode-block" id="Taobaoke.items_detail_get"><a class="viewcode-back" href="../taobaoke.html#taobaoke.Taobaoke.items_detail_get">[docs]</a>    <span class="k">def</span> <span class="nf">items_detail_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_iids</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.taobaoke.items.detail.get 查询淘宝客推广商品详细信息</span>
+<span class="sd">        </span>
+<span class="sd">        查询淘宝客推广商品详细信息&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.taobaoke.items.detail.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;num_iids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">num_iids</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">taobaokeItem</span> <span class="o">=</span> <span class="n">TaobaokeItem</span><span class="p">()</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="n">taobaokeItem</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;nick&#39;</span><span class="p">,</span> <span class="s">&#39;outer_code&#39;</span><span class="p">,</span> <span class="s">&#39;pid&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;taobaoke_item_details&#39;</span><span class="p">,</span> <span class="s">&#39;total_results&#39;</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;taobaoke_item_details&#39;</span><span class="p">:</span><span class="n">TaobaokeItemDetail</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">taobaoke_item_details</span>
+    </div>
+<div class="viewcode-block" id="Taobaoke.items_get"><a class="viewcode-back" href="../taobaoke.html#taobaoke.Taobaoke.items_get">[docs]</a>    <span class="k">def</span> <span class="nf">items_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.taobaoke.items.get 查询淘宝客推广商品</span>
+<span class="sd">        </span>
+<span class="sd">        查询淘宝客推广商品,不能通过设置cid=0来查询&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.taobaoke.items.get&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">taobaokeItem</span> <span class="o">=</span> <span class="n">TaobaokeItem</span><span class="p">()</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="n">taobaokeItem</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;nick&#39;</span><span class="p">,</span> <span class="s">&#39;pid&#39;</span><span class="p">,</span> <span class="s">&#39;keyword&#39;</span><span class="p">,</span> <span class="s">&#39;cid&#39;</span><span class="p">,</span> <span class="s">&#39;start_price&#39;</span><span class="p">,</span><span class="s">&#39;end_price&#39;</span><span class="p">,</span><span class="s">&#39;auto_send&#39;</span><span class="p">,</span><span class="s">&#39;area&#39;</span><span class="p">,</span><span class="s">&#39;start_credit&#39;</span><span class="p">,</span><span class="s">&#39;end_credit&#39;</span><span class="p">,</span><span class="s">&#39;sort&#39;</span><span class="p">,</span><span class="s">&#39;guarantee&#39;</span><span class="p">,</span><span class="s">&#39;start_commissionRate&#39;</span><span class="p">,</span><span class="s">&#39;end_commissionRate&#39;</span><span class="p">,</span><span class="s">&#39;start_commissionNum&#39;</span><span class="p">,</span><span class="s">&#39;end_commissionNum&#39;</span><span class="p">,</span><span class="s">&#39;start_totalnum&#39;</span><span class="p">,</span><span class="s">&#39;end_totalnum&#39;</span><span class="p">,</span><span class="s">&#39;cash_coupon&#39;</span><span class="p">,</span><span class="s">&#39;vip_card&#39;</span><span class="p">,</span><span class="s">&#39;overseas_item&#39;</span><span class="p">,</span><span class="s">&#39;sevendays_return&#39;</span><span class="p">,</span><span class="s">&#39;real_describe&#39;</span><span class="p">,</span><span class="s">&#39;onemonth_repair&#39;</span><span class="p">,</span><span class="s">&#39;cash_ondelivery&#39;</span><span class="p">,</span><span class="s">&#39;mall_item&#39;</span><span class="p">,</span><span class="s">&#39;page_no&#39;</span><span class="p">,</span><span class="s">&#39;page_size&#39;</span><span class="p">,</span><span class="s">&#39;outer_code&#39;</span><span class="p">,</span><span class="s">&#39;is_mobile&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;taobaoke_items&#39;</span><span class="p">,</span> <span class="s">&#39;total_results&#39;</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;taobaoke_items&#39;</span><span class="p">:</span><span class="n">TaobaokeItem</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">taobaoke_items</span>
+    </div>
+<div class="viewcode-block" id="Taobaoke.listurl_get"><a class="viewcode-back" href="../taobaoke.html#taobaoke.Taobaoke.listurl_get">[docs]</a>    <span class="k">def</span> <span class="nf">listurl_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.taobaoke.listurl.get 淘宝客关键词搜索URL</span>
+<span class="sd">        </span>
+<span class="sd">        淘宝客关键词搜索URL&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.taobaoke.listurl.get&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;q&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;nick&#39;</span><span class="p">,</span> <span class="s">&#39;outer_code&#39;</span><span class="p">,</span> <span class="s">&#39;pid&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;taobaoke_item&#39;</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;taobaoke_item&#39;</span><span class="p">:</span><span class="n">TaobaokeItem</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">taobaoke_item</span>
+    </div>
+<div class="viewcode-block" id="Taobaoke.tool_relation"><a class="viewcode-back" href="../taobaoke.html#taobaoke.Taobaoke.tool_relation">[docs]</a>    <span class="k">def</span> <span class="nf">tool_relation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pubid</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.taobaoke.tool.relation 工具联盟注册校验</span>
+<span class="sd">        </span>
+<span class="sd">        判断用户pid是否是appkey关联的注册用户&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.taobaoke.tool.relation&#39;</span><span class="p">)</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;pubid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pubid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;tools_user&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tools_user</span>
+    </div>
+<div class="viewcode-block" id="Taobaoke.virtualcard_get"><a class="viewcode-back" href="../taobaoke.html#taobaoke.Taobaoke.virtualcard_get">[docs]</a>    <span class="k">def</span> <span class="nf">virtualcard_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;taobao.taobaoke.virtualcard.get 虚拟卡查询</span>
+<span class="sd">        </span>
+<span class="sd">        虚拟点卡充值卡电话卡等查询&#39;&#39;&#39;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">TOPRequest</span><span class="p">(</span><span class="s">&#39;taobao.taobaoke.virtualcard.get&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">taobaokeItem</span> <span class="o">=</span> <span class="n">TaobaokeItem</span><span class="p">()</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="n">taobaokeItem</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">request</span><span class="p">[</span><span class="s">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fields</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;nick&#39;</span><span class="p">,</span> <span class="s">&#39;pid&#39;</span><span class="p">,</span> <span class="s">&#39;biz_type&#39;</span><span class="p">,</span> <span class="s">&#39;card_type&#39;</span><span class="p">,</span> <span class="s">&#39;area&#39;</span><span class="p">,</span><span class="s">&#39;operator&#39;</span><span class="p">,</span><span class="s">&#39;price&#39;</span><span class="p">,</span><span class="s">&#39;game_name&#39;</span><span class="p">,</span><span class="s">&#39;outer_code&#39;</span><span class="p">,</span><span class="s">&#39;page_no&#39;</span><span class="p">,</span><span class="s">&#39;page_size&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">request</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">request</span><span class="p">),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;taobaoke_items&#39;</span><span class="p">,</span> <span class="s">&#39;total_results&#39;</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;taobaoke_items&#39;</span><span class="p">:</span><span class="n">TaobaokeItem</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">taobaoke_items</span>
+    </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

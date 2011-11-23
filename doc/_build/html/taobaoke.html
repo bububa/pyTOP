@@ -1,0 +1,228 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>淘客 API &mdash; pyTOP 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.0 documentation" href="index.html" />
+    <link rel="up" title="pyTOP’s API Document" href="api.html" />
+    <link rel="prev" title="分销 API" href="fenxiao.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="fenxiao.html" title="分销 API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" accesskey="U">pyTOP&#8217;s API Document</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<span id="taobaoke"></span><h1>淘客 API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<p>提供了淘宝客商品列表和淘宝客单品详情推广，店铺推广，类目和关键字推广以及淘客报表查询等功能</p>
+<span class="target" id="module-taobaoke"></span><dl class="class">
+<dt id="taobaoke.TaobaokeReportMember">
+<em class="property">class </em><tt class="descclassname">taobaoke.</tt><tt class="descname">TaobaokeReportMember</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#TaobaokeReportMember"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.TaobaokeReportMember" title="Permalink to this definition">¶</a></dt>
+<dd><p>淘宝客报表成员</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="taobaoke.TaobaokeReport">
+<em class="property">class </em><tt class="descclassname">taobaoke.</tt><tt class="descname">TaobaokeReport</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#TaobaokeReport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.TaobaokeReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>淘宝客报表</p>
+<dl class="method">
+<dt id="taobaoke.TaobaokeReport.get">
+<tt class="descname">get</tt><big>(</big><em>date</em>, <em>page_no=1</em>, <em>page_size=40</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/taobaoke.html#TaobaokeReport.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.TaobaokeReport.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.taobaoke.report.get 淘宝客报表查询</p>
+<p>淘宝客报表查询</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="taobaoke.TaobaokeItemDetail">
+<em class="property">class </em><tt class="descclassname">taobaoke.</tt><tt class="descname">TaobaokeItemDetail</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#TaobaokeItemDetail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.TaobaokeItemDetail" title="Permalink to this definition">¶</a></dt>
+<dd><p>淘宝客商品详情</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="taobaoke.TaobaokeItem">
+<em class="property">class </em><tt class="descclassname">taobaoke.</tt><tt class="descname">TaobaokeItem</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#TaobaokeItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.TaobaokeItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>淘宝客商品</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="taobaoke.TaobaokeShop">
+<em class="property">class </em><tt class="descclassname">taobaoke.</tt><tt class="descname">TaobaokeShop</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#TaobaokeShop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.TaobaokeShop" title="Permalink to this definition">¶</a></dt>
+<dd><p>淘宝客店铺</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="taobaoke.TaobaokeShops">
+<em class="property">class </em><tt class="descclassname">taobaoke.</tt><tt class="descname">TaobaokeShops</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#TaobaokeShops"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.TaobaokeShops" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="taobaoke.TaobaokeShops.convert">
+<tt class="descname">convert</tt><big>(</big><em>sids</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#TaobaokeShops.convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.TaobaokeShops.convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.taobaoke.shops.convert 淘客店铺转换</p>
+<p>淘宝客店铺转换</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="taobaoke.TaobaokeShops.get">
+<tt class="descname">get</tt><big>(</big><em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#TaobaokeShops.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.TaobaokeShops.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.taobaoke.shops.get 淘宝客店铺搜索</p>
+<p>提供对参加了淘客推广的店铺的搜索</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="taobaoke.Taobaoke">
+<em class="property">class </em><tt class="descclassname">taobaoke.</tt><tt class="descname">Taobaoke</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#Taobaoke"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.Taobaoke" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="taobaoke.Taobaoke.caturl_get">
+<tt class="descname">caturl_get</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#Taobaoke.caturl_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.Taobaoke.caturl_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.taobaoke.caturl.get 淘宝客类目推广URL</p>
+<p>淘宝客类目推广URL</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="taobaoke.Taobaoke.items_convert">
+<tt class="descname">items_convert</tt><big>(</big><em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#Taobaoke.items_convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.Taobaoke.items_convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.taobaoke.items.convert 淘客商品转换</p>
+<p>淘宝客商品转换</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="taobaoke.Taobaoke.items_detail_get">
+<tt class="descname">items_detail_get</tt><big>(</big><em>num_iids</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#Taobaoke.items_detail_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.Taobaoke.items_detail_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.taobaoke.items.detail.get 查询淘宝客推广商品详细信息</p>
+<p>查询淘宝客推广商品详细信息</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="taobaoke.Taobaoke.items_get">
+<tt class="descname">items_get</tt><big>(</big><em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#Taobaoke.items_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.Taobaoke.items_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.taobaoke.items.get 查询淘宝客推广商品</p>
+<p>查询淘宝客推广商品,不能通过设置cid=0来查询</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="taobaoke.Taobaoke.listurl_get">
+<tt class="descname">listurl_get</tt><big>(</big><em>q</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#Taobaoke.listurl_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.Taobaoke.listurl_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.taobaoke.listurl.get 淘宝客关键词搜索URL</p>
+<p>淘宝客关键词搜索URL</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="taobaoke.Taobaoke.tool_relation">
+<tt class="descname">tool_relation</tt><big>(</big><em>pubid</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#Taobaoke.tool_relation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.Taobaoke.tool_relation" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.taobaoke.tool.relation 工具联盟注册校验</p>
+<p>判断用户pid是否是appkey关联的注册用户</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="taobaoke.Taobaoke.virtualcard_get">
+<tt class="descname">virtualcard_get</tt><big>(</big><em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/taobaoke.html#Taobaoke.virtualcard_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#taobaoke.Taobaoke.virtualcard_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>taobao.taobaoke.virtualcard.get 虚拟卡查询</p>
+<p>虚拟点卡充值卡电话卡等查询</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fenxiao.html"
+                        title="previous chapter">分销 API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/taobaoke.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="fenxiao.html" title="分销 API"
+             >previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="api.html" >pyTOP&#8217;s API Document</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>
