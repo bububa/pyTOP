@@ -52,32 +52,31 @@ class TOP(object):
     Basic API class. All the API models are inherited from this class
     '''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
-        self.OS_ENV = 'TOP_ENV'
         #淘宝正式环境
-        self.PRODUCT_API_KEY = '12422885'
-        self.PRODUCT_APP_SECRET = '9f127588ceb726905e078b64ab88a361'
+        #self.PRODUCT_API_KEY = '12422885'
+        #self.PRODUCT_APP_SECRET = '9f127588ceb726905e078b64ab88a361'
+        self.PRODUCT_API_KEY = getenv('TOP_PRODUCT_API_KEY')
+        self.PRODUCT_APP_SECRET = getenv('TOP_PRODUCT_APP_SECRET')
+        self.PRODUCT_API_URL = getenv('TOP_PRODUCT_API_URL') if getenv('TOP_PRODUCT_API_URL') else 'http://gw.api.taobao.com/router/rest'
         self.PRODUCT_LOGIN_URL = 'http://container.api.taobao.com/container?appkey='
-        self.PRODUCT_API_URL = 'http://gw.api.taobao.com/router/rest'
         self.LOGOUT_URL = 'http://container.api.taobao.com/container/logoff'
         self.TaobaoID_URL = 'http://container.api.taobao.com/container/identify'
         #淘宝测试环境
-        self.SANDBOX_API_KEY = '12422885'
-        self.SANDBOX_APP_SECRET = 'sandbox8ceb726905e078b64ab88a361'
+        #self.SANDBOX_API_KEY = '12422885'
+        #self.SANDBOX_APP_SECRET = 'sandbox8ceb726905e078b64ab88a361'
+        self.SANDBOX_API_KEY = getenv('TOP_SANDBOX_API_KEY')
+        self.SANDBOX_APP_KEY = getenv('TOP_SANDBOX_APP_SECRET')
+        self.SANDBOX_API_URL = getenv('TOP_SANDBOX_API_URL') if getenv('TOP_SANDBOX_API_URL') else 'http://gw.api.tbsandbox.com/router/rest'
         self.SANDBOX_LOGIN_URL = 'http://container.api.tbsandbox.com/container?appkey='
-        self.SANDBOX_API_URL = 'http://gw.api.tbsandbox.com/router/rest' 
         self.SANDBOX_USER_REGISTER_WITHOUT_VALIDATE = 'http://mini.tbsandbox.com/minisandbox/user/register.htm'
         
         self.REFRESH_TOKEN_URL = 'http://container.open.taobao.com/container/refresh'
-        self.ENVIRONMENT = ENVIRONMENT # or product
+        self.ENVIRONMENT = ENVIRONMENT if ENVIRONMENT else (getenv('TOP_ENVIRONMENT') if getenv('TOP_ENVIRONMENT') else 'sandbox')
         self.FORMAT = 'json'  
         self.SIGN_METHOD = 'md5'  
         self.API_VERSION = '2.0'  
         self.SDK_VERSON = 'pyTOP_0.1.0'
-        if not self.ENVIRONMENT:
-            if getenv(self.OS_ENV):
-                self.ENVIRONMENT = self.OS_ENV
-            else:
-                self.ENVIRONMENT = 'sandbox'
+        
         if self.ENVIRONMENT == 'sandbox':
             if API_KEY:
                 self.SANDBOX_API_KEY = API_KEY

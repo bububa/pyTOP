@@ -50,6 +50,20 @@ To install pyTOP, first download the files then simply: ::
 Usage
 -----
 
+You could setup API KEY and APP SECRET in system environment (~/.bash_profile)
+::
+    
+    # TOP ENVIRONMENT
+    TOP_ENVIRONMENT = product # or sandbox
+    # PRODUCT VARS
+    TOP_PRODUCT_API_KEY = 12345678
+    TOP_PRODUCT_APP_SECRET = 9f127588ceb726905e078b64ab88a362
+    TOP_PRODUCT_API_URL = http://gw.api.taobao.com/router/rest
+    # SANDBOX VARS
+    TOP_SANDBOX_API_KEY = 12345678
+    TOP_SANDBOX_APP_SECRET = sandbox8ceb726905e078b64ab88a362
+    TOP_SANDBOX_API_URL = http://gw.api.tbsandbox.com/router/rest
+
 ::
 
    >>> user = User()

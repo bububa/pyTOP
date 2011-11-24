@@ -92,6 +92,18 @@
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>You could setup API KEY and APP SECRET in system environment (~/.bash_profile)</p>
+<div class="highlight-python"><pre># TOP ENVIRONMENT
+TOP_ENVIRONMENT = product # or sandbox
+# PRODUCT VARS
+TOP_PRODUCT_API_KEY = 12345678
+TOP_PRODUCT_APP_SECRET = 9f127588ceb726905e078b64ab88a362
+TOP_PRODUCT_API_URL = http://gw.api.taobao.com/router/rest
+# SANDBOX VARS
+TOP_SANDBOX_API_KEY = 12345678
+TOP_SANDBOX_APP_SECRET = sandbox8ceb726905e078b64ab88a362
+TOP_SANDBOX_API_URL = http://gw.api.tbsandbox.com/router/rest</pre>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">user</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;bububa&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">user</span>
