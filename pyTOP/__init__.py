@@ -27,7 +27,7 @@ from .item import Item, Items, Sku, Skus, ItemImg, PropImg, Video, ItemCategory,
 # 店铺 API
 from .shop import ShopCat, ShopCats, ShopScore, SellerCat, SellerCats, Shop
 # 交易 API
-from .trade import PromotionDetail, OrderAmount, Order, TradeAmount, TradeAccountDetail, Task, Trade, Trades, Subtask, TradeConfirmFee, TradeRate, TradRates
+from .trade import PromotionDetail, OrderAmount, Order, TradeAmount, TradeAccountDetail, Task, Trade, Trades, Subtask, TradeConfirmFee
 # 店铺会员管理 API
 from .crm import GroupDomain, BasicMember, GradePromotion, RuleData, CrmMember, Group, Groups, GroupTask, MemberInfo, Members, Grade, Rule, Rules, ShopVip
 # 子账号管理 API

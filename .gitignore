@@ -27,3 +27,6 @@ dist
 *.DS_Store
 *.swp
 *.out
+
+## project files to ignore
+violations.pyflakes.txt
