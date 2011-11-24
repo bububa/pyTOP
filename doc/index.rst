@@ -42,7 +42,15 @@ Requirements
 Installation
 ------------
 
-To install pyTOP, first download the files then simply: ::
+To install pyTOP, simply: ::
+
+   $ pip install pyTOP
+
+Or, if you absolutely must: ::
+   
+   $ easy_install pyTOP
+   
+Or, download the source file and run: ::
 
    $ python setup.py install
 

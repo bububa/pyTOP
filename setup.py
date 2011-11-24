@@ -28,6 +28,8 @@ required = []
 if sys.version_info[:2] < (2,6):
     required.append('simplejson')
 
+required.append('python-dateutil')
+
 setup(
     name='pyTOP',
     version=pyTOP.__version__,
