@@ -78,7 +78,7 @@ class TradeRates(TOP):
         request['num_iid'] = num_iid
         request['seller_nick'] = seller_nick
         request['page_no'] = page_no
-        reqiest['page_size'] = page_size
+        request['page_size'] = page_size
         self.create(self.execute(request))
         return self.trade_rates
     

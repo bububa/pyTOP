@@ -10,7 +10,7 @@ pyTOP
 """
 
 __title__ = 'pyTOP'
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __build__ = 0x000800
 __author__ = 'Prof Syd Xu'
 __license__ = 'ISC'

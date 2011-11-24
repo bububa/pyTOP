@@ -29,6 +29,7 @@ if sys.version_info[:2] < (2,6):
     required.append('simplejson')
 
 required.append('python-dateutil')
+required.append('requests')
 
 setup(
     name='pyTOP',
@@ -41,9 +42,9 @@ setup(
     url='http://www.github.com/bububa/pyTOP',
     packages= [
         'pyTOP',
-        'pyTOP.packages',
-        'pyTOP.packages.requests',
-        'pyTOP.packages.requests.packages.urllib3'
+        #'pyTOP.packages',
+        #'pyTOP.packages.requests',
+        #'pyTOP.packages.requests.packages.urllib3'
     ],
     install_requires=required,
     license='ISC',

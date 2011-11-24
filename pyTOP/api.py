@@ -9,10 +9,10 @@ Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 from os import getenv
 import time
 import datetime
-from dateutil.parser import *
+from dateutil.parser import parse as date_parse
 try :  
     import json  
-except ImportError :  
+except ImportError:  
     import simplejson as json  
 import urllib
 from hashlib import md5  
@@ -20,7 +20,7 @@ import base64
 
 from errors import TOPException
 import requests
-from pprint import pprint
+#from pprint import pprint
 
 class TOPDate:
     '''
@@ -31,7 +31,7 @@ class TOPDate:
         Convert string to datetime.datetime
         '''
         try:
-            return parse(date_str)
+            return date_parse(date_str)
         except:
             return date_str
     
@@ -218,8 +218,8 @@ class TOP(object):
                 if type(v) == unicode: v = v.encode('utf-8')
                 attrs.append('%s=%s'%(field, v))
         return "<%s: %s>" %(self.__class__.__name__, ', '.join(attrs))
-        __repr__ = __str__
     
+    __repr__ = __str__
 
         
         

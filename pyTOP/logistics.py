@@ -9,7 +9,7 @@ Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 
 from api import TOP, TOPRequest, TOPDate
 from user import Location
-from trade import Task, Subtask
+from trade import Task
 
 class TransitStepInfo(TOP):
     '''物流跟踪信息的一条'''
@@ -278,7 +278,7 @@ class LogisticsPartner(TOP):
     '''查询揽送范围之内的物流公司信息'''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT='sandbox'):
         super(LogisticsPartner, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
-        self.models ={'partner':ParnterDetail}
+        self.models ={'partner':PartnerDetail}
         self.fields = ['cover_remark','uncover_remark', 'partner']
     
 

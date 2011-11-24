@@ -353,7 +353,7 @@ class Sku(TOP):
 
 class Skus(TOP):
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
-        super(Users, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
+        super(Skus, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'skus':Sku}
         self.fields = ['skus']
     

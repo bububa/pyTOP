@@ -37,12 +37,6 @@
 .. autoclass:: TradeConfirmFee
    :members:
 
-.. autoclass:: TradeRate
-   :members:
-
-.. autoclass:: TradRates
-   :members:
-
 
 ---------------------
 

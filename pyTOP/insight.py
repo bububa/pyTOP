@@ -47,7 +47,7 @@ class INCategory(TOP):
     '''类目属性对象'''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(INCategory, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
-        self.models = {'category_properties_list':INCategoryPropertiesDTO, 'child_category_list':INCategoryDTO}
+        self.models = {'category_properties_list':INCategoryProperties, 'child_category_list':INCategory}
         self.fields = ['category_id','category_name','category_desc','category_properties_list','child_category_list']
     
 
@@ -78,7 +78,7 @@ class INCategoryChildTop(TOP):
     '''类目对象'''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(INCategoryChildTop, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
-        self.models = {'category_properties_list':INCategoryPropertiesDTO}
+        self.models = {'category_properties_list':INCategoryProperties}
         self.fields = ['category_id','category_name','category_desc','category_properties_list']
     
 
@@ -86,7 +86,7 @@ class INCategoryTop(TOP):
     '''类目对象'''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(INCategoryTop, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
-        self.models = {'category_properties_list':INCategoryPropertiesDTO, 'child_category_list':INCategoryDTO}
+        self.models = {'category_properties_list':INCategoryProperties, 'child_category_list':INCategory}
         self.fields = ['category_id','category_name','category_desc','category_properties_list','child_category_list']
     
 
@@ -100,7 +100,7 @@ class INWordAnalysisTop(TOP):
 class WordBase(TOP):
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(WordBase, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
-        self.models = {'result':INWordBaseDTO}
+        self.models = {'result':INWordBase}
         self.fields = ['success','result','result_code','result_message']
     
     def get(self, words, time, aFilter='PV|CLICK|AVGCPC|COMPETITION', nick=None):
@@ -119,7 +119,7 @@ class WordBase(TOP):
 class CatsBase(TOP):
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(CatsBase, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
-        self.models = {'result':INCategoryBaseDTO}
+        self.models = {'result':INCategoryBase}
         self.fields = ['success','result','result_code','result_message']
     
     def get(self, category_ids, time, aFilter='PV|CLICK|AVGCPC|COMPETITION', nick=None):
@@ -138,7 +138,7 @@ class CatsBase(TOP):
 class WordAnalysis(TOP):
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(WordAnalysis, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
-        self.models = {'result':INWordAnalysisDTO}
+        self.models = {'result':INWordAnalysis}
         self.fields = ['success','result','result_code','result_message']
     
     def get(self, words, stu='area|source|hpprice', nick=None):
@@ -156,7 +156,7 @@ class WordAnalysis(TOP):
 class CatsAnalysis(TOP):
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(CatsAnalysis, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
-        self.models = {'result':INCategoryAnalysisDTO}
+        self.models = {'result':INCategoryAnalysis}
         self.fields = ['success','result','result_code','result_message']
     
     def get(self, category_ids, stu='area|source|hpprice', nick=None):
@@ -174,7 +174,7 @@ class CatsAnalysis(TOP):
 class CatsForecast(TOP):
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(CatsForecast, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
-        self.models = {'result':INCategoryDTO}
+        self.models = {'result':INCategory}
         self.fields = ['success','result','result_code','result_message']
     
     def get(self, words, nick=None):
@@ -190,7 +190,7 @@ class CatsForecast(TOP):
 
 class CatsTopWord(TOP):
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
-        super(CatTopWord, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
+        super(CatsTopWord, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.fields = ['success','result','result_code','result_message']
     
     def get(self, category_ids, result_num=100, nick=None):
@@ -225,7 +225,7 @@ class CatsRelatedWord(TOP):
 class WordsCats(TOP):
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(WordsCats, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
-        self.models = {'result':INWordCategoryDTO}
+        self.models = {'result':INWordCategory}
         self.fields = ['success','result','result_code','result_message']
     
     def get(self, wordCategories, aFilter='PV|CLICK|AVGCPC|COMPETITION', nick=None):
@@ -243,7 +243,7 @@ class WordsCats(TOP):
 class Cats(TOP):
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(Cats, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
-        self.models = {'result':INCategoryDTO}
+        self.models = {'result':INCategory}
         self.fields = ['success','result','result_code','result_message']
     
     def get(self, category_ids, nick=None):
@@ -260,7 +260,7 @@ class Cats(TOP):
 class TopLevelCats(TOP):
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         super(TopLevelCats, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
-        self.models = {'result':INCategoryDTO}
+        self.models = {'result':INCategory}
         self.fields = ['success','result','result_code','result_message']
     
     def get(self, nick=None):
@@ -287,7 +287,7 @@ class CreativeIDs(TOP):
         request['page_size'] = page_size
         request['page_no'] = page_no
         if nick!=None: request['nick'] = nick
-        self.create(self.execute(request), models={'result':INCategoryDTO})
+        self.create(self.execute(request), models={'result':INCategory})
         return self.result
     
     def deleted_get(self, start_time, nick=None, page_size=200, page_no=1):

@@ -10,8 +10,7 @@ Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 """
 
 from api import TOP, TOPRequest, TOPDate
-from user import Location
-from item import Item, ItemImg, Sku, Video, PropImg
+from item import Item
 
 class TaobaokeReportMember(TOP):
     '''淘宝客报表成员'''
@@ -76,7 +75,7 @@ class TaobaokeShops(TOP):
         
         淘宝客店铺转换'''
         request = TOPRequest('taobao.taobaoke.shops.convert')
-        request['num_iids'] = num_iids
+        request['sids'] = sids
         if not fields:
             taobaokeShop = TaobaokeShop()
             fields = taobaokeShop.fields

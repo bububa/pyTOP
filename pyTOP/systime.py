@@ -7,7 +7,7 @@ Created by 徐 光硕 on 2011-11-19.
 Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 """
 
-from api import TOP, TOPRequest, TOPDate
+from api import TOP, TOPRequest
 
 class SysTime(TOP):
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):

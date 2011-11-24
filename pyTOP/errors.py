@@ -137,4 +137,5 @@ class TOPException(Exception):
     
     def __str__(self):
         return "%s (code=%d)" % (super(TOPException, self).__str__(), self.code)
-        __repr__ = __str__
+    
+    __repr__ = __str__

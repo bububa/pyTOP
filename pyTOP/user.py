@@ -14,10 +14,11 @@ except ImportError :
 import urllib
 import requests
 from hashlib import md5
-import base64
+#import base64
 from api import TOP, TOPRequest, TOPDate
 from systime import SysTime
 import time
+from errors import TOPException
 from BeautifulSoup import BeautifulSoup
 
 class Location(TOP):

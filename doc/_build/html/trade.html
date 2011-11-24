@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>交易 API &mdash; pyTOP 0.1.0 documentation</title>
+    <title>交易 API &mdash; pyTOP 0.1.1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.1.0',
+        VERSION:     '0.1.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="pyTOP 0.1.0 documentation" href="index.html" />
+    <link rel="top" title="pyTOP 0.1.1 documentation" href="index.html" />
+    <link rel="up" title="pyTOP’s API Document" href="api.html" />
+    <link rel="next" title="店铺会员管理 API" href="crm.html" />
     <link rel="prev" title="店铺 API" href="shop.html" /> 
   </head>
   <body>
@@ -39,9 +41,13 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
+          <a href="crm.html" title="店铺会员管理 API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
           <a href="shop.html" title="店铺 API"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">pyTOP 0.1.1 documentation</a> &raquo;</li>
+          <li><a href="api.html" accesskey="U">pyTOP&#8217;s API Document</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -291,46 +297,6 @@
 
 </dd></dl>
 
-<dl class="class">
-<dt id="trade.TradeRate">
-<em class="property">class </em><tt class="descclassname">trade.</tt><tt class="descname">TradeRate</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradeRate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradeRate" title="Permalink to this definition">¶</a></dt>
-<dd><p>评价列表</p>
-<dl class="method">
-<dt id="trade.TradeRate.add">
-<tt class="descname">add</tt><big>(</big><em>tid</em>, <em>result</em>, <em>role</em>, <em>session</em>, <em>oid=None</em>, <em>content=None</em>, <em>anony=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradeRate.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradeRate.add" title="Permalink to this definition">¶</a></dt>
-<dd><p>taobao.traderate.add 新增单个评价</p>
-<p>新增单个评价(注：在评价之前需要对订单成功的时间进行判定（end_time）,如果超过15天，不能再通过该接口进行评价)</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="trade.TradeRate.list_add">
-<tt class="descname">list_add</tt><big>(</big><em>tid</em>, <em>result</em>, <em>role</em>, <em>session</em>, <em>oid=None</em>, <em>content=None</em>, <em>anony=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradeRate.list_add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradeRate.list_add" title="Permalink to this definition">¶</a></dt>
-<dd><p>taobao.traderate.list.add 针对父子订单新增批量评价</p>
-<p>针对父子订单新增批量评价(注：在评价之前需要对订单成功的时间进行判定（end_time）,如果超过15天，不用再通过该接口进行评价)</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="trade.TradRates">
-<em class="property">class </em><tt class="descclassname">trade.</tt><tt class="descname">TradRates</tt><big>(</big><em>API_KEY=None</em>, <em>APP_SECRET=None</em>, <em>ENVIRONMENT=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradRates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradRates" title="Permalink to this definition">¶</a></dt>
-<dd><p>确认收货费用结构</p>
-<dl class="method">
-<dt id="trade.TradRates.get">
-<tt class="descname">get</tt><big>(</big><em>rate_type</em>, <em>role</em>, <em>session</em>, <em>fields=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradRates.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradRates.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>taobao.traderates.get 搜索评价信息</p>
-<p>搜索评价信息，只能获取距今180天内的评价记录</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="trade.TradRates.search">
-<tt class="descname">search</tt><big>(</big><em>num_iid</em>, <em>seller_nick</em>, <em>page_no=None</em>, <em>page_size=None</em><big>)</big><a class="reference internal" href="_modules/trade.html#TradRates.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trade.TradRates.search" title="Permalink to this definition">¶</a></dt>
-<dd><p>taobao.traderates.search 商品评价查询接口</p>
-<p>通过商品id查询对应的评价信息</p>
-</dd></dl>
-
-</dd></dl>
-
 <hr class="docutils" />
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
@@ -348,6 +314,9 @@
   <h4>Previous topic</h4>
   <p class="topless"><a href="shop.html"
                         title="previous chapter">店铺 API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="crm.html"
+                        title="next chapter">店铺会员管理 API</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/trade.txt"
@@ -380,9 +349,13 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
+          <a href="crm.html" title="店铺会员管理 API"
+             >next</a> |</li>
+        <li class="right" >
           <a href="shop.html" title="店铺 API"
              >previous</a> |</li>
-        <li><a href="index.html">pyTOP 0.1.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">pyTOP 0.1.1 documentation</a> &raquo;</li>
+          <li><a href="api.html" >pyTOP&#8217;s API Document</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
