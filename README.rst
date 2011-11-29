@@ -25,6 +25,8 @@ Features
 - 在线订购 API
 - insight API
 - campagin API
+- Search Crawler
+- Top Keywords Crawler
 
 
 Requirements

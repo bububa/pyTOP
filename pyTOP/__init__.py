@@ -10,7 +10,7 @@ pyTOP
 """
 
 __title__ = 'pyTOP'
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 __build__ = 0x000800
 __author__ = 'Prof Syd Xu'
 __license__ = 'ISC'
@@ -56,3 +56,8 @@ from .insight import INWordBase, INCategoryBase, INWordAnalysis, INCategoryAnaly
 from .campaign import AreaOption, ChannelOption, Campaign, Campaigns, CampaignArea, CampaignBudget, CampaignPlatform, CampaignSchedule, ADGroups, ADGroup, ADGroupCatmatch, Creative, Creatives, CreativeRecord, Keyword, Keywords, AccountRecord, RecommendWord, RankedItem, ADGroupPage, RecommendWordPage, Result, Customers, Account, Tools
 # Customize Exceptions
 from .errors import TOPException
+
+# utils
+from . import utils
+# crawler
+from . import crawler

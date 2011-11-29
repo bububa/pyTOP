@@ -1,0 +1,235 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>utils &mdash; pyTOP 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for utils</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># encoding: utf-8</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">utils.py</span>
+
+<span class="sd">Created by 徐 光硕 on 2011-11-28.</span>
+<span class="sd">Copyright (c) 2011 __MyCompanyName__. All rights reserved.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">Queue</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+
+<span class="k">try</span><span class="p">:</span> 
+    <span class="kn">from</span> <span class="nn">cStringIO</span> <span class="kn">import</span> <span class="n">StringIO</span> 
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span> 
+    <span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
+
+<span class="k">def</span> <span class="nf">Traceback</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span> 
+        <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="n">s</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">&#39;&#39;</span>
+
+<span class="k">def</span> <span class="nf">sort_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Sort a list of dictionaries by dictionary key&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="n">key</span><span class="p">))</span> <span class="k">if</span> <span class="n">response</span> <span class="k">else</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="ThreadPool"><a class="viewcode-back" href="../utils.html#utils.ThreadPool">[docs]</a><span class="k">class</span> <span class="nc">ThreadPool</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;ThreadPool Utility&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">maxWorkers</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="n">Queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">workers</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">working</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">responses</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxWorkers</span> <span class="o">=</span> <span class="n">maxWorkers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">allKilled</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">allKilled</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+    
+<div class="viewcode-block" id="ThreadPool.run"><a class="viewcode-back" href="../utils.html#utils.ThreadPool.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; starts task.</span>
+<span class="sd">            target = callable to run with *args and **kargs arguments.</span>
+<span class="sd">            callback = callable executed when target ends</span>
+<span class="sd">                       callback sould accept one parameter where target&#39;s</span>
+<span class="sd">                       return value is passed.</span>
+<span class="sd">                       If callback is None it&#39;s ignored.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">workers</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addWorker</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="n">target</span><span class="p">,</span><span class="n">callback</span><span class="p">,</span><span class="n">args</span><span class="p">,</span><span class="n">kargs</span><span class="p">))</span>
+    </div>
+<div class="viewcode-block" id="ThreadPool.setMaxWorkers"><a class="viewcode-back" href="../utils.html#utils.ThreadPool.setMaxWorkers">[docs]</a>    <span class="k">def</span> <span class="nf">setMaxWorkers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Sets the maximum workers to create.</span>
+<span class="sd">            num = max workers</span>
+<span class="sd">                  If number passed is lower than active workers </span>
+<span class="sd">                  it will kill workers to match that number. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxWorkers</span> <span class="o">=</span> <span class="n">num</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">workers</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxWorkers</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">killWorker</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workers</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxWorkers</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="ThreadPool.addWorker"><a class="viewcode-back" href="../utils.html#utils.ThreadPool.addWorker">[docs]</a>    <span class="k">def</span> <span class="nf">addWorker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Add workers.</span>
+<span class="sd">            num = number of workers to create/add.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">workers</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">allKilled</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>        
+            <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__workerThread</span><span class="p">)</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">setDaemon</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="ThreadPool.killWorker"><a class="viewcode-back" href="../utils.html#utils.ThreadPool.killWorker">[docs]</a>    <span class="k">def</span> <span class="nf">killWorker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Kill workers.</span>
+<span class="sd">            num = number of workers to kill.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">workers</span><span class="p">:</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">workers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">&quot;exit&quot;</span><span class="p">)</span>  
+    </div>
+<div class="viewcode-block" id="ThreadPool.killAllWorkers"><a class="viewcode-back" href="../utils.html#utils.ThreadPool.killAllWorkers">[docs]</a>    <span class="k">def</span> <span class="nf">killAllWorkers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Kill all active workers.</span>
+<span class="sd">            wait = seconds to wait until last worker ends</span>
+<span class="sd">                   if None it waits forever.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">killWorker</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workers</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">allKilled</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">wait</span><span class="p">)</span>
+        <span class="n">responses</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">responses</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">responses</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">responses</span>
+    </div>
+    <span class="k">def</span> <span class="nf">__workerThread</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="c"># exit is &quot;special&quot; tasks to kill thread</span>
+            <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s">&quot;exit&quot;</span><span class="p">:</span>
+                <span class="k">break</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">working</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">working</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">workers</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workers</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxWorkers</span><span class="p">):</span> <span class="c"># create thread on demand</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">addWorker</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+            
+            <span class="n">fun</span><span class="p">,</span><span class="n">cb</span><span class="p">,</span><span class="n">args</span><span class="p">,</span><span class="n">kargs</span> <span class="o">=</span> <span class="n">task</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kargs</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">cb</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cb</span><span class="p">(</span><span class="n">ret</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+                <span class="k">print</span> <span class="n">Traceback</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">working</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">workers</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">workers</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">allKilled</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">countLock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+    </div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pyTOP 0.1.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

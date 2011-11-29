@@ -11,7 +11,7 @@ site:
 	cd doc; make html
 
 doc: site
-	zip doc.zip doc/_build/html/*; mv doc.zip ./dist/
+	cd doc/_build/html/; zip -r doc.zip *; mv doc.zip ../../../dist/
 
 stats: 
 	pyflakes pyTOP | awk -F\: '{printf "%s:%s: [E]%s\n", $$1, $$2, $$3}' > violations.pyflakes.txt
@@ -21,3 +21,7 @@ publish:
 
 install:
 	python setup.py install
+
+push:
+	git add .; git push origin master
+

@@ -2,6 +2,13 @@ History
 -------
 
 
+0.1.2 (2011-11-29)
+++++++++++++++++++
+
+* add search crawler
+* add top keywords crawler
+
+
 0.1.1 (2011-11-24)
 ++++++++++++++++++
 

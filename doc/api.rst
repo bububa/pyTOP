@@ -63,6 +63,8 @@ API
    taobaoke
    increment
    vas
+   crawler
+   utils
 
 ---------------------
 

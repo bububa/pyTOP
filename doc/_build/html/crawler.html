@@ -1,0 +1,188 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Crawler &mdash; pyTOP 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyTOP 0.1.1 documentation" href="index.html" />
+    <link rel="up" title="pyTOP’s API Document" href="api.html" />
+    <link rel="next" title="Utils" href="utils.html" />
+    <link rel="prev" title="在线订购 API" href="vas.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="utils.html" title="Utils"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="vas.html" title="在线订购 API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.1 documentation</a> &raquo;</li>
+          <li><a href="api.html" accesskey="U">pyTOP&#8217;s API Document</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="crawler">
+<span id="id1"></span><h1>Crawler<a class="headerlink" href="#crawler" title="Permalink to this headline">¶</a></h1>
+<p>Search Crawler and Top Keywords Crawler</p>
+<span class="target" id="module-crawler"></span><dl class="class">
+<dt id="crawler.SearchResults">
+<em class="property">class </em><tt class="descclassname">crawler.</tt><tt class="descname">SearchResults</tt><big>(</big><em>q</em>, <em>total</em>, <em>lists</em>, <em>malls</em>, <em>ads</em>, <em>cats</em>, <em>keywords</em><big>)</big><a class="reference internal" href="_modules/crawler.html#SearchResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crawler.SearchResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search Results Object</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="crawler.Cat">
+<em class="property">class </em><tt class="descclassname">crawler.</tt><tt class="descname">Cat</tt><big>(</big><em>id</em>, <em>url</em>, <em>title</em>, <em>amount</em><big>)</big><a class="reference internal" href="_modules/crawler.html#Cat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crawler.Cat" title="Permalink to this definition">¶</a></dt>
+<dd><p>The category object in search results</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="crawler.Item">
+<em class="property">class </em><tt class="descclassname">crawler.</tt><tt class="descname">Item</tt><big>(</big><em>id</em>, <em>summary</em>, <em>photo</em>, <em>attrs</em>, <em>legends=None</em><big>)</big><a class="reference internal" href="_modules/crawler.html#Item"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crawler.Item" title="Permalink to this definition">¶</a></dt>
+<dd><p>The item object in search results</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="crawler.ItemAttr">
+<em class="property">class </em><tt class="descclassname">crawler.</tt><tt class="descname">ItemAttr</tt><big>(</big><em>price</em>, <em>transaction</em>, <em>shipment_fee=None</em>, <em>location=None</em>, <em>seller=None</em>, <em>seller_id=None</em><big>)</big><a class="reference internal" href="_modules/crawler.html#ItemAttr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crawler.ItemAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>The item&#8217;s attributs object in search results</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="crawler.Ad">
+<em class="property">class </em><tt class="descclassname">crawler.</tt><tt class="descname">Ad</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/crawler.html#Ad"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crawler.Ad" title="Permalink to this definition">¶</a></dt>
+<dd><p>The advertisement object in search results</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="crawler.Crawler">
+<em class="property">class </em><tt class="descclassname">crawler.</tt><tt class="descname">Crawler</tt><big>(</big><em>proxies=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/crawler.html#Crawler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crawler.Crawler" title="Permalink to this definition">¶</a></dt>
+<dd><p>General Crawler for Taobao Site.</p>
+<dl class="method">
+<dt id="crawler.Crawler.cat_top_keywords">
+<tt class="descname">cat_top_keywords</tt><big>(</big><em>cat</em>, <em>level3=''</em>, <em>up=True</em>, <em>offset=0</em>, <em>offsets=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/crawler.html#Crawler.cat_top_keywords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crawler.Crawler.cat_top_keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get top keywords in a specific category</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="crawler.Crawler.get_cats">
+<tt class="descname">get_cats</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/crawler.html#Crawler.get_cats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crawler.Crawler.get_cats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get top keywords categories</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="crawler.Crawler.get_top_keywords">
+<tt class="descname">get_top_keywords</tt><big>(</big><em>cats=None</em>, <em>parent=None</em>, <em>up=True</em><big>)</big><a class="reference internal" href="_modules/crawler.html#Crawler.get_top_keywords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crawler.Crawler.get_top_keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get top keywords for all the categories</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="crawler.Crawler.search">
+<tt class="descname">search</tt><big>(</big><em>keyword</em><big>)</big><a class="reference internal" href="_modules/crawler.html#Crawler.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#crawler.Crawler.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get search results for a specific keyword</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="vas.html"
+                        title="previous chapter">在线订购 API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="utils.html"
+                        title="next chapter">Utils</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/crawler.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="utils.html" title="Utils"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="vas.html" title="在线订购 API"
+             >previous</a> |</li>
+        <li><a href="index.html">pyTOP 0.1.1 documentation</a> &raquo;</li>
+          <li><a href="api.html" >pyTOP&#8217;s API Document</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Prof Syd Xu.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>
