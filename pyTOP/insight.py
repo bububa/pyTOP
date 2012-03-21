@@ -97,13 +97,13 @@ class INWordAnalysisTop(TOP):
         self.fields = ['word','word_area_pers','word_source_pers','word_hp_prices']
     
 
-class WordBase(TOP):
+class WordsBase(TOP):
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
-        super(WordBase, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
+        super(WordsBase, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'result':INWordBase}
         self.fields = ['success','result','result_code','result_message']
     
-    def get(self, words, time, aFilter='PV|CLICK|AVGCPC|COMPETITION', nick=None):
+    def get(self, session, words, time='DAY|WEEK|MONTH|3MONTH', aFilter='PV|CLICK|AVGCPC|COMPETITION', nick=None):
         '''taobao.simba.insight.wordsbase.get
         ===================================
         词基础数据查询'''
@@ -112,7 +112,7 @@ class WordBase(TOP):
         request['time'] = time
         request['filter'] = aFilter
         if nick!=None: request['nick'] = nick
-        self.create(self.execute(request))
+        self.create(self.execute(request, session))
         return self.result
     
 
@@ -135,13 +135,13 @@ class CatsBase(TOP):
         return self.result
     
 
-class WordAnalysis(TOP):
+class WordsAnalysis(TOP):
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
-        super(WordAnalysis, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
+        super(WordsAnalysis, self).__init__( API_KEY, APP_SECRET, ENVIRONMENT )
         self.models = {'result':INWordAnalysis}
         self.fields = ['success','result','result_code','result_message']
     
-    def get(self, words, stu='area|source|hpprice', nick=None):
+    def get(self, session, words, stu='area|source|hpprice', nick=None):
         '''taobao.simba.insight.wordsanalysis.get
         ===================================
         词分析数据查询'''
@@ -149,7 +149,7 @@ class WordAnalysis(TOP):
         request['words'] = words
         request['stu'] = stu
         if nick!=None: request['nick'] = nick
-        self.create(self.execute(request))
+        self.create(self.execute(request, session))
         return self.result
     
 
@@ -263,13 +263,13 @@ class TopLevelCats(TOP):
         self.models = {'result':INCategory}
         self.fields = ['success','result','result_code','result_message']
     
-    def get(self, nick=None):
+    def get(self, session, nick=None):
         '''taobao.simba.insight.toplevelcats.get
         ===================================
         得到一级类目'''
         request = TOPRequest('taobao.simba.insight.toplevelcats.get')
         if nick!=None: request['nick'] = nick
-        self.create(self.execute(request))
+        self.create(self.execute(request, session))
         return self.result
     
 

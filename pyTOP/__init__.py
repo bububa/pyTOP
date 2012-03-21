@@ -51,7 +51,7 @@ from .increment import NotifyRefund, NotifyItem, NotifyTrade, AppCustomer, Incre
 # 在线订购 API
 from .vas import ArticleUserSubscribe, ArticleBizOrder, ArticleSub, Vas
 # insight API
-from .insight import INWordBase, INCategoryBase, INWordAnalysis, INCategoryAnalysis, INCategoryProperties, INCategory, INWordCategory, INRecordBase, INCategoryAnalysisTop, INCategoryChildTop, INCategoryTop, INWordAnalysisTop, WordBase, CatsBase, WordAnalysis, CatsAnalysis, CatsForecast, CatsTopWord, CatsRelatedWord, WordsCats, Cats, TopLevelCats, CreativeIDs, AdGroupIDs, KeywordIDs, CatMatchedIDs
+from .insight import INWordBase, INCategoryBase, INWordAnalysis, INCategoryAnalysis, INCategoryProperties, INCategory, INWordCategory, INRecordBase, INCategoryAnalysisTop, INCategoryChildTop, INCategoryTop, INWordAnalysisTop, WordsBase, CatsBase, WordsAnalysis, CatsAnalysis, CatsForecast, CatsTopWord, CatsRelatedWord, WordsCats, Cats, TopLevelCats, CreativeIDs, AdGroupIDs, KeywordIDs, CatMatchedIDs
 # Campagin API
 from .campaign import AreaOption, ChannelOption, Campaign, Campaigns, CampaignArea, CampaignBudget, CampaignPlatform, CampaignSchedule, ADGroups, ADGroup, ADGroupCatmatch, Creative, Creatives, CreativeRecord, Keyword, Keywords, AccountRecord, RecommendWord, RankedItem, ADGroupPage, RecommendWordPage, Result, Customers, Account, Tools
 # Customize Exceptions
@@ -61,3 +61,5 @@ from .errors import TOPException
 from . import utils
 # crawler
 from . import crawler
+# models
+from . import models

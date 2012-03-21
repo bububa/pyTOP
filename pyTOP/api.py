@@ -53,8 +53,8 @@ class TOP(object):
     '''
     def __init__(self, API_KEY=None, APP_SECRET=None, ENVIRONMENT=None):
         #淘宝正式环境
-        #self.PRODUCT_API_KEY = '12422885'
-        #self.PRODUCT_APP_SECRET = '9f127588ceb726905e078b64ab88a361'
+        #self.PRODUCT_API_KEY = '12333896'
+        #self.PRODUCT_APP_SECRET = 'd4c1d414d63a4b5e88821210968299ee'
         self.PRODUCT_API_KEY = getenv('TOP_PRODUCT_API_KEY')
         self.PRODUCT_APP_SECRET = getenv('TOP_PRODUCT_APP_SECRET')
         self.PRODUCT_API_URL = getenv('TOP_PRODUCT_API_URL') if getenv('TOP_PRODUCT_API_URL') else 'http://gw.api.taobao.com/router/rest'
@@ -62,10 +62,10 @@ class TOP(object):
         self.LOGOUT_URL = 'http://container.api.taobao.com/container/logoff'
         self.TaobaoID_URL = 'http://container.api.taobao.com/container/identify'
         #淘宝测试环境
-        #self.SANDBOX_API_KEY = '12422885'
-        #self.SANDBOX_APP_SECRET = 'sandbox8ceb726905e078b64ab88a361'
+        #self.SANDBOX_API_KEY = '12333896'
+        #self.SANDBOX_APP_SECRET = 'sandbox4d63a4b5e88821210968299ee'
         self.SANDBOX_API_KEY = getenv('TOP_SANDBOX_API_KEY')
-        self.SANDBOX_APP_KEY = getenv('TOP_SANDBOX_APP_SECRET')
+        self.SANDBOX_APP_SECRET = getenv('TOP_SANDBOX_APP_SECRET')
         self.SANDBOX_API_URL = getenv('TOP_SANDBOX_API_URL') if getenv('TOP_SANDBOX_API_URL') else 'http://gw.api.tbsandbox.com/router/rest'
         self.SANDBOX_LOGIN_URL = 'http://container.api.tbsandbox.com/container?appkey='
         self.SANDBOX_USER_REGISTER_WITHOUT_VALIDATE = 'http://mini.tbsandbox.com/minisandbox/user/register.htm'
@@ -75,7 +75,7 @@ class TOP(object):
         self.FORMAT = 'json'  
         self.SIGN_METHOD = 'md5'  
         self.API_VERSION = '2.0'  
-        self.SDK_VERSON = 'pyTOP_0.1.0'
+        self.SDK_VERSON = 'top-sdk-php-20111202'
         
         if self.ENVIRONMENT == 'sandbox':
             if API_KEY:
@@ -97,6 +97,7 @@ class TOP(object):
             self.APP_SECRET = self.PRODUCT_APP_SECRET
         else:
             raise TOPException(0);
+        
         self.AUTH_URL = 'http://container.api.taobao.com/container?appkey=%s' % self.API_KEY
     
     def set_format(self, format):
@@ -168,7 +169,7 @@ class TOP(object):
         if rsp.has_key('error_response'):
             error_code = rsp['error_response']['code']
             if 'sub_msg' in rsp['error_response']:
-                msg = rsp['error_response']['sub_msg']
+                msg = '%s [%s]'%(rsp['error_response']['sub_msg'], rsp['error_response']['msg'])
             else:
                 msg = rsp['error_response']['msg']
             raise TOPException(error_code, msg)

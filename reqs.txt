@@ -1,4 +1,7 @@
 envoy
 nose
-pyflakes
+pyflakes 
 rudolf
+psycopg2
+mysql-python
+SQLAlchemy
