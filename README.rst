@@ -24,7 +24,7 @@ Features
 - 主动通知业务 API
 - 在线订购 API
 - insight API
-- campagin API
+- campaign API
 - Search Crawler
 - Top Keywords Crawler
 
